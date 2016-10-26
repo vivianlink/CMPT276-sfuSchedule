@@ -25,3 +25,4 @@ At the end of the project we hope to have a website with the features mentioned 
 
 The application is designed especially for SFU students. SFU students will benefit from this project as it provides a quicker, more intuitive solution for students to search for course information and plan their term. By combining several features from app such as goSFU and rateMyProf, students will be able to save time to build a perfect schedule for themselves.
 
+vp branch test
