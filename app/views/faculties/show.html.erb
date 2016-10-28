@@ -1,11 +1,22 @@
-<p>
-  <strong>Name:</strong>
-  <%= @faculty.name %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @faculty.description %>
-</p>
+<table>
+<tr>
+<th> <strong>Name:</strong> </th>
+<th> <strong>Description:</strong> </th>
+</tr>
+
+<tr>
+  <td><%= @faculty.name %></td>
+  <td><%= @faculty.description %></td>
+</tr>
+</table>
+<h3> listing courses: </h3>
+<% @faculty.courses.each do |course| %>
+
+<%= render partial:'courses/course', locals: { course: course }  %>
+
+<% end %>
+<h3> add course: </h3>
+<%= render 'courses/form' %>
 
 <%= link_to 'back', faculties_path %>

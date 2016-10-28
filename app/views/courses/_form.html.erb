@@ -1,0 +1,10 @@
+<%= form_for([@faculty, @faculty.courses.build]) do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
