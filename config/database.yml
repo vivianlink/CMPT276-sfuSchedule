@@ -25,7 +25,7 @@ development:
   <<: *default
   database: myproj_development
   username: postgres
-  password: 121
+  password: Facai123
   host: localhost
 
   # The specified database role being used to connect to postgres.
@@ -62,7 +62,7 @@ test:
   <<: *default
   database: myproj_test
   username: postgres
-  password: 121
+  password: Facai123
   host: localhost
 
 # As with config/secrets.yml, you never want to store sensitive information,

@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'users/new'
+
+  resources :users
+
+  # match '/curl_courses' => 'request_courses#curl_get_courses', via::get
+  # match '/curl_courses' => 'request_courses#curl_post_courses', via::post
+
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

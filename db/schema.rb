@@ -11,32 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025170210) do
+ActiveRecord::Schema.define(version: 20161029005704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "salt"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
-  create_table "cats", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "name"
-    t.string   "description"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.string   "commenter"
-    t.text     "body"
-    t.integer  "cat_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "comments", ["cat_id"], name: "index_comments_on_cat_id", using: :btree
-
-  add_foreign_key "comments", "cats"
 end
