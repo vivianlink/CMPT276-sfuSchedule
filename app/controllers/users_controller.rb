@@ -8,10 +8,12 @@ class UsersController < ApplicationController
     if @user.save
       flash[:notice] = "You signed up successfully"
       flash[:color]= "valid"
+      redirect_to welcome_index_path
     else
-      flash[:color]= "invalid"
-	end 
-  	render "new"
+      flash[:color]= "invalid" 
+      flash[:notice] = "Form is invalid"
+    end 
+      #render "new"
   end
 
   def index 

@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   get 'users/new'
+  get 'welcome/index'
 
   resources :users
-
   # match '/curl_courses' => 'request_courses#curl_get_courses', via::get
   # match '/curl_courses' => 'request_courses#curl_post_courses', via::post
 
