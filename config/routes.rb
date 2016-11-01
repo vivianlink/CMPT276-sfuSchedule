@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'sessions/login'
   post 'sessions/login_attempt'
+  get 'sessions/logout'
 
   get 'users/login'
   get 'users/new'
