@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'sessions/login'
+
   get 'users/new'
   get 'welcome/index'
 
