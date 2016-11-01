@@ -12,8 +12,8 @@ class UsersController < ApplicationController
     else
       flash[:color]= "invalid" 
       flash[:notice] = "Form is invalid"
+      render "new"
     end 
-      #render "new"
   end
 
   def index 
