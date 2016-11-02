@@ -2,7 +2,7 @@
 
 # Define variables here.
 branch = database
-message = "message created from makefile"
+message = "preqs ready"
 
 git_push_master:
 	git add .
@@ -20,4 +20,5 @@ git_push_heroku:
 	git push heroku master
 
 gems:
-	export GEM_HOME=$HOME/.gemsexport PATH=.bundle/bin:$GEM_HOME/bin:$PATH
+	gem install bundler
+	bundle install

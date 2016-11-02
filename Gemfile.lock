@@ -57,6 +57,8 @@ GEM
     execjs (2.7.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -76,6 +78,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.1)
     multi_json (1.12.1)
+    multi_xml (0.5.5)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     pg (0.19.0)
@@ -152,6 +155,7 @@ DEPENDENCIES
   bcrypt-ruby
   byebug
   coffee-rails (~> 4.1.0)
+  httparty
   jbuilder (~> 2.0)
   jquery-rails
   pg (~> 0.15)
@@ -165,4 +169,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.13.4
+   1.13.6
