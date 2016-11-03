@@ -1,4 +1,5 @@
 <h1>Listing courses</h1>
+
  
 <table>
   <tr>
@@ -17,5 +18,11 @@
               data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
-</table>
- <%= link_to 'New course', new_course_path %>
+</table> <%= link_to 'New course', new_course_path %>
+ 
+ <%= form_tag courses_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>

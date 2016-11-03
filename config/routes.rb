@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :faculties do
-    resources :courses
-  end
+  resources :faculties 
+  
+  
   resources :courses
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
