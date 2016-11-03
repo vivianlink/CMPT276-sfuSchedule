@@ -2,7 +2,7 @@
 
 # Define variables here.
 branch = database
-message = "model DFaculty"
+message = "Some documentation/comments"
 
 git_push_master:
 	git add .

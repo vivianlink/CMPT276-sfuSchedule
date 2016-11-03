@@ -1,91 +1,63 @@
 class UrlConstructController < ApplicationController
+  # This class file has all the methods required to construct the url's
+  # and parse the json files into the database models.
+  # All other models should be able to refer to the database models
+  # instead of the sfu api.
   require 'json'
   require 'open-uri'
   require 'httparty'
 
-
-
   @@base = 'http://www.sfu.ca/bin/wcm/course-outlines?'
 
   def index
-  #  @forView = $forView
+    # Test method for output results.
+    #@forView = $forView
     array = []
-    
 
     urlYear
 
+    # Methods do not loop like this, thus we must have a separate function
+    # Or loop to iterate per element.
     @YearView.each do |year|
         filler = urlSemester(year.dYearNumber)
         array.push(filler)
-    end  
-
-
+    end
 
     @forView = array
-
-
-
   end
-
 
   def urlYear
     array = []
     source = HTTParty.get(@@base)
     data = JSON.parse((source.body))
 
-
-=begin
-
     data.each do |display|
       id = display["value"]
-      course_url = id
-      array.push(course_url)
+      dsomething = DYear.new("dYearNumber" => id)
+      dsomething.save
+      array.push(dsomething)
     end
-
-=end
-
-    data.each do |display|
-      id = display["value"]
-      @dsomething = DYear.new("dYearNumber" => id)
-      @dsomething.save
-      array.push(@dsomething)
-    end
-
-  @YearView = array
-
+    @YearView = array
   end
 
   def urlSemester(year)
     array = []
-    source = HTTParty.get(@@base + year)
+    url = @@base + year
+    source = HTTParty.get(url)
     data = JSON.parse((source.body))
 
-     data.each do |display|
+    data.each do |display|
       id = display["value"]
-      @dsomething = DSemester.new("dSemesterSeasons" => id)
-      @dsomething.save
-      array.push(@dsomething)
+      dsomething = DSemester.new("dSemesterSeasons" => id)
+      dsomething.save
+      array.push(dsomething)
     end
-  @SemesterView = array
-
-
-
-
+    @SemesterView = array
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  def urlFaculty(semester, url)
+    # Instead of only passing semester we want to also pass the url that we
+    # have already.
+  end
 
 end
