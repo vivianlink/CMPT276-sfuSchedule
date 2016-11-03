@@ -9,11 +9,22 @@ class UrlConstructController < ApplicationController
 
   def index
   #  @forView = $forView
+    array = []
+    
+
     urlYear
 
+    @YearView.each do |year|
+        filler = urlSemester(year.dYearNumber)
+        array.push(filler)
+    end  
 
-    #source = HTTParty.get('http://www.sfu.ca/bin/wcm/course-outlines?2014/fall/cmpt/102/d100')
-    #@forView = JSON.parse((source.body))
+
+
+    @forView = array
+
+
+
   end
 
 
@@ -23,21 +34,58 @@ class UrlConstructController < ApplicationController
     data = JSON.parse((source.body))
 
 
+=begin
+
     data.each do |display|
       id = display["value"]
       course_url = id
       array.push(course_url)
     end
 
+=end
 
-=begin
     data.each do |display|
       id = display["value"]
-      #dsomething = dYear.new("dYearNumber" => id)
-
+      @dsomething = DYear.new("dYearNumber" => id)
+      @dsomething.save
+      array.push(@dsomething)
     end
-=end
-  @forView = array
+
+  @YearView = array
 
   end
+
+  def urlSemester(year)
+    array = []
+    source = HTTParty.get(@@base + year)
+    data = JSON.parse((source.body))
+
+     data.each do |display|
+      id = display["value"]
+      @dsomething = DSemester.new("dSemesterSeasons" => id)
+      @dsomething.save
+      array.push(@dsomething)
+    end
+  @SemesterView = array
+
+
+
+
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 end
