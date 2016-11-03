@@ -2,7 +2,7 @@
 
 # Define variables here.
 branch = database
-message = "preqs ready"
+message = "this is making us mad"
 
 git_push_master:
 	git add .

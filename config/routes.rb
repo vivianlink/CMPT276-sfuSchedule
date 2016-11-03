@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'url_construct/index'
-  match    ':controller(/:action(/:id))',    :via    =>    :get
+  match ':controller(/:action(/:id))', :via => :get
   match ':controller(/:action(/:id))', :via => :post
 
   get 'sessions/login'
