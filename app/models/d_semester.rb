@@ -1,3 +1,3 @@
 class DSemester < ActiveRecord::Base
-  belongs_to :dYear
+  belongs_to :DYear
 end

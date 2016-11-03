@@ -1,3 +1,3 @@
 class DYear < ActiveRecord::Base
-  has_many :dSemesters
+  has_many :DSemesters
 end

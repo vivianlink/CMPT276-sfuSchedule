@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DYearTest < ActiveSupport::TestCase
+class DFacultyTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
