@@ -18,24 +18,26 @@ class UrlConstructController < ApplicationController
 
 
   def urlYear
-    @array = []
+    array = []
     source = HTTParty.get(@@base)
-    @data = JSON.parse((source.body))
+    data = JSON.parse((source.body))
 
-=begin
-    @data.each do |display|
+
+    data.each do |display|
       id = display["value"]
       course_url = id
-      @array.push(course_url)
+      array.push(course_url)
+    end
+
+
+=begin
+    data.each do |display|
+      id = display["value"]
+      #dsomething = dYear.new("dYearNumber" => id)
+
     end
 =end
-    @data.each do |display|
-      id = display["value"]
-      dsomething = dYear.new("dYearNumber" => id)
-
-    end
-
-
+  @forView = array
 
   end
 end
