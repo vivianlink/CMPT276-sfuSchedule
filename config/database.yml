@@ -7,12 +7,21 @@ default: &default
 
 development:
   <<: *default
-  database: myproj_development
+  database: cmpt276
+  username: cmpt276
+  password: thecmpt276Passw0rd
+  host: localhost
 
 test:
   <<: *default
-  database: myproj_test
+  database: cmpt276_test
+  username: cmpt276
+  password: thecmpt276Passw0rd
+
+  host: localhost
 
 production:
   <<: *default
-  database: myproj_production
+  database: ruby-getting-started_production
+  username: ruby-getting-started
+  password: <%= ENV['RUBY-GETTING-STARTED_DATABASE_PASSWORD'] %>
