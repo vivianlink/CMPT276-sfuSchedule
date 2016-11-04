@@ -2,7 +2,7 @@
 
 # Define variables here.
 branch = database
-message = "I hate making urls"
+message = "going to sleep"
 
 push_master:
 	git add .

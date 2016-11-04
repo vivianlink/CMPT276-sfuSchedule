@@ -18,11 +18,19 @@ class UrlConstructController < ApplicationController
 
     # Methods do not loop like this, thus we must have a separate function
     # Or loop to iterate per element.
+
     @YearView.each do |year|
-      filler = urlSemester(year.dYearNumber)
-      url = @@base + year.dYearNumber
+      #urlSemester(year.dYearNumber)
+      #url = @@base + year.dYearNumber
+      urlSemester('2014')
+      url = @@base + '2014'
       @SemesterView.each do |season|
         filler = urlFaculty(season.dSemesterSeasons, url)
+        #url = url + '/' + season.dSemesterSeasons
+        # @FacultyView.each do |faculty|
+        #   filler = urlCourse(faculty.dSubject, url)
+        #   array.push(filler)
+        # end
         array.push(filler)
       end
         #array.push(filler)
@@ -77,6 +85,23 @@ class UrlConstructController < ApplicationController
       array.push(dValue)
     end
     @FacultyView = array
+  end
+
+  def urlCourse(faculty, url)
+    array = []
+    nURL = url + '/' + faculty
+    source = HTTParty.get(nURL)
+    data = JSON.parse((source.body))
+
+    data.each do |display|
+      course = display["value"]
+      #title = display["title"]
+      #dValue = DCourse.new("dCourseNumber" => course, "dTitle" => title)
+      dValue = DCourse.new("dCourseNumber" => course)
+      dValue.save
+      array.push(dValue)
+    end
+    @CourseView = array
   end
 
 end
