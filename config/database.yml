@@ -7,12 +7,12 @@ default: &default
 
 development:
   <<: *default
-  database: myproj
+  database: myproj_development
 
 test:
   <<: *default
-  database: myproj
+  database: myproj_test
 
 production:
   <<: *default
-  database: myproj
+  database: myproj_production

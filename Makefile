@@ -2,19 +2,19 @@
 
 # Define variables here.
 branch = database
-message = "Some documentation/comments"
+message = "I hate making urls"
 
-git_push_master:
+push_master:
 	git add .
 	git commit -m $(message)
 	git push origin
 
-git_push_branch:
+push_branch:
 	git add .
 	git commit -m $(message)
 	git push origin	$(branch)
 
-git_push_heroku:
+push_heroku:
 	git add .
 	git commit -m $(message)
 	git push heroku master

@@ -19,11 +19,20 @@ class UrlConstructController < ApplicationController
     # Methods do not loop like this, thus we must have a separate function
     # Or loop to iterate per element.
     @YearView.each do |year|
-        filler = urlSemester(year.dYearNumber)
+      filler = urlSemester(year.dYearNumber)
+      url = @@base + year.dYearNumber
+      @SemesterView.each do |season|
+        filler = urlFaculty(season.dSemesterSeasons, url)
         array.push(filler)
+      end
+        #array.push(filler)
     end
 
+
+
     @forView = array
+
+    #@data =JSON.parse(HTTParty.get('http://www.sfu.ca/bin/wcm/course-outlines?2017/spring').body)
   end
 
   def urlYear
@@ -56,8 +65,18 @@ class UrlConstructController < ApplicationController
   end
 
   def urlFaculty(semester, url)
-    # Instead of only passing semester we want to also pass the url that we
-    # have already.
+    array = []
+    nURL = url + '/' + semester
+    source = HTTParty.get(nURL)
+    data = JSON.parse((source.body))
+
+    data.each do |display|
+      subject = display["value"]
+      dValue = DFaculty.new("dSubject" => subject)
+      dValue.save
+      array.push(dValue)
+    end
+    @FacultyView = array
   end
 
 end
