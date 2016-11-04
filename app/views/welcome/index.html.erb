@@ -1,17 +1,22 @@
+
 <h1>this is sfu planner!</h1>
 <table>
 <tr>
 	<th>
-<%= link_to 'Courses', controller: 'courses' %>
+<%= link_to 'Courses:', controller: 'courses' %>
 	</th>
 	<th>
  
  <%= form_tag courses_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
+  <p>&nbsp
+  	faculty
+  	<%= text_field_tag :faculty, params[:faculty] %> 
+  	number
+    <%= text_field_tag :number, params[:number] %>
     <%= submit_tag "Search", :name => nil %>
   </p>
   </th>
   </tr>
  </table>
+
 <% end %>

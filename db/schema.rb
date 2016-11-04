@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102172535) do
+ActiveRecord::Schema.define(version: 20161104002635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20161102172535) do
   add_index "comments", ["cat_id"], name: "index_comments_on_cat_id", using: :btree
 
   create_table "courses", force: :cascade do |t|
-    t.string   "name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "faculty_id"
@@ -61,6 +60,15 @@ ActiveRecord::Schema.define(version: 20161102172535) do
   create_table "faculties", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "salt"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_foreign_key "comments", "cats"
