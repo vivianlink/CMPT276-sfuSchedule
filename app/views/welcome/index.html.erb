@@ -1,17 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<h1>this is sfu planner!</h1>
-<div class="sign-up-button"> 
-	<a class="sign-up" href= "/users/new"> SIGN UP </a><br>
-</div>
-<% if session[:user_name].present? %>
-
-	<div class="logout-button"> 
-		<a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
-	</div>
-	Hello, <%=session[:user_name]%>!
-<% else %>
-	<div class="login-button"> 
-		<a class="login" href= "/sessions/login"> LOGIN </a><br>
-	</div>	
-<% end %>
+<body align="center">
+	<h1>this is sfu planner!</h1>
+	<% if session[:user_name].present? %>
+		<div class="logout-button">
+			<a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
+		</div>
+		Hello, <%=session[:user_name]%>!
+	<% else %>
+		<div class="sign-up-button">
+			<a class="sign-up" href= "/users/new"> SIGN UP </a><br>
+		</div>
+		<div class="login-button">
+			<a class="login" href= "/sessions/login"> LOGIN </a><br>
+		</div>
+	<% end %>
+	<p>
+		faculty
+		<%= text_field_tag :faculty, params[:faculty] %>
+		number
+		<%= text_field_tag :number, params[:number] %>
+		year
+		<%= text_field_tag :year, params[:year] %>
+		semester
+		<%= text_field_tag :semester, params[:semester] %>
+		<%= submit_tag "Search", :name => nil %>
+	</p>
+</body>
