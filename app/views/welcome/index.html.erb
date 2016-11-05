@@ -1,17 +1,27 @@
-<p id="notice"><%= notice %></p>
 
 <h1>this is sfu planner!</h1>
-<div class="sign-up-button"> 
-	<a class="sign-up" href= "/users/new"> SIGN UP </a><br>
-</div>
-<% if session[:user_name].present? %>
+<table>
+<tr>
+	<th >
+<button><%= link_to 'Courses:', controller: 'courses' %></button>
+	</th>
+	<th>
+ 
+ <%= form_tag courses_path, :method => 'get' do %>
+  <p id=1>&nbsp
+  	faculty
+    <%= text_field_tag :faculty, params[:faculty] %> 
 
-	<div class="logout-button"> 
-		<a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
-	</div>
-	Hello, <%=session[:user_name]%>!
-<% else %>
-	<div class="login-button"> 
-		<a class="login" href= "/sessions/login"> LOGIN </a><br>
-	</div>	
+  	number
+    <%= text_field_tag :number, params[:number] %>
+    year
+    <%= text_field_tag :year, params[:year] %> 
+    semester
+    <%= text_field_tag :semester, params[:semester] %> 
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+  </th>
+  </tr>
+ </table>
+
 <% end %>

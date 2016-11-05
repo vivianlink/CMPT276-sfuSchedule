@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+ 
+p,body,button {
+    background-color: #a6192e;
+}
+
+button {
+	text: #a6192e;
+
+ height: 25px !important;
+
+width: 220px !important;
+}
+
+text_field {
+
+height: 25px !important;
+
+width: 220px !important;
+
+font-size: 14px !important;
+
+}
+

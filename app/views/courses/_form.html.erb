@@ -1,0 +1,38 @@
+  <%= form_for :course, url: courses_path do |f| %>
+
+  <p>
+    <%= f.label :year %><br>
+    <%= f.text_field :year %>
+  </p>
+  <p>
+    <%= f.label :semester %><br>
+    <%= f.text_field :semester %>
+  </p>
+  <p>
+    <%= f.label :faculty %><br>
+    <%= f.text_field :faculty %>
+  </p>
+  <p>
+    <%= f.label :number %><br>
+    <%= f.text_field :number %>
+  </p>
+  <p>
+    <%= f.label :section %><br>
+    <%= f.text_field :section %>
+  </p>
+  <p>
+    <%= f.label :instructor %><br>
+    <%= f.text_field :instructor %>
+  </p>
+  <p>
+    <%= f.label :schedule %><br>
+    <%= f.text_field :schedule %>
+  </p>
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+  <% end%>
