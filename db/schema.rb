@@ -16,50 +16,17 @@ ActiveRecord::Schema.define(version: 20161104002635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admin_users", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "articles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "cats", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "name"
-    t.string   "description"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.string   "commenter"
-    t.text     "body"
-    t.integer  "cat_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "comments", ["cat_id"], name: "index_comments_on_cat_id", using: :btree
-
   create_table "courses", force: :cascade do |t|
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "faculty_id"
     t.string   "year"
     t.string   "semester"
+    t.string   "faculty"
     t.string   "number"
     t.string   "section"
     t.string   "instructor"
     t.string   "schedule"
     t.string   "description"
-    t.string   "faculty"
-  end
-
-  create_table "faculties", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,5 +38,4 @@ ActiveRecord::Schema.define(version: 20161104002635) do
     t.datetime "updated_at",         null: false
   end
 
-  add_foreign_key "comments", "cats"
 end

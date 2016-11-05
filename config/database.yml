@@ -23,9 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: myproj_development
-  username: postgres
-  password: 121
+  database: cmpt276 #myproj_development
+  username: cmpt276 #postgres
+  password: thecmpt276Passw0rd #121
   host: localhost
 
   # The specified database role being used to connect to postgres.
