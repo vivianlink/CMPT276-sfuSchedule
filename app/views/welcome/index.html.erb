@@ -9,6 +9,10 @@
 	<div class="logout-button"> 
 		<a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
 	</div>
+	<div class="become-admin-button">
+		<a class="become-admin" href="/users/become-admin"> BECOME ADMIN </a>
+	</div>
+
 	Hello, <%=session[:user_name]%>!
 <% else %>
 	<div class="login-button"> 
