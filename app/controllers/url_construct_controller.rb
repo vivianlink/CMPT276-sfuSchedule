@@ -17,7 +17,7 @@ class UrlConstructController < ApplicationController
 
 
 
-
+    array  = []
    
 
     urlYear
@@ -27,8 +27,8 @@ class UrlConstructController < ApplicationController
       urlSemester(urltesting)
       instage_year_url = @@base + urltesting
 
-      @SemesterView.each do |season|
-        instage_season_url = instage_year_url + '/' + season.dSemesterSeasons
+      
+        instage_season_url = instage_year_url + '/' + "fall"
         urlFaculty(instage_season_url)
         
 
@@ -36,10 +36,22 @@ class UrlConstructController < ApplicationController
             instage_falculty_url = instage_season_url + '/' + falculty.dSubject
             urlCourse(instage_falculty_url)
             
+            @CourseView.each do |course|
+              filler = instage_course_url = instage_falculty_url+ '/' + course.dCourseNumber
+
+
+
+              creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2016", "semester" => "fall")
+              creating_new_course.save
+
+
+              array.push(filler)
+
+            end
+
           
          end
 
-       end
 
 
 
@@ -55,8 +67,7 @@ class UrlConstructController < ApplicationController
 
   
 
-  @forView = DCourse.all
-
+  @forView = array
 
 
 
@@ -82,11 +93,6 @@ class UrlConstructController < ApplicationController
 
     filler = urlCourse(instage_falculty_url)
     array.push(filler)
-
-    @forView = array
-
-
-
 
 
 
