@@ -10,6 +10,89 @@ class UrlConstructController < ApplicationController
   @@base = 'http://www.sfu.ca/bin/wcm/course-outlines?'
 
   def index
+
+
+  
+
+
+
+
+
+   
+
+    urlYear
+
+
+      urltesting = "2016"
+      urlSemester(urltesting)
+      instage_year_url = @@base + urltesting
+
+      @SemesterView.each do |season|
+        instage_season_url = instage_year_url + '/' + season.dSemesterSeasons
+        urlFaculty(instage_season_url)
+        
+
+         @FacultyView.each do |falculty|
+            instage_falculty_url = instage_season_url + '/' + falculty.dSubject
+            urlCourse(instage_falculty_url)
+            
+          
+         end
+
+       end
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  @forView = DCourse.all
+
+
+
+
+
+
+
+
+
+
+
+
+=begin
+
+
+
+
+
+  array = []
+
+    urlYear
+
+    instage_falculty_url = 'http://www.sfu.ca/bin/wcm/course-outlines?2014/fall/iat'
+
+    filler = urlCourse(instage_falculty_url)
+    array.push(filler)
+
+    @forView = array
+
+
+
+
+
+
+
+
+
     # Test method for output results.
     #@forView = $forView
     array = []
@@ -26,11 +109,11 @@ class UrlConstructController < ApplicationController
       url = @@base + '2014'
       @SemesterView.each do |season|
         filler = urlFaculty(season.dSemesterSeasons, url)
-        #url = url + '/' + season.dSemesterSeasons
-        # @FacultyView.each do |faculty|
-        #   filler = urlCourse(faculty.dSubject, url)
-        #   array.push(filler)
-        # end
+        url = url + '/' + season.dSemesterSeasons
+        @FacultyView.each do |faculty|
+          filler = urlCourse(faculty.dSubject, url)
+          array.push(filler)
+        end
         array.push(filler)
       end
         #array.push(filler)
@@ -41,7 +124,11 @@ class UrlConstructController < ApplicationController
     @forView = array
 
     #@data =JSON.parse(HTTParty.get('http://www.sfu.ca/bin/wcm/course-outlines?2017/spring').body)
+=end
   end
+
+
+
 
   def urlYear
     array = []
@@ -56,6 +143,9 @@ class UrlConstructController < ApplicationController
     end
     @YearView = array
   end
+
+
+
 
   def urlSemester(year)
     array = []
@@ -72,9 +162,13 @@ class UrlConstructController < ApplicationController
     @SemesterView = array
   end
 
-  def urlFaculty(semester, url)
+
+
+
+
+  def urlFaculty(instage_semester_url)
     array = []
-    nURL = url + '/' + semester
+    nURL = instage_semester_url
     source = HTTParty.get(nURL)
     data = JSON.parse((source.body))
 
@@ -87,16 +181,19 @@ class UrlConstructController < ApplicationController
     @FacultyView = array
   end
 
-  def urlCourse(faculty, url)
+
+
+
+
+
+  def urlCourse(instage_falculty_url)
     array = []
-    nURL = url + '/' + faculty
+    nURL = instage_falculty_url
     source = HTTParty.get(nURL)
     data = JSON.parse((source.body))
 
     data.each do |display|
       course = display["value"]
-      #title = display["title"]
-      #dValue = DCourse.new("dCourseNumber" => course, "dTitle" => title)
       dValue = DCourse.new("dCourseNumber" => course)
       dValue.save
       array.push(dValue)

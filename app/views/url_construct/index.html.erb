@@ -1,14 +1,23 @@
+<!DOCTYPE html>
+<html>
+ 
 <h1>UrlConstruct#index</h1>
 <p>Find me in app/views/url_construct/index.html.erb</p>
 <p>JSON test </p>
-
-<% @forView.each do |view| %>
-<%= view %>
-</br >
-</br >
+<body>
+<table>
+  <% i = 0 %>
+<% @forView.each do |display| %>
+<tr>
+  <td>
+  <%= i%>
+  <% i = i+1 %>
+</td>
+<td><%= display.dCourseNumber %></td>
+</tr>
 <% end %>
-</br >
-</br>
-
-
-</p>
+</table>
+</body>
+ 
+ 
+</html>
