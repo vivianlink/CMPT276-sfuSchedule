@@ -23,4 +23,6 @@ test:
 
 production:
   <<: *default
-  database: myproj_production
+  database: sfuPlanner_production
+  username: sfuPlanner
+  password: <%= ENV['SFUPLANNER_DATABASE_PASSWORD'] %>
