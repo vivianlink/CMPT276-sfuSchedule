@@ -1,10 +1,28 @@
 Rails.application.routes.draw do
 
+
   resources :faculties 
   
   
   resources :courses
   resources  :welcome
+
+  get 'url_construct/index'
+  match ':controller(/:action(/:id))', :via => :get
+  match ':controller(/:action(/:id))', :via => :post
+
+  get 'sessions/login'
+  post 'sessions/login_attempt'
+  get 'sessions/logout'
+
+  get 'users/login'
+  get 'users/new'
+  get 'welcome/index'
+
+  resources :users
+  # match '/curl_courses' => 'request_courses#curl_get_courses', via::get
+  # match '/curl_courses' => 'request_courses#curl_post_courses', via::post
+
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
