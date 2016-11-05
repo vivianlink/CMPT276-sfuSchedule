@@ -15,15 +15,11 @@
 			<a class="login" href= "/sessions/login"> LOGIN </a><br>
 		</div>
 	<% end %>
-	<p>
-		faculty
-		<%= text_field_tag :faculty, params[:faculty] %>
-		number
-		<%= text_field_tag :number, params[:number] %>
-		year
-		<%= text_field_tag :year, params[:year] %>
-		semester
-		<%= text_field_tag :semester, params[:semester] %>
+	<table align="center">
+		<tr><td>Faculty:</td><td><%= text_field_tag :faculty, params[:faculty] %></td></tr>
+		<tr><td>Number:</td><td><%= text_field_tag :number, params[:number] %></td></tr>
+		<tr><td>Year:</td><td><%= text_field_tag :year, params[:year] %></td></tr>
+		<tr><td>Semester:</td><td><%= text_field_tag :semester, params[:semester] %></td></tr>
+	</table>
 		<%= submit_tag "Search", :name => nil %>
-	</p>
 </body>
