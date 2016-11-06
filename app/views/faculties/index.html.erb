@@ -1,0 +1,22 @@
+<h1>Listing faculties</h1>
+ 
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+     <th colspan="3"></th>
+  </tr>
+ 
+  <% @faculties.each do |faculty| %>
+    <tr>
+      <td><%= faculty.name %></td>
+      <td><%= faculty.description %></td>
+      <td><%= link_to 'Show', faculty_path(faculty) %></td>
+      <td><%= link_to 'Edit', edit_faculty_path(faculty) %></td>
+      <td><%= link_to 'Destroy', faculty_path(faculty),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+ <%= link_to 'New faculty', new_faculty_path %>

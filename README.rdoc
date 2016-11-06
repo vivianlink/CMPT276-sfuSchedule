@@ -1,28 +1,9 @@
-== README
+to become admin enter password : cmpt276admin
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+there may be odd things we need to do.
 
-Things you may want to cover:
+http://www.sfu.ca/bin/wcm/course-outlines?2017/spring/engl/111w
 
-* Ruby version
+In this example JSON, there are 3 lectures, and each with their own set of tutorials. We can distinguish them by looking at "associatedClass"
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Do we need to worry about labs?
