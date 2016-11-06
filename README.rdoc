@@ -1,3 +1,5 @@
+to become admin enter password : cmpt276admin
+
 there may be odd things we need to do.
 
 http://www.sfu.ca/bin/wcm/course-outlines?2017/spring/engl/111w
