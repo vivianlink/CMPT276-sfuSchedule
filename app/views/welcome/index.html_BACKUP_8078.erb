@@ -23,12 +23,68 @@
   </tr>
  </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <p id="notice"><%= notice %></p>
 
 <div class="sign-up-button"> 
   <a class="sign-up" href= "/users/new"> SIGN UP </a><br>
 </div>
 <% if session[:user_name].present? %>
+
+<<<<<<< HEAD
+  <div class="logout-button"> 
+    <a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
+  </div>
+  Hello, <%=session[:user_name]%>!
+<% else %>
+  <div class="login-button"> 
+    <a class="login" href= "/sessions/login"> LOGIN </a><br>
+  </div>  
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% end %>
+=======
 	<div class="logout-button"> 
 		<a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
 	</div>
@@ -50,3 +106,5 @@
 		<a class="login" href= "/sessions/login"> LOGIN </a><br>
 	</div>	
 <% end %>
+
+>>>>>>> admin

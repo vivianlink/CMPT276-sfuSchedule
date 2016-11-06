@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   resources :faculties 
   
   
@@ -10,6 +9,11 @@ Rails.application.routes.draw do
   get 'url_construct/index'
   match ':controller(/:action(/:id))', :via => :get
   match ':controller(/:action(/:id))', :via => :post
+  
+  get 'admin/new'
+  
+  get 'admin/become_admin_attempt'
+  post 'admin/become_admin_attempt'
 
   get 'sessions/login'
   post 'sessions/login_attempt'

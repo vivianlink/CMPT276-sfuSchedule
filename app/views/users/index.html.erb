@@ -7,6 +7,7 @@
     <tr>
       <th>Username</th>
       <th>Email Address</th>
+      <th> isAdmin? </th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,8 +17,13 @@
       <tr>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
-        </a></td>
-
+        <td>
+          <% if user.is_admin %>
+            YES
+          <% else %>
+            NO
+          <% end %> 
+        </td>
         <td><%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
