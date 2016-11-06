@@ -5,7 +5,9 @@ class AdminController < ApplicationController
   def become_admin_attempt
     if (params[:admin_password] == "cmpt276admin")
       flash[:notice] = "You are now an administrator of SFU Planner"
-      #session[:user_name] = authorized_user.username
+      @user = User.find(session[:user_id])
+      @user[:is_admin] = true
+      @user.save
       redirect_to welcome_index_path
     else
       flash[:notice] = "Unable to authenticate"

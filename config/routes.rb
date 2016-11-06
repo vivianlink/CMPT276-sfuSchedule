@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   get 'admin/new'
+  
+  get 'admin/become_admin_attempt'
   post 'admin/become_admin_attempt'
 
   get 'sessions/login'
