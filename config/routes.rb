@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'admin/new'
+  post 'admin/become_admin_attempt'
+
   get 'sessions/login'
   post 'sessions/login_attempt'
   get 'sessions/logout'
