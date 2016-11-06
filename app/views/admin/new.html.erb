@@ -7,7 +7,9 @@
     <p>Admin Password:</br> <%= password_field_tag :admin_password%></p> 
 
     <%= submit_tag("Authenticate") %>
+    <%= link_to 'Back', welcome_index_path%>
   <% end %>
 
   <p id="notice"><%= notice %></p>
 </div>
+
