@@ -7,12 +7,11 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <ul>
-    <li><a href="#home">Search</a></li>
-    <li><a href="#news">Profile</a></li>
-    <li><a href="#contact">Schedule</a></li>
-    <li><a href="#about">PlaceHolder</a></li>
-    <li><a href="#about">PlaceHolder</a></li>
-    <li><a href="#about">PlaceHolder</a></li>
+    <li><a href="">Search</a></li>
+    <li><a href="">Profile</a></li>
+    <li><a href="">Schedule</a></li>
+    <% if false %>
+    <%# this block is commented out %>
     <% if session[:user_name].present? %>
   		<li style="float:right"><a href= "/sessions/logout">Logout</a></li>
       <li style="float:right"><a><%=session[:user_name]%></a><li>
@@ -20,6 +19,12 @@
   		<li style="float:right"><a href= "/users/new">Sign Up</a></li>
   		<li style="float:right"><a href= "/sessions/login"> Login </a></li>
   	<% end %>
+    <% if session[:is_admin] %>
+  		<li style="float:right"><a class="show-users" href="/users"> SHOW USERS </a></li>
+  	<% else %>
+  		<li style="float:right"><a class="become-admin" href="/admin/new"> BECOME ADMIN </a></li>
+  	<% end %>
+    <% end %>
   </ul>
 </head>
 <body>

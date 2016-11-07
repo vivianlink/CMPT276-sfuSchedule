@@ -6,5 +6,32 @@
 		<tr><td>Year:</td><td><%= text_field_tag :year, params[:year] %></td></tr>
 		<tr><td>Semester:</td><td><%= text_field_tag :semester, params[:semester] %></td></tr>
 	</table>
-		<%= submit_tag "Search", class:"button", :name => nil %>
+	<%= form_tag courses_path, :method => 'get' do %>
+	<%= submit_tag "Search", class:"button", :name => nil %>
 </body>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="sign-up-button">
+  <a class="sign-up" href= "/users/new"> SIGN UP </a><br>
+</div>
+<% if session[:user_name].present? %>
+  <div class="logout-button">
+    <a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
+  </div>
+  Hello, <%=session[:user_name]%>!
+<% else %>
+  <div class="login-button">
+    <a class="login" href= "/sessions/login"> LOGIN </a><br>
+  </div>
+<% end %>
+<% if session[:is_admin] %>
+	<div class="show-users-button">
+		<a class="show-users" href="/users"> SHOW USERS </a>
+	</div>
+<% else %>
+	<div class="become-admin-button">
+		<a class="become-admin" href="/admin/new"> BECOME ADMIN </a>
+	</div>
+<% end %>
