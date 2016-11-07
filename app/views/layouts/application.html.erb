@@ -14,8 +14,8 @@
     <li><a href="#about">PlaceHolder</a></li>
     <li><a href="#about">PlaceHolder</a></li>
     <% if session[:user_name].present? %>
-      <li style="float:right"><a><%=session[:user_name]%></a><li>
   		<li style="float:right"><a href= "/sessions/logout">Logout</a></li>
+      <li style="float:right"><a><%=session[:user_name]%></a><li>
   	<% else %>
   		<li style="float:right"><a href= "/users/new">Sign Up</a></li>
   		<li style="float:right"><a href= "/sessions/login"> Login </a></li>
