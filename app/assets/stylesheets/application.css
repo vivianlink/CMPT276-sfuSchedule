@@ -1,5 +1,5 @@
 /*
-<<<<<<< HEAD
+
   * This is a manifest file that'll be compiled into application.css, which will include all the files
   * listed below.
   *
@@ -21,13 +21,26 @@ body {
  text-align: center;
  color: #55acee;
 }
+
+
+
+/*
+  table styling
+*/
 table {
   text-align: right;
 }
+
 th{
   background-color: lightblue;
 }
 tr:nth-child(even) {background-color: #f2f2f2}
+
+
+
+/*
+  blue fansy button
+*/
 .button {
  cursor: pointer;
  margin: 10px;
@@ -44,23 +57,33 @@ tr:nth-child(even) {background-color: #f2f2f2}
  background-color: #55acee;
  color: #fff
 }
-=======
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require_self
- */
 
- 
+
+
+/*
+  navigation bar
+*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+li {
+  float: left;
+}
+li a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+li a:hover:not(.active) {
+  background-color: grey;
+  color: #fff
+}
+
+
 p,body,button {
     background-color: #fff;
 }
@@ -82,5 +105,3 @@ width: 220px !important;
 font-size: 14px !important;
 
 }
-
->>>>>>> master
