@@ -24,8 +24,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    if session[:user_id].present? 
+      @user = User.find(session[:user_id])
+    end 
   end 
+
 
   def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)

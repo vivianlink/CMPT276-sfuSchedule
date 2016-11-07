@@ -27,7 +27,9 @@ class SessionsController < ApplicationController
 
   def logout
       flash[:notice] = "Bye, #{session[:user_name]}. See you later!"
-	  session[:user_name] = nil
+	    session[:user_name] = nil
+      session[:user_id] = nil
+      session[:is_admin] = false
       redirect_to welcome_index_path
   end
 end
