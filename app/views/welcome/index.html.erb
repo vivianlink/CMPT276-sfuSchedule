@@ -22,19 +22,23 @@
   <div class="logout-button">
     <a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
   </div>
+
+  
+	<% if session[:is_admin] %>
+		<div class="show-users-button">
+			<a class="show-users" href="/users"> SHOW USERS </a>
+		</div>
+	<% else %>
+		<div class="become-admin-button">
+			<a class="become-admin" href="/admin/new"> BECOME ADMIN </a>
+		</div>
+	<% end %>
+
   Hello, <%=session[:user_name]%>!
 <% else %>
   <div class="login-button">
     <a class="login" href= "/sessions/login"> LOGIN </a><br>
   </div>
-<% end %>
-<% if session[:is_admin] %>
-	<div class="show-users-button">
-		<a class="show-users" href="/users"> SHOW USERS </a>
-	</div>
-<% else %>
-	<div class="become-admin-button">
-		<a class="become-admin" href="/admin/new"> BECOME ADMIN </a>
-	</div>
+
 <% end %>
 <% end %>
