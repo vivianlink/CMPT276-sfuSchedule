@@ -12,15 +12,43 @@ class UrlConstructController < ApplicationController
   def index
 
 
-  
-
-
-
-
-    array  = []
+    if @yay == 5
+      @forView = [2,3,4]
+    end
    
 
-    urlYear
+    # array = [1,2,3]
+    # source = HTTParty.get(@@base + "wef" )
+    # data = JSON.parse((source.body))
+    # badURL = HTTParty.get(@@base + "yousuck")
+    # badJSON = JSON.parse((badURL.body))
+
+    #  if (data == badJSON)
+    #  else
+    # data.each do |data|
+ 
+    
+    # display = data["value"]
+    # array.push(display)
+
+    # end
+   
+    # end
+
+
+     @forView = [1,2,3]
+
+  end
+
+
+
+
+  def url2016FallCourses
+
+
+  
+
+    array  = []
 
 
       urltesting = "2016"
@@ -54,84 +82,66 @@ class UrlConstructController < ApplicationController
 
 
 
+  @forView = array
+
+
+  end
 
 
 
 
-
-
-
-
-
+ def url2015SpringCourses
 
 
   
 
+    array  = []
+
+
+      urltesting = "2015"
+      urlSemester(urltesting)
+      instage_year_url = @@base + urltesting
+
+      
+        instage_season_url = instage_year_url + '/' + "spring"
+        urlFaculty(instage_season_url)
+        
+
+         @FacultyView.each do |falculty|
+            instage_falculty_url = instage_season_url + '/' + falculty.dSubject
+            urlCourse(instage_falculty_url)
+            
+            @CourseView.each do |course|
+              filler = instage_course_url = instage_falculty_url+ '/' + course.dCourseNumber
+
+
+
+              creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2016", "semester" => "fall")
+              creating_new_course.save
+
+
+              array.push(filler)
+
+            end
+
+          
+         end
+
+
+
   @forView = array
 
 
-
-
-
-
-
-
-
-
-
-=begin
-
-
-
-
-
-  array = []
-
-    urlYear
-
-    instage_falculty_url = 'http://www.sfu.ca/bin/wcm/course-outlines?2014/fall/iat'
-
-    filler = urlCourse(instage_falculty_url)
-    array.push(filler)
-
-
-
-
-
-
-    # Test method for output results.
-    #@forView = $forView
-    array = []
-
-    urlYear
-
-    # Methods do not loop like this, thus we must have a separate function
-    # Or loop to iterate per element.
-
-    @YearView.each do |year|
-      #urlSemester(year.dYearNumber)
-      #url = @@base + year.dYearNumber
-      urlSemester('2014')
-      url = @@base + '2014'
-      @SemesterView.each do |season|
-        filler = urlFaculty(season.dSemesterSeasons, url)
-        url = url + '/' + season.dSemesterSeasons
-        @FacultyView.each do |faculty|
-          filler = urlCourse(faculty.dSubject, url)
-          array.push(filler)
-        end
-        array.push(filler)
-      end
-        #array.push(filler)
-    end
-
-
-
-    @forView = array
-
-    #@data =JSON.parse(HTTParty.get('http://www.sfu.ca/bin/wcm/course-outlines?2017/spring').body)
-=end
   end
+
+
+
+
+
+
+
+
+
 
 
 
@@ -178,12 +188,25 @@ class UrlConstructController < ApplicationController
     source = HTTParty.get(nURL)
     data = JSON.parse((source.body))
 
-    data.each do |display|
-      subject = display["value"]
-      dValue = DFaculty.new("dSubject" => subject)
-      dValue.save
-      array.push(dValue)
+
+
+    badURL = HTTParty.get(@@base + "genjihasabrother")
+    badJSON = JSON.parse((badURL.body))
+
+    if (data == badJSON)
+    else
+
+      data.each do |display|
+        subject = display["value"]
+        dValue = DFaculty.new("dSubject" => subject)
+        dValue.save
+        array.push(dValue)
+      end
     end
+
+
+
+
     @FacultyView = array
   end
 
@@ -198,12 +221,23 @@ class UrlConstructController < ApplicationController
     source = HTTParty.get(nURL)
     data = JSON.parse((source.body))
 
-    data.each do |display|
-      course = display["value"]
-      dValue = DCourse.new("dCourseNumber" => course)
-      dValue.save
-      array.push(dValue)
+    badURL = HTTParty.get(@@base + "genjihasabrother")
+    badJSON = JSON.parse((badURL.body))
+
+    if (data == badJSON)
+    else
+    
+
+      data.each do |display|
+          course = display["value"]
+          dValue = DCourse.new("dCourseNumber" => course)
+          dValue.save
+          array.push(dValue)
+      end
+
     end
+
+
     @CourseView = array
   end
 

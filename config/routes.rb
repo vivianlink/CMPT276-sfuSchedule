@@ -6,9 +6,15 @@ Rails.application.routes.draw do
   resources :courses
   resources  :welcome
 
+
+
+
+
   get 'url_construct/index'
   match ':controller(/:action(/:id))', :via => :get
   match ':controller(/:action(/:id))', :via => :post
+  get 'url_construct/url2016FallCourses'
+  get 'url_construct/url2015SpringCourses'
   
   get 'admin/new'
   
