@@ -10,7 +10,6 @@
     <li><a href="">Search</a></li>
     <li><a href="">Profile</a></li>
     <li><a href="">Schedule</a></li>
-    <% if false %>
     <%# this block is commented out %>
     <% if session[:user_name].present? %>
   		<li style="float:right"><a href= "/sessions/logout">Logout</a></li>
@@ -20,11 +19,10 @@
   		<li style="float:right"><a href= "/sessions/login"> Login </a></li>
   	<% end %>
     <% if session[:is_admin] %>
-  		<li style="float:right"><a class="show-users" href="/users"> SHOW USERS </a></li>
+  		<li style="float:right"><a href="/users"> SHOW USERS </a></li>
   	<% else %>
-  		<li style="float:right"><a class="become-admin" href="/admin/new"> BECOME ADMIN </a></li>
+  		<li style="float:right"><a href="/admin/new"> BECOME ADMIN </a></li>
   	<% end %>
-    <% end %>
   </ul>
 </head>
 <body>

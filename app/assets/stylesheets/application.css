@@ -53,7 +53,6 @@ tr:nth-child(even) {background-color: #f2f2f2}
 }
 
 .button:hover {
- cursor: url(http://cur.cursors-4u.net/symbols/sym-1/sym46.cur), auto;
  background-color: #55acee;
  color: #fff
 }
