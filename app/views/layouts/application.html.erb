@@ -7,9 +7,9 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <ul>
-    <li><a href="">Search</a></li>
-    <li><a href="">Profile</a></li>
-    <li><a href="">Schedule</a></li>
+    <li><a href="/welcome">Search</a></li>
+    <li><a href="/users/show">Profile</a></li>
+    <li><a href="/courses">Schedule</a></li>
     <%# this block is commented out %>
     <% if session[:user_name].present? %>
   		<li style="float:right"><a href= "/sessions/logout">Logout</a></li>
