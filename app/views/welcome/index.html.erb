@@ -1,12 +1,12 @@
 <body>
 	<h1>SFU PLANNER</h1>
+	<%= form_tag courses_path, :method => 'get' do %>
 	<table align="center">
 		<tr><td>Faculty:</td><td><%= text_field_tag :faculty, params[:faculty] %></td></tr>
 		<tr><td>Number:</td><td><%= text_field_tag :number, params[:number] %></td></tr>
 		<tr><td>Year:</td><td><%= text_field_tag :year, params[:year] %></td></tr>
 		<tr><td>Semester:</td><td><%= text_field_tag :semester, params[:semester] %></td></tr>
 	</table>
-	<%= form_tag courses_path, :method => 'get' do %>
 	<%= submit_tag "Search", class:"button", :name => nil %>
 </body>
 <% end %>
