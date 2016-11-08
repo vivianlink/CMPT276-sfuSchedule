@@ -116,7 +116,7 @@ class UrlConstructController < ApplicationController
 
 
 
-              creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2016", "semester" => "fall")
+              creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2015", "semester" => "spring")
               creating_new_course.save
 
 
