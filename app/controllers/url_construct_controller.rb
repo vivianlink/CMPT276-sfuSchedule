@@ -43,49 +43,49 @@ class UrlConstructController < ApplicationController
 
 
 
-  def url2016FallCourses
+  # def url2016FallCourses
 
 
   
 
-    array  = []
+  #   array  = []
 
 
-      urltesting = "2016"
-      urlSemester(urltesting)
-      instage_year_url = @@base + urltesting
+  #     urltesting = "2016"
+  #     urlSemester(urltesting)
+  #     instage_year_url = @@base + urltesting
 
       
-        instage_season_url = instage_year_url + '/' + "fall"
-        urlFaculty(instage_season_url)
+  #       instage_season_url = instage_year_url + '/' + "fall"
+  #       urlFaculty(instage_season_url)
         
 
-         @FacultyView.each do |falculty|
-            instage_falculty_url = instage_season_url + '/' + falculty.dSubject
-            urlCourse(instage_falculty_url)
+  #        @FacultyView.each do |falculty|
+  #           instage_falculty_url = instage_season_url + '/' + falculty.dSubject
+  #           urlCourse(instage_falculty_url)
             
-            @CourseView.each do |course|
-              filler = instage_course_url = instage_falculty_url+ '/' + course.dCourseNumber
+  #           @CourseView.each do |course|
+  #             filler = instage_course_url = instage_falculty_url+ '/' + course.dCourseNumber
 
 
 
-              creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2016", "semester" => "fall")
-              creating_new_course.save
+  #             creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2016", "semester" => "fall", )
+  #             creating_new_course.save
 
 
-              array.push(filler)
+  #             array.push(filler)
 
-            end
+  #           end
 
           
-         end
+  #        end
 
 
 
-  @forView = array
+  # @forView = array
 
 
-  end
+  # end
 
 
 
@@ -112,20 +112,24 @@ class UrlConstructController < ApplicationController
             urlCourse(instage_falculty_url)
             
             @CourseView.each do |course|
-              filler = instage_course_url = instage_falculty_url+ '/' + course.dCourseNumber
+              instage_course_url = instage_falculty_url+ '/' + course.dCourseNumber
+              urlSection(instage_course_url)
+
+              @SectionView.each do |section|
+
+                filler = instage_section_url = instage_course_url + '/' + section.dSectionNumber
+
+                creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2015", "semester" => "spring", "section" => section.dSectionNumber, "CourseUrl" => instage_section_url  )
+                creating_new_course.save
 
 
-
-              creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2015", "semester" => "spring")
-              creating_new_course.save
-
-
-              array.push(filler)
+                array.push(filler)
+              end
 
             end
 
           
-         end
+          end
 
 
 
@@ -188,8 +192,6 @@ class UrlConstructController < ApplicationController
     source = HTTParty.get(nURL)
     data = JSON.parse((source.body))
 
-
-
     badURL = HTTParty.get(@@base + "genjihasabrother")
     badJSON = JSON.parse((badURL.body))
 
@@ -203,9 +205,6 @@ class UrlConstructController < ApplicationController
         array.push(dValue)
       end
     end
-
-
-
 
     @FacultyView = array
   end
@@ -240,5 +239,37 @@ class UrlConstructController < ApplicationController
 
     @CourseView = array
   end
+
+end
+
+
+
+
+def urlSection(instage_course_url)
+  array = []
+  nURL = instage_course_url
+  source = HTTParty.get(nURL)
+  data = JSON.parse((source.body))
+
+  badURL = HTTParty.get("http://www.sfu.ca/bin/wcm/course-outlines?genjihasabrother")
+  badJSON = JSON.parse((badURL.body))
+
+  if (data == badJSON)
+  else
+
+
+    data.each do |display|
+        section = display["value"]
+        dValue = DSection.new("dSectionNumber" => section)
+        dValue.save
+        array.push(dValue)
+    end
+
+  end
+
+
+  @SectionView = array
+
+
 
 end
