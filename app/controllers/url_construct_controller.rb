@@ -95,7 +95,7 @@ class UrlConstructController < ApplicationController
 
   
 
-    array  = []
+    array  = [1,12,123]
 
 
       urltesting = "2015"
@@ -117,13 +117,19 @@ class UrlConstructController < ApplicationController
 
               @SectionView.each do |section|
 
-                filler = instage_section_url = instage_course_url + '/' + section.dSectionNumber
+                instage_section_url = instage_course_url + '/' + section.dSectionNumber
+                urlDetail(instage_section_url)
 
-                creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2015", "semester" => "spring", "section" => section.dSectionNumber, "CourseUrl" => instage_section_url  )
-                creating_new_course.save
+                @DetailView.each do |detail|
 
 
-                array.push(filler)
+
+
+
+                  creating_new_course = Course.new("instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2015", "semester" => "spring", "section" => section.dSectionNumber, "CourseUrl" => instage_section_url  )
+                  creating_new_course.save
+
+                end
               end
 
             end
@@ -269,6 +275,40 @@ def urlSection(instage_course_url)
 
 
   @SectionView = array
+
+
+
+end
+
+
+
+
+def urlDetail(instage_section_url)
+  array = []
+  nURL = instage_section_url
+  source = HTTParty.get(nURL)
+  data = JSON.parse((source.body))
+
+  badURL = HTTParty.get("http://www.sfu.ca/bin/wcm/course-outlines?genjihasabrother")
+  badJSON = JSON.parse((badURL.body))
+
+  if (data == badJSON)
+  else
+
+    if (data.include?("instructor"))
+
+      professor = data["instructor"]
+      professor = professor.first
+      professor = professor["lastName"]
+      dValue = DDetail.new("dProfessor" => professor)
+      dValue.save
+      array.push(dValue)
+    end 
+
+  end
+
+
+  @DetailView = array
 
 
 
