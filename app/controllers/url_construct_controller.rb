@@ -126,7 +126,7 @@ class UrlConstructController < ApplicationController
 
 
 
-                  creating_new_course = Course.new("instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2015", "semester" => "spring", "section" => section.dSectionNumber, "CourseUrl" => instage_section_url  )
+                  creating_new_course = Course.new("unit"=>detail.dUnit,"schedule"=> detail.DSchedule,"instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2015", "semester" => "spring", "section" => section.dSectionNumber, "CourseUrl" => instage_section_url  )
                   creating_new_course.save
 
                 end
@@ -299,10 +299,28 @@ def urlDetail(instage_section_url)
 
       professor = data["instructor"]
       professor = professor.first
-      professor = professor["lastName"]
-      dValue = DDetail.new("dProfessor" => professor)
+      professor = professor["name"]
+      
+
+      schedule = data["courseSchedule"]
+      schedule = schedule.first
+      schedule = schedule["startTime"] + "to" + schedule["endTime"] + "on" + schedule["days"]
+     
+
+      unit = data["info"]
+      unit = unit["units"]
+
+      dValue = DDetail.new("dUnit" => unit,"dProfessor" => professor, "DSchedule" => schedule)
       dValue.save
       array.push(dValue)
+
+
+
+
+
+
+
+
     end 
 
   end
