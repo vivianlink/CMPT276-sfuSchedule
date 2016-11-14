@@ -12,321 +12,180 @@ class UrlConstructController < ApplicationController
   def index
 
 
-    if @yay == 5
-      @forView = [2,3,4]
-    end
-   
-
-    # array = [1,2,3]
-    # source = HTTParty.get(@@base + "wef" )
-    # data = JSON.parse((source.body))
-    # badURL = HTTParty.get(@@base + "yousuck")
-    # badJSON = JSON.parse((badURL.body))
-
-    #  if (data == badJSON)
-    #  else
-    # data.each do |data|
- 
-    
-    # display = data["value"]
-    # array.push(display)
-
-    # end
-   
-    # end
-
-
-     @forView = [1,2,3]
+    @forView = [1,2,3]
 
   end
 
 
+  def url2016FallCourses
+    filler_array = []
+
+    urlYear = "2016"
+    urlSeason = "/fall"
+    instage_season_url = @@base + urlYear + urlSeason
+
+    urlFalculty(instage_season_url)
 
 
-  # def url2016FallCourses
+      @AllFalculty.each do |falculty|
+          instage_falculty_url = instage_season_url + "/" + falculty.dSubject
+          urlCourse(instage_falculty_url)
 
 
-  
-
-  #   array  = []
-
-
-  #     urltesting = "2016"
-  #     urlSemester(urltesting)
-  #     instage_year_url = @@base + urltesting
-
-      
-  #       instage_season_url = instage_year_url + '/' + "fall"
-  #       urlFaculty(instage_season_url)
-        
-
-  #        @FacultyView.each do |falculty|
-  #           instage_falculty_url = instage_season_url + '/' + falculty.dSubject
-  #           urlCourse(instage_falculty_url)
-            
-  #           @CourseView.each do |course|
-  #             filler = instage_course_url = instage_falculty_url+ '/' + course.dCourseNumber
+          @AllCourse.each do |course|
+            instage_course_url = instage_falculty_url + "/" + course.dCourseNumber
+            urlSection(instage_course_url)
 
 
-
-  #             creating_new_course = Course.new("faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2016", "semester" => "fall", )
-  #             creating_new_course.save
-
-
-  #             array.push(filler)
-
-  #           end
-
-          
-  #        end
-
-
-
-  # @forView = array
-
-
-  # end
+            @AllSection.each do |section|
+              instage_section_url = instage_course_url + "/" + section.dSectionNumber
+              urlDetail(instage_section_url)
 
 
 
 
- def url2015SpringCourses
-
-
-  
-
-    array  = [1,12,123]
-
-
-      urltesting = "2015"
-      urlSemester(urltesting)
-      instage_year_url = @@base + urltesting
-
-      
-        instage_season_url = instage_year_url + '/' + "spring"
-        urlFaculty(instage_season_url)
-        
-
-         @FacultyView.each do |falculty|
-            instage_falculty_url = instage_season_url + '/' + falculty.dSubject
-            urlCourse(instage_falculty_url)
-            
-            @CourseView.each do |course|
-              instage_course_url = instage_falculty_url+ '/' + course.dCourseNumber
-              urlSection(instage_course_url)
-
-              @SectionView.each do |section|
-
-                instage_section_url = instage_course_url + '/' + section.dSectionNumber
-                urlDetail(instage_section_url)
-
-                @DetailView.each do |detail|
-
-
-
-
-
-                  creating_new_course = Course.new("unit"=>detail.dUnit,"schedule"=> detail.DSchedule,"instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => "2015", "semester" => "spring", "section" => section.dSectionNumber, "CourseUrl" => instage_section_url  )
+                @AllDetail.each do |detail|
+                  
+                  creating_new_course = Course.new("instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => urlYear, "semester" => urlSeason, "section" => section.dSectionNumber, "CourseUrl" => instage_section_url,"schedule" => detail.DSchedule,"unit" => detail.dUnit)
                   creating_new_course.save
-
+                  puts instage_section_url
+                  puts creating_new_course.schedule
                 end
-              end
-
             end
 
-          
           end
 
-
-
-  @forView = array
-
+      end
 
   end
 
 
 
+  def url2015SpringCourses
 
-
-
-
-
-
-
-
-
-
-  def urlYear
-    array = []
-    source = HTTParty.get(@@base)
-    data = JSON.parse((source.body))
-
-    data.each do |display|
-      id = display["value"]
-      dsomething = DYear.new("dYearNumber" => id)
-      dsomething.save
-      array.push(dsomething)
-    end
-    @YearView = array
   end
 
 
 
-
-  def urlSemester(year)
-    array = []
-    url = @@base + year
-    source = HTTParty.get(url)
+  def urlFalculty(instage_season_url)
+    filler_array = []
+    source = HTTParty.get(instage_season_url)
     data = JSON.parse((source.body))
 
-    data.each do |display|
-      id = display["value"]
-      dsomething = DSemester.new("dSemesterSeasons" => id)
-      dsomething.save
-      array.push(dsomething)
-    end
-    @SemesterView = array
-  end
-
-
-
-
-
-  def urlFaculty(instage_semester_url)
-    array = []
-    nURL = instage_semester_url
-    source = HTTParty.get(nURL)
-    data = JSON.parse((source.body))
-
-    badURL = HTTParty.get(@@base + "genjihasabrother")
+    badURL = HTTParty.get(@@base + "ErrorMessage")
     badJSON = JSON.parse((badURL.body))
 
     if (data == badJSON)
     else
-
-      data.each do |display|
-        subject = display["value"]
+      data.each do |falculty|
+        subject = falculty["value"]
         dValue = DFaculty.new("dSubject" => subject)
         dValue.save
-        array.push(dValue)
+        filler_array.push(dValue)
       end
     end
 
-    @FacultyView = array
+    @AllFalculty = filler_array
   end
-
-
-
 
 
 
   def urlCourse(instage_falculty_url)
-    array = []
-    nURL = instage_falculty_url
-    source = HTTParty.get(nURL)
+    filler_array = []
+    source = HTTParty.get(instage_falculty_url)
     data = JSON.parse((source.body))
 
-    badURL = HTTParty.get(@@base + "genjihasabrother")
+    badURL = HTTParty.get(@@base + "ErrorMessage")
     badJSON = JSON.parse((badURL.body))
 
     if (data == badJSON)
     else
-    
+      data.each do |course|
+        course = course["value"]
+        dValue = DCourse.new("dCourseNumber" => course)
+        dValue.save
+        filler_array.push(dValue)
+      end
+    end
 
-      data.each do |display|
-          course = display["value"]
-          dValue = DCourse.new("dCourseNumber" => course)
-          dValue.save
-          array.push(dValue)
+    @AllCourse = filler_array
+  end  
+
+
+
+  def urlSection(instage_course_url)
+    filler_array = []
+    source = HTTParty.get(instage_course_url)
+    data = JSON.parse((source.body))
+
+    badURL = HTTParty.get(@@base + "ErrorMessage")
+    badJSON = JSON.parse((badURL.body))
+
+    if (data == badJSON)
+    else
+      data.each do |section|
+        section = section["value"]
+        dValue = DSection.new("dSectionNumber" => section)
+        dValue.save
+        filler_array.push(dValue)
+      end
+    end
+
+    @AllSection = filler_array
+  end  
+
+
+
+  def urlDetail(instage_section_url)
+    filler_array = []
+    source = HTTParty.get(instage_section_url)
+    data = JSON.parse((source.body))
+
+    badURL = HTTParty.get(@@base + "ErrorMessage")
+    badJSON = JSON.parse((badURL.body))    
+
+    if (data == badJSON)
+    else
+      if (data.include?("instructor"))
+
+        professor = data["instructor"]
+        professor = professor.first
+        professor = professor["name"]
+
+        overall_schedule = ""
+
+        if(data.include?("courseSchedule"))
+        schedule = data["courseSchedule"]
+        
+            schedule.each do |schedule|
+
+              if (schedule.include?("startTime"))
+                overall_schedule = overall_schedule + schedule["startTime"] + " to " + schedule["endTime"] + " on " + schedule["days"]
+              else 
+                overall_schedule = "none"
+              end
+
+            end
+
+        end
+
+        unit = data["info"]
+        unit = unit["units"]
+
+        dValue = DDetail.new("dUnit" => unit, "dProfessor" => professor, "DSchedule" => overall_schedule)
+        dValue.save
+        filler_array.push(dValue)
+
+
       end
 
     end
 
 
-    @CourseView = array
-  end
-
-end
-
-
-
-
-def urlSection(instage_course_url)
-  array = []
-  nURL = instage_course_url
-  source = HTTParty.get(nURL)
-  data = JSON.parse((source.body))
-
-  badURL = HTTParty.get("http://www.sfu.ca/bin/wcm/course-outlines?genjihasabrother")
-  badJSON = JSON.parse((badURL.body))
-
-  if (data == badJSON)
-  else
-
-
-    data.each do |display|
-        section = display["value"]
-        dValue = DSection.new("dSectionNumber" => section)
-        dValue.save
-        array.push(dValue)
-    end
+    @AllDetail = filler_array
 
   end
 
-
-  @SectionView = array
-
-
-
-end
-
-
-
-
-def urlDetail(instage_section_url)
-  array = []
-  nURL = instage_section_url
-  source = HTTParty.get(nURL)
-  data = JSON.parse((source.body))
-
-  badURL = HTTParty.get("http://www.sfu.ca/bin/wcm/course-outlines?genjihasabrother")
-  badJSON = JSON.parse((badURL.body))
-
-  if (data == badJSON)
-  else
-
-    if (data.include?("instructor"))
-
-      professor = data["instructor"]
-      professor = professor.first
-      professor = professor["name"]
-      
-
-      schedule = data["courseSchedule"]
-      schedule = schedule.first
-      schedule = schedule["startTime"] + "to" + schedule["endTime"] + "on" + schedule["days"]
-     
-
-      unit = data["info"]
-      unit = unit["units"]
-
-      dValue = DDetail.new("dUnit" => unit,"dProfessor" => professor, "DSchedule" => schedule)
-      dValue.save
-      array.push(dValue)
-
-
-
-
-
-
-
-
-    end 
-
-  end
-
-
-  @DetailView = array
 
 
 
