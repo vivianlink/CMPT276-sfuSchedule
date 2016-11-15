@@ -21,8 +21,8 @@ class UrlConstructController < ApplicationController
     filler_array = []
 
     urlYear = "2016"
-    urlSeason = "/fall"
-    instage_season_url = @@base + urlYear + urlSeason
+    urlSeason = "fall"
+    instage_season_url = @@base + urlYear + "/" + urlSeason
 
     urlFalculty(instage_season_url)
 
@@ -46,10 +46,11 @@ class UrlConstructController < ApplicationController
 
                 @AllDetail.each do |detail|
                   
-                  creating_new_course = Course.new("instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => urlYear, "semester" => urlSeason, "section" => section.dSectionNumber, "CourseUrl" => instage_section_url,"schedule" => detail.DSchedule,"unit" => detail.dUnit)
+                  creating_new_course = Course.new("designation" => detail.dDesignation, "instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => urlYear, "semester" => urlSeason, "section" => section.dSectionNumber, "CourseUrl" => instage_section_url,"schedule" => detail.DSchedule,"unit" => detail.dUnit)
                   creating_new_course.save
                   puts instage_section_url
-                  puts creating_new_course.schedule
+                  puts creating_new_course.id
+                  puts creating_new_course.designation
                 end
             end
 
@@ -62,6 +63,45 @@ class UrlConstructController < ApplicationController
 
 
   def url2015SpringCourses
+    filler_array = []
+
+    urlYear = "2015"
+    urlSeason = "spring"
+    instage_season_url = @@base + urlYear + "/" + urlSeason
+
+    urlFalculty(instage_season_url)
+
+
+      @AllFalculty.each do |falculty|
+          instage_falculty_url = instage_season_url + "/" + falculty.dSubject
+          urlCourse(instage_falculty_url)
+
+
+          @AllCourse.each do |course|
+            instage_course_url = instage_falculty_url + "/" + course.dCourseNumber
+            urlSection(instage_course_url)
+
+
+            @AllSection.each do |section|
+              instage_section_url = instage_course_url + "/" + section.dSectionNumber
+              urlDetail(instage_section_url)
+
+
+
+
+                @AllDetail.each do |detail|
+                  
+                  creating_new_course = Course.new("designation" => detail.dDesignation, "instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => urlYear, "semester" => urlSeason, "section" => section.dSectionNumber, "CourseUrl" => instage_section_url,"schedule" => detail.DSchedule,"unit" => detail.dUnit)
+                  creating_new_course.save
+                  puts instage_section_url
+                  puts creating_new_course.id
+                  puts creating_new_course.designation
+                end
+            end
+
+          end
+
+      end
 
   end
 
@@ -151,6 +191,9 @@ class UrlConstructController < ApplicationController
         professor = data["instructor"]
         professor = professor.first
         professor = professor["name"]
+      else
+        professor = "none specified"
+      end
 
         overall_schedule = ""
 
@@ -167,17 +210,28 @@ class UrlConstructController < ApplicationController
 
             end
 
+        else
+          schedule = "no schedule in api"
         end
 
-        unit = data["info"]
-        unit = unit["units"]
 
-        dValue = DDetail.new("dUnit" => unit, "dProfessor" => professor, "DSchedule" => overall_schedule)
+        if(data.include?("info"))
+          data = data["info"]
+          unit = data["units"]
+
+          designation = data["designation"]
+
+
+        end
+
+
+
+        dValue = DDetail.new("dDesignation" => designation,"dUnit" => unit, "dProfessor" => professor, "DSchedule" => overall_schedule)
         dValue.save
         filler_array.push(dValue)
 
 
-      end
+     
 
     end
 
