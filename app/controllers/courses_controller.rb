@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
 
       #for search
       @courses = Course.search(params[:faculty],
-        params[:number],params[:year],params[:semester], params[:section])
+        params[:number],params[:year],params[:semester], params[:section], params[:instructor])
   
   	end
 
