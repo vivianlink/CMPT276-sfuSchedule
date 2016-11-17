@@ -41,6 +41,9 @@ class ProfController < ApplicationController
 	end
 
 	def new
+		# delete previous comment for this prof from this user
+		Rating.where(:prof_name => params[:prof_name], :user_name => session[:user_name]).destroy_all
+
 		@rating = Rating.new
 		@rating[:comment] = params[:comment]
 		@rating[:rating] = params[:rating]
