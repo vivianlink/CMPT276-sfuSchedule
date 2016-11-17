@@ -22,7 +22,22 @@ class ProfController < ApplicationController
 	end
 
 	def show
-		@ratings = Rating.all
+		@ratings = Rating.where(prof_name: params[:prof_name])
+
+		@ratings_total = 0
+		@ratings_count = 0
+
+
+		@ratings.each do |rating|
+			print rating.rating
+			if rating.rating
+				@ratings_total += rating.rating
+				@ratings_count += 1
+			end
+		end
+
+		@rating_average = @ratings_total.to_f / @ratings_count
+		@rating_average = @rating_average.round(2)
 	end
 
 	def new
@@ -34,6 +49,6 @@ class ProfController < ApplicationController
 
 		@rating.save
 
-		render "show"
+		redirect_to action: "show", prof_name: params[:prof_name]
 	end
 end

@@ -1,5 +1,9 @@
 <h1><%= params[:prof_name] %></h1>
-<p>Find me in app/views/prof/show.html.erb</p>
+<% if @ratings_count > 0 %>
+	<p>Rating is <b><%= @rating_average %></b> according to <b> <%= @ratings_count %></b> people</p>
+<% else %>
+	<p>No one gave rating to this professor. Be the first to rate!</p>
+<% end %>
 
 <div class="comment-form">
   <%= form_tag prof_new_path, :method => 'get' do %>
@@ -12,4 +16,5 @@
 
 <% @ratings.each do |rating| %>
     <%= rating.comment %>
+    <br>
 <% end %>
