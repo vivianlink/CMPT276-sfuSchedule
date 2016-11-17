@@ -5,16 +5,37 @@
 	<p>No one gave rating to this professor. Be the first to rate!</p>
 <% end %>
 
-<div class="comment-form">
-  <%= form_tag prof_new_path, :method => 'get' do %>
+<% if session[:user_name].present? %>
+	<div class="comment-form">
+	  <%= form_tag prof_new_path, :method => 'get' do %>
   		Rating: <%= select_tag "rating", options_for_select(["", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]) %>
-		Comment: <%= text_field_tag :comment %>
+  		<br>
+		Comment:
+		<br> 
+		<%= text_area_tag :comment %>
 		<%= hidden_field_tag 'prof_name', params[:prof_name] %>
-	<%= submit_tag "Submit", class:"submit-button", :name => nil %>
+		<br>
+		<%= submit_tag "Submit", class:"submit-button", :name => nil %>
+	<% end %>
+	</div>
+<% else %>
+	You need to be logged in to rate a prof
 <% end %>
-</div>
 
-<% @ratings.each do |rating| %>
-    <%= rating.comment %>
-    <br>
-<% end %>
+<div class="ratings-wrapper"> 
+	<% @ratings.each do |rating| %>
+		<% if rating.rating
+			   @user_rating = rating.rating
+		   else
+		       @user_rating = "-"
+		   end %>
+
+		<div class="rating">
+			<div class="rating-user-name"><%= rating.user_name %> says</div>
+			<span class="rating-comment"><%= rating.comment %></span>	
+			<div class="rating-rating">Rating: <%= @user_rating %>/10</div>
+			<div class="rating-date"><%= rating.created_at %></div>
+	    </div>
+	    <br>
+	<% end %>
+</div>
