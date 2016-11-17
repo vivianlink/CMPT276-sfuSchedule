@@ -4,13 +4,11 @@
 <table>
 	<tr>
 		<th>Name</th>
-
-		<th colspan="3"></th>
 	</tr>
  
 	<% @profs.each do |prof| %>
 	    <tr>
-	      <td><%= prof %></td>
+	      <td><%= link_to prof, prof_show_path(:prof_name => prof) %></td>
 	    </tr>
 	<% end %>
 </table>

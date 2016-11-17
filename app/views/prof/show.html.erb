@@ -1,2 +1,11 @@
-<h1>Prof#show</h1>
+<h1><%= params[:prof_name] %></h1>
 <p>Find me in app/views/prof/show.html.erb</p>
+
+<div class="comment-form">
+  <%= form_tag prof_show_path, :method => 'get' do %>
+  		Rating: <%= select_tag "rating", options_for_select(["", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]) %>
+		Comment: <%= text_field_tag :comment %>
+		<%= hidden_field_tag 'prof_name', params[:prof_name] %>
+	<%= submit_tag "Submit", class:"submit-button", :name => nil %>
+<% end %>
+</div>
