@@ -15,26 +15,46 @@
   *= require_self
 */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
 
 body {
- font-family: 'Open Sans', 'sans-serif';
+ font-family: 'Titillium Web', sans-serif;
  text-align: center;
- color: #55acee;
+ color: black;
 }
 
-
+.sfu-logo {
+  display: inline-block;
+  height: 70px;
+  margin-right: 15px;
+}
 
 /*
   table styling
 */
-table {
-  text-align: right;
+table, tr, td {
+  text-align: center;
+  padding: 10px;
 }
 
-th{
-  background-color: lightblue;
+table {
+  display: inline-block;
+  border: 1px solid grey;
 }
-tr:nth-child(even) {background-color: #f2f2f2}
+
+tr:not(:first-child) td {
+  border-top: 1px solid grey;
+}
+
+.table-wrapper {
+  text-align: center;
+}
+
+.move-right {
+  margin-right: -140px;
+}
+
+/*tr:nth-child(even) {background-color: #E5E1E1}*/
 
 
 
@@ -47,13 +67,13 @@ tr:nth-child(even) {background-color: #f2f2f2}
  border-radius: 5px;
  font-size: 15px;
  display: inline-block;
- color: #55acee;
+ color: grey;
  background-color: white;
- border: 2px #55acee solid;
+ border: 2px grey solid;
 }
 
 .button:hover {
- background-color: #55acee;
+ background-color: grey;
  color: #fff
 }
 

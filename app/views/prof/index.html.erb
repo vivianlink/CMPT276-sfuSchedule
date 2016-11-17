@@ -1,21 +1,24 @@
-<h1>Search a Professor</h1>
+<h1> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">SEARCH A PROFESSOR</h1>
 
 <%= form_tag prof_index_path, :method => 'get' do %>
-	<table align="center">
-		<tr><td>Professor name:</td><td><%= text_field_tag :prof_name, params[:prof_name] %></td></tr>
+	<table class="prof-search" align="center">
+		<tr><td>Professor name:</td><td><%= text_field_tag :prof_name, params[:prof_name] %></td><td>
+	<%= submit_tag "Search", class:"button", :name => nil %></td></tr>
 
 	</table>
-	<%= submit_tag "Search", class:"button", :name => nil %>
 <% end %>
 
-<table>
-	<tr>
-		<th>Name</th>
-	</tr>
- 
-	<% @profs.each do |prof| %>
-	    <tr>
-	      <td><%= link_to prof, prof_show_path(:prof_name => prof) %></td>
-	    </tr>
-	<% end %>
-</table>
+<br><br>
+<div class="table-wrapper">
+	<table>
+		<tr>
+			<th>Professor List</th>
+		</tr>
+	 
+		<% @profs.each do |prof| %>
+		    <tr>
+		      <td><%= link_to prof, prof_show_path(:prof_name => prof) %></td>
+		    </tr>
+		<% end %>
+	</table>
+</div>
