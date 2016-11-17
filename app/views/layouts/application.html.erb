@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SfuPlanner</title>
+  <link rel="icon" href="http://www.mrsnelsons.com/sites/mrsnelsons.com/files/books.jpg" type="image/x-icon" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <ul>
+    <li><a href="/welcome">Search</a></li>
+    <li><a href="/users/show">Profile</a></li>
+    <li><a href="/courses">Schedule</a></li>
+    <li><a href="/prof">Rate a Professor</a></li>
+    <%# this block is commented out %>
+    <% if session[:user_name].present? %>
+  		<li style="float:right"><a href= "/sessions/logout">Logout</a></li>
+      <li style="float:right"><a><%=session[:user_name]%></a><li>
+      
+      <% if session[:is_admin] %>
+        <li style="float:right"><a href="/users"> SHOW USERS </a></li>
+      <% else %>
+        <li style="float:right"><a href="/admin/new"> BECOME ADMIN </a></li>
+      <% end %>
+  	<% else %>
+  		<li style="float:right"><a href= "/users/new">Sign Up</a></li>
+  		<li style="float:right"><a href= "/sessions/login"> Login </a></li>
+  	<% end %>
+  </ul>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

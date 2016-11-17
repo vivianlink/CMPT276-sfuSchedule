@@ -1,0 +1,48 @@
+<body>
+	<h1>SFU PLANNER</h1>
+	<%= form_tag courses_path, :method => 'get' do %>
+	<table align="center">
+		<tr><td>Faculty:</td><td><%= text_field_tag :faculty, params[:faculty] %></td></tr>
+		<tr><td>Number:</td><td><%= text_field_tag :number, params[:number] %></td></tr>
+		<tr><td>Year:</td><td><%= text_field_tag :year, params[:year] %></td></tr>
+		<tr><td>Semester:</td><td><%= text_field_tag :semester, params[:semester] %></td></tr>
+		<tr><td>Section:</td><td><%= text_field_tag :section, params[:section] %></td></tr>
+		<tr><td>instructor:</td><td><%= text_field_tag :instructor, params[:instructor] %></td></tr>
+		<tr><td>unit:</td><td><%= text_field_tag :unit, params[:unit] %></td></tr>
+		<tr><td>designation:</td><td><%= text_field_tag :designation, params[:designation] %></td></tr>
+	</table>
+	<%= submit_tag "Search", class:"button", :name => nil %>
+</body>
+<% end %>
+
+<%if false%>
+<%# the following are commmented out%>
+<p id="notice"><%= notice %></p>
+
+<div class="sign-up-button">
+  <a class="sign-up" href= "/users/new"> SIGN UP </a><br>
+</div>
+<% if session[:user_name].present? %>
+  <div class="logout-button">
+    <a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
+  </div>
+
+  
+	<% if session[:is_admin] %>
+		<div class="show-users-button">
+			<a class="show-users" href="/users"> SHOW USERS </a>
+		</div>
+	<% else %>
+		<div class="become-admin-button">
+			<a class="become-admin" href="/admin/new"> BECOME ADMIN </a>
+		</div>
+	<% end %>
+
+  Hello, <%=session[:user_name]%>!
+<% else %>
+  <div class="login-button">
+    <a class="login" href= "/sessions/login"> LOGIN </a><br>
+  </div>
+
+<% end %>
+<% end %>

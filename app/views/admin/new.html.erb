@@ -1,0 +1,15 @@
+<% @page_title = "AdminAuth | SignUp" %>
+
+<div class= "Sign_Form">
+  <h1>Admin Authentication Form</h1>
+  <%= form_tag(:action => 'become_admin_attempt') do %>
+    
+    <p>Admin Password:</br> <%= password_field_tag :admin_password%></p> 
+
+    <%= submit_tag("Authenticate") %>
+    <%= link_to 'Back', welcome_index_path%>
+  <% end %>
+
+  <p id="notice"><%= notice %></p>
+</div>
+

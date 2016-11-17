@@ -1,0 +1,22 @@
+<div class="user-show">
+
+	<% if session[:user_id].present? %>  
+		<p> 
+		Hello <%=@user.username %>, this is your profile: </p>
+		<p>
+    	<strong>Name:</strong>
+    	<%= @user.username %>
+ 	    </p>
+
+ 		 <p>	
+    	 <strong>Email:</strong>
+    	 <%= @user.email %>
+  		 </p>
+
+  	<%else %>  
+  		You are not logged in. No profile to show. 
+
+  	<% end %>
+
+
+</div>

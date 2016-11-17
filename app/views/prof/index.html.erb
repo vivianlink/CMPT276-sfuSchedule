@@ -1,0 +1,10 @@
+<h1>Prof#index</h1>
+<p>Find me in app/views/prof/index.html.erb</p>
+
+<%= form_tag prof_list_path, :method => 'get' do %>
+	<table align="center">
+		<tr><td>Professor name:</td><td><%= text_field_tag :prof_name, params[:prof_name] %></td></tr>
+
+	</table>
+	<%= submit_tag "Search", class:"button", :name => nil %>
+<% end %>

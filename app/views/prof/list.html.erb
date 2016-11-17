@@ -1,0 +1,16 @@
+<h1>Prof#list</h1>
+<p>Find me in app/views/prof/list.html.erb</p>
+
+<table>
+	<tr>
+		<th>Name</th>
+
+		<th colspan="3"></th>
+	</tr>
+ 
+	<% @profs.each do |prof| %>
+	    <tr>
+	      <td><%= prof %></td>
+	    </tr>
+	<% end %>
+</table>
