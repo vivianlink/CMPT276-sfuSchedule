@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20161117192740) do
+=======
+ActiveRecord::Schema.define(version: 20161110023035) do
+>>>>>>> 65361e76b806177b578e35af866a4eaef5ed1be9
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +47,10 @@ ActiveRecord::Schema.define(version: 20161117192740) do
     t.string   "unit"
     t.string   "Unit"
     t.string   "CourseUrl"
+<<<<<<< HEAD
     t.string   "designation"
+=======
+>>>>>>> 65361e76b806177b578e35af866a4eaef5ed1be9
   end
 
   create_table "d_courses", force: :cascade do |t|
@@ -53,6 +60,7 @@ ActiveRecord::Schema.define(version: 20161117192740) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   create_table "d_details", force: :cascade do |t|
     t.string   "dProfessor"
     t.datetime "created_at",   null: false
@@ -62,6 +70,8 @@ ActiveRecord::Schema.define(version: 20161117192740) do
     t.string   "dDesignation"
   end
 
+=======
+>>>>>>> 65361e76b806177b578e35af866a4eaef5ed1be9
   create_table "d_faculties", force: :cascade do |t|
     t.string   "dSubject"
     t.datetime "created_at"
@@ -86,6 +96,7 @@ ActiveRecord::Schema.define(version: 20161117192740) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   create_table "ratings", force: :cascade do |t|
     t.string   "comment"
     t.integer  "rating"
@@ -95,6 +106,8 @@ ActiveRecord::Schema.define(version: 20161117192740) do
     t.datetime "updated_at", null: false
   end
 
+=======
+>>>>>>> 65361e76b806177b578e35af866a4eaef5ed1be9
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"

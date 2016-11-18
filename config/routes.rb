@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get 'prof/show'
 
   get 'prof/new'
-
   resources :faculties 
   
   
