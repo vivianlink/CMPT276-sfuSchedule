@@ -2,9 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond');
+
 #comment {
 	height: 100px;
 	width: 300px;
+}
+
+.sfu-logo2 {
+  display: inline-block;
+  height: 70px;
+  margin-right: 5px;
+}
+
+.login-notice{
+	color: #ff4d4d;
+}
+
+.prof-name{
+	font-family: 'Oswald', sans-serif;
+	font-size: 50px;
+	padding: 15px;
+}
+.average-rating {
+	font-family: 'Oswald', sans-serif;
+
 }
 
 .prof-search {
@@ -30,14 +53,24 @@
 	text-align: left;
 }
 
+.name-only{
+	color: #ff4d4d;
+
+}
+
 .rating-rating {
 	text-align: right;
 	padding-bottom: 5px;
 	padding-right: 5px;
+	color: #ff4d4d;
 }
 
 .rating-date {
 	text-align: right;
-	font-size: 0.8em;
 	padding-right: 5px;
+	font-family: 'Cormorant Garamond', serif;
+}
+
+.rating-comment{
+	font-size: 20px;
 }

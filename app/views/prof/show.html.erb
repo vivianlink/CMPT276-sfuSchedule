@@ -1,6 +1,7 @@
-<h1><%= params[:prof_name] %></h1>
+
+<h1><img class="sfu-logo2" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo"> <span class= "prof-name"><%= params[:prof_name] %> </span></h1>
 <% if @ratings_count > 0 %>
-	<p>Rating is <b><%= @rating_average %></b> according to <b> <%= @ratings_count %></b> people</p>
+	<p class= "average-rating">Rating is <b><%= @rating_average %></b> according to <b> <%= @ratings_count %></b> people</p>
 <% else %>
 	<p>No one gave rating to this professor. Be the first to rate!</p>
 <% end %>
@@ -19,7 +20,7 @@
 	<% end %>
 	</div>
 <% else %>
-	You need to be logged in to rate a prof
+	<div class="login-notice">You need to be logged in to rate this professor. </div>
 <% end %>
 
 <div class="ratings-wrapper"> 
@@ -31,7 +32,7 @@
 		   end %>
 
 		<div class="rating">
-			<div class="rating-user-name"><%= rating.user_name %> says</div>
+			<div class="rating-user-name"> <b><span class= "name-only"> <%= rating.user_name %></span></b> says</div>
 			<span class="rating-comment"><%= rating.comment %></span>	
 			<div class="rating-rating">Rating: <%= @user_rating %>/10</div>
 			<div class="rating-date"><%= rating.created_at %></div>

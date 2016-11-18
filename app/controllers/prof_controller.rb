@@ -1,7 +1,11 @@
 class ProfController < ApplicationController
   	def index
-	  	@profs = Course.search("",
-	        "","","", "", params[:prof_name], "", "")
+		prof_name = params[:prof_name]
+		if prof_name
+			prof_name.downcase!
+		end
+
+		@profs = Course.where("LOWER(instructor) LIKE ?", "%#{prof_name}%")
 
 	  	# get unique instructor names
 	  	@profs = @profs.uniq.pluck(:instructor) 
@@ -11,8 +15,12 @@ class ProfController < ApplicationController
 	end
 
 	def list
-	  	@profs = Course.search("",
-	        "","","", "", params[:prof_name], "", "")
+		prof_name = params[:prof_name]
+		if prof_name
+			prof_name.downcase!
+		end
+
+		@profs = Course.where("LOWER(instructor) LIKE ?", "%#{prof_name}%")
 
 	  	# get unique instructor names
 	  	@profs = @profs.uniq.pluck(:instructor) 
