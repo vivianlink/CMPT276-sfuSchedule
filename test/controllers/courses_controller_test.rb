@@ -4,8 +4,6 @@ class CoursesControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end
-<<<<<<< HEAD
-=======
   test "Only Show and Back accessible for non admin users" do
     get :index
     assert_response :success
@@ -38,5 +36,4 @@ class CoursesControllerTest < ActionController::TestCase
     session[:user_id] = nil
     session[:is_admin] = false
   end
->>>>>>> 65361e76b806177b578e35af866a4eaef5ed1be9
 end
