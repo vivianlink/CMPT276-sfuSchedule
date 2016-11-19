@@ -12,3 +12,5 @@
 !/log/.keep
 /tmp
 database.yml
+config/database.yml
+Gemfile
