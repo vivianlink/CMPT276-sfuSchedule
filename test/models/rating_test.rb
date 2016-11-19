@@ -30,11 +30,14 @@ class RatingTest < ActiveSupport::TestCase
 
 	test "rating must only be numeric" do
 		r2=Rating.new('comment'=>'good prof, awesome!', 'rating'=>'testest', 
-					'prof_name'=>'Mary', 'user_name'=>'vi')
+					'prof_name'=>'Mary', 'user_name'=>'viv')
 		assert_not  r2.valid?, "rating need to be integer"
 
 		r2.rating = 0.88
 		assert_not  r2.valid?, "rating must be integer"
+
+		r2.rating = 5
+		assert  r2.valid?, "integer is valid" 
 	end
 
 end
