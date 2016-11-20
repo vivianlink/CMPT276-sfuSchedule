@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'prof/index'
+
+  get 'prof/list'
+
+  get 'prof/show'
+
+  get 'prof/new'
   resources :faculties 
   
   

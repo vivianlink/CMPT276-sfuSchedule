@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DSectionTest < ActiveSupport::TestCase
+class DDetailTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

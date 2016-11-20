@@ -1,0 +1,14 @@
+<h1>Prof#list</h1>
+<p>Find me in app/views/prof/list.html.erb</p>
+
+<table>
+	<tr>
+		<th>Name</th>
+	</tr>
+ 
+	<% @profs.each do |prof| %>
+	    <tr>
+	      <td><%= link_to prof, prof_show_path(:prof_name => prof) %></td>
+	    </tr>
+	<% end %>
+</table>

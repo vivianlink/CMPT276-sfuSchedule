@@ -1,0 +1,42 @@
+
+<h1><img class="sfu-logo2" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo"> <span class= "prof-name"><%= params[:prof_name] %> </span></h1>
+<% if @ratings_count > 0 %>
+	<p class= "average-rating">Rating is <b><%= @rating_average %></b> according to <b> <%= @ratings_count %></b> people</p>
+<% else %>
+	<p>No one gave rating to this professor. Be the first to rate!</p>
+<% end %>
+
+<% if session[:user_name].present? %>
+	<div class="comment-form">
+	  <%= form_tag prof_new_path, :method => 'get' do %>
+  		Rating: <%= select_tag "rating", options_for_select(["", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]) %>
+  		<br>
+		Comment:
+		<br> 
+		<%= text_area_tag :comment %>
+		<%= hidden_field_tag 'prof_name', params[:prof_name] %>
+		<br>
+		<%= submit_tag "Submit", class:"submit-button", :name => nil %>
+	<% end %>
+	</div>
+<% else %>
+	<div class="login-notice">You need to be logged in to rate this professor. </div>
+<% end %>
+
+<div class="ratings-wrapper"> 
+	<% @ratings.each do |rating| %>
+		<% if rating.rating
+			   @user_rating = rating.rating
+		   else
+		       @user_rating = "-"
+		   end %>
+
+		<div class="rating">
+			<div class="rating-user-name"> <b><span class= "name-only"> <%= rating.user_name %></span></b> says</div>
+			<span class="rating-comment"><%= rating.comment %></span>	
+			<div class="rating-rating">Rating: <%= @user_rating %>/10</div>
+			<div class="rating-date"><%= rating.created_at %></div>
+	    </div>
+	    <br>
+	<% end %>
+</div>

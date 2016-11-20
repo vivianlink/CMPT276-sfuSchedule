@@ -1,13 +1,17 @@
 <body>
-	<h1>SFU PLANNER</h1>
+	<h1> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">COURSE SEARCH</h1>
 	<%= form_tag courses_path, :method => 'get' do %>
-	<table align="center">
+	<table class="course-search" align="center">
 		<tr><td>Faculty:</td><td><%= text_field_tag :faculty, params[:faculty] %></td></tr>
 		<tr><td>Number:</td><td><%= text_field_tag :number, params[:number] %></td></tr>
 		<tr><td>Year:</td><td><%= text_field_tag :year, params[:year] %></td></tr>
 		<tr><td>Semester:</td><td><%= text_field_tag :semester, params[:semester] %></td></tr>
 		<tr><td>Section:</td><td><%= text_field_tag :section, params[:section] %></td></tr>
+		<tr><td>Instructor:</td><td><%= text_field_tag :instructor, params[:instructor] %></td></tr>
+		<tr><td>Unit:</td><td><%= text_field_tag :unit, params[:unit] %></td></tr>
+		<tr><td>Designation:</td><td><%= text_field_tag :designation, params[:designation] %></td></tr>
 	</table>
+	<br>
 	<%= submit_tag "Search", class:"button", :name => nil %>
 </body>
 <% end %>
@@ -27,11 +31,11 @@
   
 	<% if session[:is_admin] %>
 		<div class="show-users-button">
-			<a class="show-users" href="/users"> SHOW USERS </a>
+			<a class="show-users" href="/users"> Show Users </a>
 		</div>
 	<% else %>
 		<div class="become-admin-button">
-			<a class="become-admin" href="/admin/new"> BECOME ADMIN </a>
+			<a class="become-admin" href="/admin/new"> Become admin </a>
 		</div>
 	<% end %>
 
