@@ -6,6 +6,15 @@
       <th>Faculty</th>
       <th>Number</th>
       <th>Section</th>
+      <th>Unit</th>
+      <th>WQB</th>
+      <th>Year</th>
+      <th>Semester</th>
+      
+      <th><%= sortable "Faculty" %></th>
+      <th><%= sortable "Year" %></th>
+      <th><%= sortable "Unit", "Released" %></th>
+     
     </tr>
    
     <% @courses.each do |course| %>
@@ -13,6 +22,10 @@
         <td><%= course.faculty %></td>
         <td><%= course.number %></td>
         <td><%= course.section %></td>
+        <td><%= course.unit %></td>
+        <td><%= course.designation %></td>
+        <td><%= course.year %></td>
+        <td><%= course.semester %></td>
         <td><%= link_to 'Show', course_path(course) %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
         <td><%= link_to 'Destroy', course_path(course),
