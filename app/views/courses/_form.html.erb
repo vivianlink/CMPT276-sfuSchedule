@@ -1,4 +1,4 @@
-  <%= form_for :course, url: courses_path do |f| %>
+  <%= form_for @course do |f| %>
 
   <p>
     <%= f.label :year %><br>
@@ -34,7 +34,7 @@
   </p>
   <p>
     <%= f.label :designation %><br>
-    <%= f.text_field :designations %>
+    <%= f.text_field :designation %>
   </p>
   <p>
     <%= f.label :unit %><br>
@@ -45,6 +45,10 @@
     <%= f.text_field :CourseUrl %>
   </p>
   <p>
-    <%= f.submit %>
+
+  
+       <%= f.submit %>
+  
   </p>
   <% end%>
+  

@@ -1,12 +1,29 @@
 class CoursesController < ApplicationController
 
+helper_method :sort_column, :sort_direction
+  
+  def sort
+
+    if params[:commit] == "Search(in WQB order)"
+   
+      @courses = Course.search(params[:faculty], params[:number],params[:year], 
+                  params[:semester],  params[:unit], 
+                  params[:designation] ).order(year: :desc,faculty: :asc, designation: :desc, 
+                  number: :asc, unit: :asc)#.order("#{sort_column} #{sort_direction}")
+
+    elsif params[:commit] == "Search"
+          @courses = Course.search(params[:faculty], params[:number],params[:year], 
+        params[:semester],  params[:unit],
+          params[:designation] ).order(year: :desc,faculty: :asc, number: :asc, unit: :asc)
+    end
+
+  end
 
 	def index
       @courses = Course.all
 
       #for search
-      @courses = Course.search(params[:faculty],
-        params[:number],params[:year],params[:semester], params[:section], params[:instructor], params[:unit], params[:designation])
+      @courses = Course.order("#{sort_column} #{sort_direction}")
   
   	end
 
@@ -15,7 +32,7 @@ class CoursesController < ApplicationController
   end
 
   def new
-  		
+  		@course = Course.new  
   end
 
 
@@ -27,19 +44,16 @@ class CoursesController < ApplicationController
 	def update
     @course = Course.find(params[:id])
 
-    if @course.update(course_params)
-     	 redirect_to @course
+    if @course.update_attributes(course_params) 
+      flash[:notice] = 'Course was successfully updated.'
+       redirect_to @course
     else
-      	render 'edit'
+        render 'edit'
     end
   end
 
 
   def create
-   # @faculty = Faculty.find(params[:faculty_id])
-    #@course = Course.create(course_params)
-    #redirect_to courses_path
-    #render plain: params[:article].inspect
       @course = Course.new(course_params)
  
       if @course.save
@@ -57,10 +71,22 @@ class CoursesController < ApplicationController
     redirect_to courses_path
   end
 
-  private
+ private
     def course_params
       params.require(:course).permit(:name, :year, 
-        :semester, :faculty, :number, :section, :instructor, :schedule, :description, :unit, :CourseUrl)
+        :semester, :faculty, :number, :section, :instructor, :schedule, :description, :unit, :designation, :CourseUrl)
     end
+
+  def sortable_columns
+    ["faculty", "number","unit","designation","year","semester"]
+  end
+
+  def sort_column
+    sortable_columns.include?(params[:column]) ? params[:column] : "faculty"
+   end
+  
+   def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+   end
 
 end

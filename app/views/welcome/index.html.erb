@@ -1,18 +1,37 @@
 <body>
 	<h1> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">COURSE SEARCH</h1>
-	<%= form_tag courses_path, :method => 'get' do %>
+	<%= form_tag sort_path, :method => 'get' do %>
 	<table class="course-search" align="center">
-		<tr><td>Faculty:</td><td><%= text_field_tag :faculty, params[:faculty] %></td></tr>
+
+		<tr><td>Faculty:</td>
+		<td> <%= select_tag :faculty, options_for_select( Course.all.pluck(:faculty).uniq.insert(0, "") ), :style => "width:173px" %> 
+		</td></tr>
+
 		<tr><td>Number:</td><td><%= text_field_tag :number, params[:number] %></td></tr>
-		<tr><td>Year:</td><td><%= text_field_tag :year, params[:year] %></td></tr>
-		<tr><td>Semester:</td><td><%= text_field_tag :semester, params[:semester] %></td></tr>
-		<tr><td>Section:</td><td><%= text_field_tag :section, params[:section] %></td></tr>
-		<tr><td>Instructor:</td><td><%= text_field_tag :instructor, params[:instructor] %></td></tr>
+
+		<tr><td>Year:</td>
+		<td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:173px" %> 
+		</td></tr>
+
+		<tr><td>Semester:</td>
+		<td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:173px" %> 
+		</td></tr> 
+
 		<tr><td>Unit:</td><td><%= text_field_tag :unit, params[:unit] %></td></tr>
-		<tr><td>Designation:</td><td><%= text_field_tag :designation, params[:designation] %></td></tr>
+	
+		<tr><td>Designation:</td>
+		<td> Writing<%= check_box_tag :designation, "W" %>
+		  	 Quantitative<%= check_box_tag :designation, "Q" %>
+		  	 <br>
+		Breath &nbsp<%= select_tag :designation, options_for_select(["","Breath(all)", "Breadth-Science",
+					 "Breadth-Social", "Breadth-Humanities"]),
+			:style => "width:103px" %>
+		</td></tr>
+		
 	</table>
 	<br>
-	<%= submit_tag "Search", class:"button", :name => nil %>
+	<%= submit_tag "Search",  class:"button", :name => "commit" %>
+	<%= submit_tag "Search(in WQB order)", class:"button", :name => "commit" %>
 </body>
 <% end %>
 
