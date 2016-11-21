@@ -5,6 +5,19 @@ class WelcomeControllerTest < ActionController::TestCase
   #   assert true
   # end
 
+  test "search fields checking" do
+    get :index
+    assert_response :success
+    assert_select "td" , {count: 1, text: "Faculty:"}
+    assert_select "td" , {count: 1, text: "Number:"}
+    assert_select "td" , {count: 1, text: "Year:"}
+    assert_select "td" , {count: 1, text: "Semester:"}
+    assert_select "td" , {count: 1, text: "Unit:"}
+    assert_select "td" , {count: 1, text: "Designation:"}
+  end
+
+
+
   test "checking login/signup" do
   	# test logged out
 	session[:user_name] = nil

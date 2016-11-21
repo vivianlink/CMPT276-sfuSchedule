@@ -2,11 +2,6 @@ class CoursesController < ApplicationController
 
  helper_method :sort_column, :sort_direction
   
-    
-
-
-
-
   def sort
 
     if params[:commit] == "Search(in WQB order)"
@@ -26,17 +21,13 @@ class CoursesController < ApplicationController
 
 	def index
       @courses = Course.all
-
       @courses = Course.order("#{sort_column} #{sort_direction}")
-     
-     
-  	end
+
+  end
 
 	def show
     @course = Course.find(params[:id])
   end
-
-
 
 
   def new
@@ -49,12 +40,7 @@ class CoursesController < ApplicationController
   end  
 
 
-
   def create
-   # @faculty = Faculty.find(params[:faculty_id])
-    #@course = Course.create(course_params)
-    #redirect_to courses_path
-    #render plain: params[:article].inspect
       @course = Course.new(course_params)
       @course.designation = " "
       if @course.save
