@@ -4,24 +4,49 @@ class CoursesController < ApplicationController
   
     #
 
-	def index
-      #@courses = Course.all
-      @courses = Course.order(sort_column + " " + sort_direction)
-      #for search
+
+#@courses = Course.search(params[:faculty], params[:number],params[:year], 
+       # params[:semester],  params[:unit],
+        #  params[:designation] ).order(year: :desc,faculty: :asc, number: :asc,
+               #                         unit: :asc)
+
+
+  def sort
+    # puts params.inspect
+     # @courses=Course.all
+    if params[:commit] == "SearchWQB"
+   
       @courses = Course.search(params[:faculty], params[:number],params[:year], 
-        params[:semester],  params[:unit],  params[:designation] )
+        params[:semester],  params[:unit],
+          params[:designation] ).order(year: :desc,faculty: :asc, designation: :desc, 
+                                       number: :asc, unit: :asc)
 
+    elsif params[:commit] == "Search"
+          @courses = Course.search(params[:faculty], params[:number],params[:year], 
+        params[:semester],  params[:unit],
+          params[:designation] ).order(year: :desc,faculty: :asc, number: :asc,
+                                        unit: :asc)
+        end
 
-       # params[:section], params[:instructor], params[:unit], 
-       # params[:designation])
+  end
+
+	def index
+      @courses = Course.all
+
+     # @courses = Course.order("#{sort_column} #{sort_direction}")
+     
+     
   	end
 
 	def show
     @course = Course.find(params[:id])
   end
 
+
+
+
   def new
-  		
+  		@course = Course.new
   end
 
 
@@ -31,24 +56,13 @@ class CoursesController < ApplicationController
 
 
 
-  def update
-    @course = Course.find(params[:id])
-
-    if @course.update_attributes(course_params) 
-       redirect_to @course
-    else
-        render 'edit'
-    end
-  end
-
-
   def create
    # @faculty = Faculty.find(params[:faculty_id])
     #@course = Course.create(course_params)
     #redirect_to courses_path
     #render plain: params[:article].inspect
       @course = Course.new(course_params)
- 
+      @course.designation = " "
       if @course.save
         redirect_to courses_path
       else
@@ -56,6 +70,16 @@ class CoursesController < ApplicationController
       end
   end
 
+  def update
+    @course = Course.find(params[:id])
+
+    if @course.update_attributes(course_params) 
+      flash[:notice] = 'Profile was successfully updated.'
+       redirect_to @course
+    else
+        render 'edit'
+    end
+  end
 
   def destroy
     #@faculty = Faculty.find(params[:faculty_id])
@@ -67,12 +91,15 @@ class CoursesController < ApplicationController
   private
     def course_params
       params.require(:course).permit(:name, :year, 
-        :semester, :faculty, :number, :section, :instructor, :schedule, :description, :unit, :CourseUrl)
+        :semester, :faculty, :number, :section, :instructor, :schedule, :description, :unit, :designation, :CourseUrl)
     end
 
+  def sortable_columns
+    ["faculty", "number","unit","designation","year","semester"]
+  end
 
   def sort_column
-    Course.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    sortable_columns.include?(params[:column]) ? params[:column] : "faculty"
    end
   
    def sort_direction

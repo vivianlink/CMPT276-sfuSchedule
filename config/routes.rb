@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get "/courses/sort " => "courses#sort", :as => 'sort' 
+
   get 'prof/index'
 
   get 'prof/list'
