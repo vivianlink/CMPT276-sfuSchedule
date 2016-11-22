@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_and_belongs_to_many :course
   attr_accessor :password
 
   EMAIL_REGEX =  /\A[^@\s]+@([^@.\s]+\.)*[^@.\s]+\z/
@@ -21,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(username_or_email="", login_password="")
-    if  EMAIL_REGEX.match(username_or_email)    
+    if  EMAIL_REGEX.match(username_or_email)
       user = User.find_by_email(username_or_email)
     else
       user = User.find_by_username(username_or_email)
@@ -32,7 +33,7 @@ class User < ActiveRecord::Base
       return false
     end
   end
-   
+
   def match_password(login_password="")
     encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
   end
