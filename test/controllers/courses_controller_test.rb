@@ -13,8 +13,8 @@ class CoursesControllerTest < ActionController::TestCase
     assert_select "a[href=?]", new_course_path, {count: 0, text: "New course"}
     assert_select "a[href=?]", welcome_index_path, {count: 1, text: "Back"}
 
-    session[:user_name] = 1
-    session[:user_id] = 1
+    session[:user_name] = users(:one).username
+    session[:user_id] = users(:one).id
     get :index
     assert_response :success
     assert_select "td", {count: Course.all.count, text: "Show"}
@@ -40,18 +40,18 @@ class CoursesControllerTest < ActionController::TestCase
   test "Only users can add a course" do
     get :index
     assert_response :success
-    assert_select "td", {count: 0, text: "Add"}
+    assert_select 'td', {count: 0, text: 'Add'}
 
-    session[:user_name] = 1
-    session[:user_id] = 1
+    session[:user_name] = users(:one).username
+    session[:user_id] = users(:one).id
     get :index
     assert_response :success
-    assert_select "td", {count: Course.all.count, text: "Add"}
+    assert_select 'td', {count: Course.all.count, text: 'Add'}
 
     session[:is_admin] = true
     get :index
     assert_response :success
-    assert_select "td", {count: Course.all.count, text: "Add"}
+    assert_select 'td', {count: Course.all.count, text: 'Add'}
     session[:user_name] = nil
     session[:user_id] = nil
     session[:is_admin] = false
