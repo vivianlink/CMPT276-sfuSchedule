@@ -8,17 +8,17 @@ default: &default
 development:
   <<: *default
 
-  database: cmpt276 #myproj_development
-  username: cmpt276 #postgres
-  password: thecmpt276Passw0rd 
+  database: myproj_development
+  username: postgres
+  password: Facai123
   host: localhost
 
 
 test:
   <<: *default
-  database: cmpt276 #myproj_development
-  username: cmpt276 #postgres
-  password: thecmpt276Passw0rd 
+  database: myproj_test
+  username: postgres
+  password: Facai123
   host: localhost
 
 production:
