@@ -45,12 +45,23 @@ class UrlConstructController < ApplicationController
 
 
                 @AllDetail.each do |detail|
-                  
-                  creating_new_course = Course.new("designation" => detail.dDesignation, "instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => urlYear, "semester" => urlSeason, "section" => section.dSectionNumber, "CourseUrl" => instage_section_url,"schedule" => detail.DSchedule,"unit" => detail.dUnit)
-                  creating_new_course.save
-                  puts instage_section_url
-                  puts creating_new_course.id
-                  puts creating_new_course.designation
+                  if detail.sectioncode == "LEC"
+                    creating_new_course = Course.new("calender" => detail.calender,
+                                                     "designation" => detail.dDesignation,
+                                                     "instructor" => detail.dProfessor,
+                                                     "faculty" => falculty.dSubject,
+                                                     "number" => course.dCourseNumber,
+                                                     "year" => urlYear,
+                                                     "semester" => urlSeason,
+                                                     "section" => section.dSectionNumber,
+                                                     "CourseUrl" => instage_section_url,
+                                                     "schedule" => detail.DSchedule,
+                                                     "unit" => detail.dUnit)
+                    creating_new_course.save
+                    puts instage_section_url
+                    puts creating_new_course.id
+                    puts creating_new_course.designation
+                  end
                 end
             end
 
@@ -90,12 +101,27 @@ class UrlConstructController < ApplicationController
 
 
                 @AllDetail.each do |detail|
-                  
-                  creating_new_course = Course.new("designation" => detail.dDesignation, "instructor" => detail.dProfessor, "faculty" => falculty.dSubject, "number" => course.dCourseNumber, "year" => urlYear, "semester" => urlSeason, "section" => section.dSectionNumber, "CourseUrl" => instage_section_url,"schedule" => detail.DSchedule,"unit" => detail.dUnit)
-                  creating_new_course.save
-                  puts instage_section_url
-                  puts creating_new_course.id
-                  puts creating_new_course.designation
+                  if detail.sectioncode == "LEC"
+                    creating_new_course = Course.new("calender" => detail.calender,
+                                                     "designation" => detail.dDesignation,
+                                                     "instructor" => detail.dProfessor,
+                                                     "faculty" => falculty.dSubject,
+                                                     "number" => course.dCourseNumber,
+                                                     "year" => urlYear,
+                                                     "semester" => urlSeason,
+                                                     "section" => section.dSectionNumber,
+                                                     "CourseUrl" => instage_section_url,
+                                                     "schedule" => detail.DSchedule,
+                                                     "unit" => detail.dUnit)
+                    creating_new_course.save
+                    puts instage_section_url
+                    puts creating_new_course.id
+                    puts creating_new_course.designation
+                    creating_new_course.save
+                    puts instage_section_url
+                    puts creating_new_course.id
+                    puts creating_new_course.designation
+                  end
                 end
             end
 
@@ -196,11 +222,14 @@ class UrlConstructController < ApplicationController
       end
 
         overall_schedule = ""
+        sectioncode = ""
 
         if(data.include?("courseSchedule"))
         schedule = data["courseSchedule"]
-        
+        calender = schedule
+
             schedule.each do |schedule|
+              sectioncode = schedule["sectionCode"]
 
               if (schedule.include?("startTime"))
                 overall_schedule = overall_schedule + schedule["startTime"] + " to " + schedule["endTime"] + " on " + schedule["days"]
@@ -226,7 +255,12 @@ class UrlConstructController < ApplicationController
 
 
 
-        dValue = DDetail.new("dDesignation" => designation,"dUnit" => unit, "dProfessor" => professor, "DSchedule" => overall_schedule)
+        dValue = DDetail.new("calender" => calender,
+                             "sectioncode" => sectioncode,
+                             "dDesignation" => designation,
+                             "dUnit" => unit, 
+                             "dProfessor" => professor, 
+                             "DSchedule" => overall_schedule)
         dValue.save
         filler_array.push(dValue)
 
