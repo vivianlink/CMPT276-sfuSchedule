@@ -1,20 +1,20 @@
 <h1>Listing Searchc Result</h1>
 
-<div class = "table-wrapper"> 
+<div class = "table-wrapper">
   <table class="move-right">
     <tr>
 
      <!-- <th><%= sort_link "faculty" %></th> -->
       <th><%= "faculty" %></th>
       <th><%= "number" %></th>
-      <th><%= "unit" %></th>     
+      <th><%= "unit" %></th>
       <th><%= "designation" %></th>
       <th><%= "year" %></th>
       <th><%= "semester" %></th>
 
-     
+
     </tr>
-   
+
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.faculty %></td>
@@ -24,14 +24,23 @@
         <td><%= course.year %></td>
         <td><%= course.semester %></td>
         <td><%= link_to 'Show', course_path(course) %></td>
-        <td><%= link_to 'Edit', edit_course_path(course) %></td>
-        <td><%= link_to 'Destroy', course_path(course),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %></td>
+        <% if session[:is_admin] %>
+          <td><%= link_to 'Edit', edit_course_path(course) %></td>
+          <td><%= link_to 'Destroy', course_path(course),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <% if session[:user_name].present? %>
+          <% if !User.find(session[:user_id]).course.exists?(course.id) %>
+            <td><%= button_to "Add", {:action => "add", id: course.id} %></td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
-  </table> <%= link_to 'New course', new_course_path %>
-
+  </table>
+  <% if session[:is_admin] %>
+    <%= link_to 'New course', new_course_path %>
+  <% end %>
   <%= link_to 'Back', welcome_index_path %>
 
 </div>

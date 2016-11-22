@@ -1,18 +1,18 @@
 class CoursesController < ApplicationController
 
 helper_method :sort_column, :sort_direction
-  
+
   def sort
 
     if params[:commit] == "Search(in WQB order)"
-   
-      @courses = Course.search(params[:faculty], params[:number],params[:year], 
-                  params[:semester],  params[:unit], 
-                  params[:designation] ).order(year: :desc,faculty: :asc, designation: :desc, 
+
+      @courses = Course.search(params[:faculty], params[:number],params[:year],
+                  params[:semester],  params[:unit],
+                  params[:designation] ).order(year: :desc,faculty: :asc, designation: :desc,
                   number: :asc, unit: :asc)#.order("#{sort_column} #{sort_direction}")
 
     elsif params[:commit] == "Search"
-          @courses = Course.search(params[:faculty], params[:number],params[:year], 
+          @courses = Course.search(params[:faculty], params[:number],params[:year],
         params[:semester],  params[:unit],
           params[:designation] ).order(year: :desc,faculty: :asc, number: :asc, unit: :asc)
     end
@@ -24,7 +24,7 @@ helper_method :sort_column, :sort_direction
 
       #for search
       @courses = Course.order("#{sort_column} #{sort_direction}")
-  
+
   	end
 
 	def show
@@ -32,19 +32,19 @@ helper_method :sort_column, :sort_direction
   end
 
   def new
-  		@course = Course.new  
+  		@course = Course.new
   end
 
 
   def edit
      @course = Course.find(params[:id])
-  end  
+  end
 
 
 	def update
     @course = Course.find(params[:id])
 
-    if @course.update_attributes(course_params) 
+    if @course.update_attributes(course_params)
       flash[:notice] = 'Course was successfully updated.'
        redirect_to @course
     else
@@ -55,7 +55,7 @@ helper_method :sort_column, :sort_direction
 
   def create
       @course = Course.new(course_params)
- 
+
       if @course.save
         redirect_to courses_path
       else
@@ -63,6 +63,12 @@ helper_method :sort_column, :sort_direction
       end
   end
 
+  def add
+    @currUser = User.find(session[:user_id])
+    @course = Course.find(params[:id])
+    @course.user << @currUser
+    redirect_to :back
+  end
 
   def destroy
     #@faculty = Faculty.find(params[:faculty_id])
@@ -73,7 +79,7 @@ helper_method :sort_column, :sort_direction
 
  private
     def course_params
-      params.require(:course).permit(:name, :year, 
+      params.require(:course).permit(:name, :year,
         :semester, :faculty, :number, :section, :instructor, :schedule, :description, :unit, :designation, :CourseUrl)
     end
 
@@ -84,7 +90,7 @@ helper_method :sort_column, :sort_direction
   def sort_column
     sortable_columns.include?(params[:column]) ? params[:column] : "faculty"
    end
-  
+
    def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
    end
