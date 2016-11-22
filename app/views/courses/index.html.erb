@@ -26,6 +26,9 @@
                   method: :delete,
                   data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+        <% if session[:user_name].present? %>
+          <td><%= button_to "Add", {:action => "add", id: course.id} %></td>
+        <% end %>
       </tr>
     <% end %>
   </table>

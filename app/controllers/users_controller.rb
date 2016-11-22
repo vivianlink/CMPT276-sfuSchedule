@@ -13,22 +13,28 @@ class UsersController < ApplicationController
       session[:is_admin] = false
       redirect_to welcome_index_path
     else
-      flash[:color]= "invalid" 
+      flash[:color]= "invalid"
       flash[:notice] = "Form is invalid"
       render "new"
-    end 
+    end
   end
 
-  def index 
+  def index
     @users = User.all
   end
 
   def show
-    if session[:user_id].present? 
+    if session[:user_id].present?
       @user = User.find(session[:user_id])
-    end 
-  end 
+    end
+  end
 
+  def remove
+    @currUser = User.find(session[:user_id])
+    @delCourse = @currUser.course.find(params[:id])
+    @currUser.course.delete(@delCourse)
+    redirect_to :back
+  end
 
   def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)

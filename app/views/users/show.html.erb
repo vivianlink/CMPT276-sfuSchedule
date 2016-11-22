@@ -1,22 +1,44 @@
 <div class="user-show">
 
-	<% if session[:user_id].present? %>  
-		<p> 
+	<% if session[:user_id].present? %>
+		<p>
 		Hello <%=@user.username %>, this is your profile: </p>
 		<p>
     	<strong>Name:</strong>
     	<%= @user.username %>
  	    </p>
 
- 		 <p>	
+ 		 <p>
     	 <strong>Email:</strong>
     	 <%= @user.email %>
   		 </p>
 
-  	<%else %>  
-  		You are not logged in. No profile to show. 
+  <%else %>
+  		You are not logged in. No profile to show.
 
-  	<% end %>
-
+  <% end %>
+	<% if @user.course.any? %>
+	<div class = "table-wrapper">
+		<table class="move-right">
+			<tr>
+				<th><%= "faculty" %></th>
+				<th><%= "number" %></th>
+				<th><%= "unit" %></th>
+				<th><%= "designation" %></th>
+				<th><%= "year" %></th>
+				<th><%= "semester" %></th>
+			</tr>
+				<% @user.course.each do |course| %>
+			    <tr>
+			      <td><%= course.faculty %></td>
+			      <td><%= course.number %></td>
+			      <td><%= course.unit %></td>
+			      <td><%= course.designation %></td>
+			      <td><%= course.year %></td>
+			      <td><%= course.semester %></td>
+						<td><%= button_to "Remove", {:action => "remove", id: course.id} %></td>
+					</tr>
+				<% end %>
+	<% end %>
 
 </div>

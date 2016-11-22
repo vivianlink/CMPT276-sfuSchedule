@@ -30,6 +30,11 @@
                   method: :delete,
                   data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+        <% if session[:user_name].present? %>
+          <% if !User.find(session[:user_id]).course.exists?(course.id) %>
+            <td><%= button_to "Add", {:action => "add", id: course.id} %></td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </table>
