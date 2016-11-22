@@ -2,19 +2,20 @@ class CoursesController < ApplicationController
 
 helper_method :sort_column, :sort_direction
 
-  def sort
+def sort
+ 
 
     if params[:commit] == "Search(in WQB order)"
 
       @courses = Course.search(params[:faculty], params[:number],params[:year],
                   params[:semester],  params[:unit],
-                  params[:designation] ).order(year: :desc,faculty: :asc, designation: :desc,
+                 params[:W],params[:Q],params[:B]).order(year: :desc,faculty: :asc, designation: :desc,
                   number: :asc, unit: :asc)#.order("#{sort_column} #{sort_direction}")
 
     elsif params[:commit] == "Search"
           @courses = Course.search(params[:faculty], params[:number],params[:year],
         params[:semester],  params[:unit],
-          params[:designation] ).order(year: :desc,faculty: :asc, number: :asc, unit: :asc)
+          params[:W],params[:Q],params[:B] ).order(year: :desc,faculty: :asc, number: :asc, unit: :asc)
     end
 
   end

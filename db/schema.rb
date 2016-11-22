@@ -94,6 +94,13 @@ ActiveRecord::Schema.define(version: 20161121194803) do
     t.datetime "updated_at"
   end
 
+  create_table "faculties", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.text     "description"
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.string   "comment"
     t.integer  "rating"
