@@ -13,7 +13,6 @@ development:
   password: Facai123
   host: localhost
 
-
 test:
   <<: *default
   database: myproj_test
