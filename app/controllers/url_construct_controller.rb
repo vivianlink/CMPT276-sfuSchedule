@@ -56,7 +56,8 @@ class UrlConstructController < ApplicationController
                                                      "section" => section.dSectionNumber,
                                                      "CourseUrl" => instage_section_url,
                                                      "schedule" => detail.DSchedule,
-                                                     "unit" => detail.dUnit)
+                                                     "unit" => detail.dUnit,
+                                                     "RoomNumber" => detail.RoomNumber)
                     creating_new_course.save
                     puts instage_section_url
                     puts creating_new_course.id
@@ -112,7 +113,8 @@ class UrlConstructController < ApplicationController
                                                      "section" => section.dSectionNumber,
                                                      "CourseUrl" => instage_section_url,
                                                      "schedule" => detail.DSchedule,
-                                                     "unit" => detail.dUnit)
+                                                     "unit" => detail.dUnit,
+                                                     "RoomNumber" => detail.RoomNumber)
                     creating_new_course.save
                     puts instage_section_url
                     puts creating_new_course.id
@@ -223,6 +225,8 @@ class UrlConstructController < ApplicationController
 
         overall_schedule = ""
         sectioncode = ""
+        roomnumber = ""
+        firstRoom = 0
 
         if(data.include?("courseSchedule"))
         schedule = data["courseSchedule"]
@@ -236,6 +240,22 @@ class UrlConstructController < ApplicationController
               else 
                 overall_schedule = "none"
               end
+
+
+              if (schedule.include?("roomNumber"))
+                if (firstRoom == 0)
+                  roomnumber = roomnumber + schedule["roomNumber"]
+                  firstRoom = 1;
+                end
+
+                if (roomnumber.include?(schedule["roomNumber"]))
+                else
+                  roomnumber = roomnumber + "," + schedule["roomNumber"]
+                end 
+                
+              end
+
+
 
             end
 
@@ -260,7 +280,8 @@ class UrlConstructController < ApplicationController
                              "dDesignation" => designation,
                              "dUnit" => unit, 
                              "dProfessor" => professor, 
-                             "DSchedule" => overall_schedule)
+                             "DSchedule" => overall_schedule,
+                             "RoomNumber" => roomnumber)
         dValue.save
         filler_array.push(dValue)
 
