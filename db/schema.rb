@@ -29,13 +29,6 @@ ActiveRecord::Schema.define(version: 20161126003718) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "buildings", force: :cascade do |t|
-    t.integer  "capacity"
-    t.integer  "max_generation"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
   create_table "courses", force: :cascade do |t|
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -110,22 +103,6 @@ ActiveRecord::Schema.define(version: 20161126003718) do
     t.text     "description"
   end
 
-  create_table "locations", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "latitude"
-    t.integer  "longitude"
-    t.string   "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "people", force: :cascade do |t|
-    t.string   "pname"
-    t.integer  "age"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "ratings", force: :cascade do |t|
     t.string   "comment"
     t.integer  "rating"
@@ -133,38 +110,6 @@ ActiveRecord::Schema.define(version: 20161126003718) do
     t.string   "user_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "things", force: :cascade do |t|
-    t.string   "tname"
-    t.text     "description"
-    t.integer  "person_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "tokimons", force: :cascade do |t|
-    t.string   "toname"
-    t.integer  "weight"
-    t.integer  "height"
-    t.integer  "fly"
-    t.integer  "fight"
-    t.integer  "fire"
-    t.integer  "water"
-    t.integer  "electric"
-    t.integer  "ice"
-    t.integer  "total"
-    t.integer  "trainer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "trainers", force: :cascade do |t|
-    t.string   "nameTr"
-    t.integer  "level"
-    t.integer  "levelProgress"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -175,14 +120,6 @@ ActiveRecord::Schema.define(version: 20161126003718) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.boolean  "is_admin"
-  end
-
-  create_table "widgets", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "stock"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end
