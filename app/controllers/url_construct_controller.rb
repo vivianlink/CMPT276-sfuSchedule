@@ -45,7 +45,10 @@ class UrlConstructController < ApplicationController
 
 
                 @AllDetail.each do |detail|
-                  if detail.sectioncode == "LEC"
+
+
+
+                  if (detail.sectioncode == "LEC" || detail.sectioncode == "SEM" || detail.sectioncode == "PRA" || detail.sectioncode == "STD" || detail.sectioncode == "WKS")
                     @creating_new_course = Course.new("calender" => detail.calender,
                                                      "designation" => detail.dDesignation,
                                                      "instructor" => detail.dProfessor,
@@ -60,7 +63,7 @@ class UrlConstructController < ApplicationController
                                                      "RoomNumber" => detail.RoomNumber)
                     @creating_new_course.save
 
-                  else
+                  else if (detail.sectioncode == "SEC" || detail.sectioncode == "STL" || detail.sectioncode == "LAB" || detail.sectioncode == "TUT")
                     creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + "-" + section.dSectionNumber,
                                                           "tutcalender" => detail.calender,
                                                           "tutschedule" => detail.DSchedule,
@@ -75,6 +78,7 @@ class UrlConstructController < ApplicationController
             end
 
           end
+        end
 
       end
 
