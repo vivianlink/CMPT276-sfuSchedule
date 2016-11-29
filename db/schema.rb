@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126003718) do
+ActiveRecord::Schema.define(version: 20161128230956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,13 +96,6 @@ ActiveRecord::Schema.define(version: 20161126003718) do
     t.datetime "updated_at"
   end
 
-  create_table "faculties", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "name"
-    t.text     "description"
-  end
-
   create_table "ratings", force: :cascade do |t|
     t.string   "comment"
     t.integer  "rating"
@@ -110,6 +103,16 @@ ActiveRecord::Schema.define(version: 20161126003718) do
     t.string   "user_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tutorials", force: :cascade do |t|
+    t.string   "tutname"
+    t.string   "tutcalender"
+    t.string   "tutlocation"
+    t.string   "tutschedule"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "course_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -120,6 +123,14 @@ ActiveRecord::Schema.define(version: 20161126003718) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.boolean  "is_admin"
+  end
+
+  create_table "widgets", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "stock"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

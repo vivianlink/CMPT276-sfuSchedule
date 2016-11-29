@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 helper_method :sort_column, :sort_direction
 
 def sort
- 
+
 
     if params[:commit] == "Search(in WQB order)"
 

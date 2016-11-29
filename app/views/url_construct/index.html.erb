@@ -15,11 +15,13 @@
 
 
 
+<%  if session[:user_name].present?  %>
+<% if session[:is_admin]  %>
+ <%= button_to "2016 fall", {:action => "url2016FallCourses" } %>
+ <%= button_to "2015 spring", {:action => "url2015SpringCourses" }%>
 
- <%= button_to "2016 fall", url_construct_url2016FallCourses_path, method: :url2016FallCourses %>
- <%= button_to "2015 spring", url_construct_url2015SpringCourses_path, method: :url2015SpringCourses%>
-
-
+<% end  %>
+<% end %>
 
 
 </body>

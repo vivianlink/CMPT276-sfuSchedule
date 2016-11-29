@@ -48,6 +48,22 @@
   <%= @course.RoomNumber %>
 </p>
 
-
-
+<% if @course.tutorial.any? %>
+  <p>
+    Tutorial sections
+  </p>
+  <table class="center">
+  <tr>
+    <th><%= "Section" %></th>
+    <th><%= "Schdeule" %></th>
+    <th><%= "Location" %></th>
+  </tr>
+  <%  @course.tutorial.each do |tutorial| %>
+    <tr>
+      <td><%= tutorial.tutname %></td>
+      <td><%= tutorial.tutschedule %></td>
+      <td><%= tutorial.tutlocation %></td>
+    </tr>
+  <% end %>
+<% end %>
 <%= link_to 'back', courses_path %>

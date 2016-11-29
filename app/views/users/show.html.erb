@@ -13,7 +13,7 @@
     	 <%= @user.email %>
   		 </p>
 			 <% if @user.course.any? %>
-	 		<div class = "table-wrapper">
+	 			<div class = "table-wrapper">
 	 			<table class="move-right">
 	 				<tr>
 	 					<th><%= "faculty" %></th>
@@ -34,10 +34,9 @@
 	 							<td><%= link_to "Remove", {:action => "remove", id: course.id} %></td>
 	 						</tr>
 	 					<% end %>
+					</div>
 	 		<% end %>
   <%else %>
   		You are not logged in. No profile to show.
 
   <% end %>
-
-</div>
