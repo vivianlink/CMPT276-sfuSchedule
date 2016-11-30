@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get "/courses/sort " => "courses#sort", :as => 'sort' 
+  get "/courses/sort " => "courses#sort", :as => 'sort'
 
   get 'prof/index'
 
@@ -9,20 +9,19 @@ Rails.application.routes.draw do
   get 'prof/show'
 
   get 'prof/new'
-  resources :faculties 
-  
-  
+  resources :faculties
+
+
   resources :courses
   resources  :welcome
 
   get 'url_construct/index'
   match ':controller(/:action(/:id))', :via => :get
   match ':controller(/:action(/:id))', :via => :post
-  get 'url_construct/url2016FallCourses'
-  get 'url_construct/url2015SpringCourses'
-  
+
+
   get 'admin/new'
-  
+
   get 'admin/become_admin_attempt'
   post 'admin/become_admin_attempt'
 

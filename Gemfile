@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
-
  ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

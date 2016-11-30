@@ -4,65 +4,40 @@
 	<table class="course-search" align="center">
 
 		<tr><td>Faculty:</td>
-		<td> <%= select_tag :faculty, options_for_select( Course.all.pluck(:faculty).uniq.insert(0, "") ), :style => "width:173px" %> 
+		<td> <%= select_tag :faculty, options_for_select( Course.all.pluck(:faculty).uniq.insert(0, "") ), :style => "width:173px" %>
 		</td></tr>
 
 		<tr><td>Number:</td><td><%= text_field_tag :number, params[:number] %></td></tr>
 
 		<tr><td>Year:</td>
-		<td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:173px" %> 
+		<td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:173px" %>
 		</td></tr>
 
 		<tr><td>Semester:</td>
-		<td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:173px" %> 
-		</td></tr> 
+		<td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:173px" %>
+		</td></tr>
 
 		<tr><td>Unit:</td><td><%= text_field_tag :unit, params[:unit] %></td></tr>
-	
+
 		<tr><td>Designation:</td>
-		<td> Writing<%= check_box_tag :designation, "W" %>
-		  	 Quantitative<%= check_box_tag :designation, "Q" %>
-		  	 <br>
-		Breath &nbsp<%= select_tag :designation, options_for_select(["","Breath(all)", "Breadth-Science",
+		<td> Writing<%= check_box_tag :W, "Writing" %>
+		Quantitative<%= check_box_tag :Q, "Quantitative" %>
+		<br>
+		Breath &nbsp<%= select_tag :B, options_for_select(["","Breadth", "Breadth-Science",
 					 "Breadth-Social", "Breadth-Humanities"]),
 			:style => "width:103px" %>
 		</td></tr>
-		
+
 	</table>
 	<br>
 	<%= submit_tag "Search",  class:"button", :name => "commit" %>
 	<%= submit_tag "Search(in WQB order)", class:"button", :name => "commit" %>
+
+	
+	<p> most viewed prof show here </p>
+	<p> most commented prof show here </p>
+	<p> highest rating prof show here </p>
+	<p> most viewed course show here</p>
+	<p> most added to cart here </p>
 </body>
-<% end %>
-
-<%if false%>
-<%# the following are commmented out%>
-<p id="notice"><%= notice %></p>
-
-<div class="sign-up-button">
-  <a class="sign-up" href= "/users/new"> SIGN UP </a><br>
-</div>
-<% if session[:user_name].present? %>
-  <div class="logout-button">
-    <a class="logout" href= "/sessions/logout"> LOGOUT </a><br>
-  </div>
-
-  
-	<% if session[:is_admin] %>
-		<div class="show-users-button">
-			<a class="show-users" href="/users"> Show Users </a>
-		</div>
-	<% else %>
-		<div class="become-admin-button">
-			<a class="become-admin" href="/admin/new"> Become admin </a>
-		</div>
-	<% end %>
-
-  Hello, <%=session[:user_name]%>!
-<% else %>
-  <div class="login-button">
-    <a class="login" href= "/sessions/login"> LOGIN </a><br>
-  </div>
-
-<% end %>
 <% end %>

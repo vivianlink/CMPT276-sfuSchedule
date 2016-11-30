@@ -15,9 +15,10 @@
     <% if session[:user_name].present? %>
   		<li style="float:right"><a href= "/sessions/logout">Logout</a></li>
       <li style="float:right"><a><%=session[:user_name]%></a><li>
-      
+
       <% if session[:is_admin] %>
         <li style="float:right"><a href="/users"> SHOW USERS </a></li>
+        <li style="float:right"><a href="/urlConstruct"> urlConstruct </a></li>
       <% else %>
         <li style="float:right"><a href="/admin/new"> BECOME ADMIN </a></li>
       <% end %>

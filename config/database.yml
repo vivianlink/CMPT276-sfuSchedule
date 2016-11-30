@@ -15,6 +15,7 @@ development:
 
 test:
   <<: *default
+
   database: myproj_test
   username: postgres
   password: Facai123

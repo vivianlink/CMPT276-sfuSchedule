@@ -45,8 +45,11 @@ class UrlConstructController < ApplicationController
 
 
                 @AllDetail.each do |detail|
-                  if detail.sectioncode == "LEC"
-                    creating_new_course = Course.new("calender" => detail.calender,
+
+
+
+                  if (detail.sectioncode == "LEC" || detail.sectioncode == "SEM" || detail.sectioncode == "PRA" || detail.sectioncode == "STD" || detail.sectioncode == "WKS")
+                    @creating_new_course = Course.new("calender" => detail.calender,
                                                      "designation" => detail.dDesignation,
                                                      "instructor" => detail.dProfessor,
                                                      "faculty" => falculty.dSubject,
@@ -56,16 +59,26 @@ class UrlConstructController < ApplicationController
                                                      "section" => section.dSectionNumber,
                                                      "CourseUrl" => instage_section_url,
                                                      "schedule" => detail.DSchedule,
-                                                     "unit" => detail.dUnit)
-                    creating_new_course.save
+                                                     "unit" => detail.dUnit,
+                                                     "RoomNumber" => detail.RoomNumber)
+                    @creating_new_course.save
+
+                  else if (detail.sectioncode == "SEC" || detail.sectioncode == "STL" || detail.sectioncode == "LAB" || detail.sectioncode == "TUT")
+                    creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + "-" + section.dSectionNumber,
+                                                          "tutcalender" => detail.calender,
+                                                          "tutschedule" => detail.DSchedule,
+                                                          "tutlocation" => detail.RoomNumber)
+
+                    @creating_new_course.tutorial << creating_new_tutorial
+                    creating_new_tutorial.save
                     puts instage_section_url
-                    puts creating_new_course.id
-                    puts creating_new_course.designation
+                    puts detail.DSchedule
                   end
                 end
             end
 
           end
+        end
 
       end
 
@@ -112,7 +125,8 @@ class UrlConstructController < ApplicationController
                                                      "section" => section.dSectionNumber,
                                                      "CourseUrl" => instage_section_url,
                                                      "schedule" => detail.DSchedule,
-                                                     "unit" => detail.dUnit)
+                                                     "unit" => detail.dUnit,
+                                                     "RoomNumber" => detail.RoomNumber)
                     creating_new_course.save
                     puts instage_section_url
                     puts creating_new_course.id
@@ -175,7 +189,7 @@ class UrlConstructController < ApplicationController
     end
 
     @AllCourse = filler_array
-  end  
+  end
 
 
 
@@ -198,7 +212,7 @@ class UrlConstructController < ApplicationController
     end
 
     @AllSection = filler_array
-  end  
+  end
 
 
 
@@ -208,7 +222,7 @@ class UrlConstructController < ApplicationController
     data = JSON.parse((source.body))
 
     badURL = HTTParty.get(@@base + "ErrorMessage")
-    badJSON = JSON.parse((badURL.body))    
+    badJSON = JSON.parse((badURL.body))
 
     if (data == badJSON)
     else
@@ -223,6 +237,8 @@ class UrlConstructController < ApplicationController
 
         overall_schedule = ""
         sectioncode = ""
+        roomnumber = ""
+        firstRoom = 0
 
         if(data.include?("courseSchedule"))
         schedule = data["courseSchedule"]
@@ -233,9 +249,25 @@ class UrlConstructController < ApplicationController
 
               if (schedule.include?("startTime"))
                 overall_schedule = overall_schedule + schedule["startTime"] + " to " + schedule["endTime"] + " on " + schedule["days"]
-              else 
+              else
                 overall_schedule = "none"
               end
+
+
+              if (schedule.include?("roomNumber"))
+                if (firstRoom == 0)
+                  roomnumber = roomnumber + schedule["roomNumber"]
+                  firstRoom = 1;
+                end
+
+                if (roomnumber.include?(schedule["roomNumber"]))
+                else
+                  roomnumber = roomnumber + "," + schedule["roomNumber"]
+                end
+
+              end
+
+
 
             end
 
@@ -258,14 +290,15 @@ class UrlConstructController < ApplicationController
         dValue = DDetail.new("calender" => calender,
                              "sectioncode" => sectioncode,
                              "dDesignation" => designation,
-                             "dUnit" => unit, 
-                             "dProfessor" => professor, 
-                             "DSchedule" => overall_schedule)
+                             "dUnit" => unit,
+                             "dProfessor" => professor,
+                             "DSchedule" => overall_schedule,
+                             "RoomNumber" => roomnumber)
         dValue.save
         filler_array.push(dValue)
 
 
-     
+
 
     end
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
- 
+
 <h1>UrlConstruct#index</h1>
-<p>Find me in app/views/url_construct/index.html.erb</p>
-<p>JSON test </p>
+<p>Clicking the buttons will generate all courses corresponding to the semesters below</p>
+<p>Each click will take approximately 10 mins to generate. I woudlnt recomending clicking it </p>
+<p>Database is not complete, tests for database will be implemented once database is completed</p>
 <body>
 
 
@@ -14,14 +15,16 @@
 
 
 
+<%  if session[:user_name].present?  %>
+<% if session[:is_admin]  %>
+ <%= button_to "2016 fall", {:action => "url2016FallCourses" } %>
+ <%= button_to "2015 spring", {:action => "url2015SpringCourses" }%>
 
- <%= button_to "2016 fall", url_construct_url2016FallCourses_path, method: :url2016FallCourses %>
- <%= button_to "2015 spring", url_construct_url2015SpringCourses_path, method: :url2015SpringCourses%>
- 
-
+<% end  %>
+<% end %>
 
 
 </body>
- 
+
 
 </html>

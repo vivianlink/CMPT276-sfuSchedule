@@ -1,4 +1,4 @@
-<h1>Listing Searchc Result</h1>
+<h1>Listing Search Result</h1>
 
 <div class = "table-wrapper">
   <table class="move-right">
@@ -32,7 +32,7 @@
         <% end %>
         <% if session[:user_name].present? %>
           <% if !User.find(session[:user_id]).course.exists?(course.id) %>
-            <td><%= button_to "Add", {:action => "add", id: course.id} %></td>
+            <td><%= link_to "Add", {:action => "add", id: course.id} %></td>
           <% end %>
         <% end %>
       </tr>

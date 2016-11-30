@@ -43,7 +43,31 @@
   <strong>CourseUrl:</strong>
   <%= @course.CourseUrl %>
 </p>
+<p>
+  <strong>RoomNumber:</strong>
+  <%= @course.RoomNumber %>
+</p>
 
-
-
-<%= link_to 'back', courses_path %>
+<% if @course.tutorial.any? %>
+  <p>
+    Tutorial sections
+  </p>
+  <table class="center">
+  <tr>
+    <th><%= "Section" %></th>
+    <th><%= "Schdeule" %></th>
+    <th><%= "Location" %></th>
+  </tr>
+  <%  @course.tutorial.each do |tutorial| %>
+    <tr>
+      <td><%= tutorial.tutname %></td>
+      <td><%= tutorial.tutschedule %></td>
+      <td><%= tutorial.tutlocation %></td>
+      <% if session[:user_name].present? %>
+        <% if !User.find(session[:user_id]).course.exists?(@course.id) %>
+          <td><%= link_to "Add", {:action => "add", id: @course.id} %></td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+<% end %>
