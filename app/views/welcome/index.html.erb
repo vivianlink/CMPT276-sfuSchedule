@@ -34,10 +34,41 @@
 	<%= submit_tag "Search(in WQB order)", class:"button", :name => "commit" %>
 
 	
-	<p> most viewed prof show here </p>
+<!-- 	<p> most viewed prof show here </p>
+
 	<p> most commented prof show here </p>
-	<p> highest rating prof show here </p>
-	<p> most viewed course show here</p>
-	<p> most added to cart here </p>
+
+	<p> highest rating prof show here </p> -->
+
+	<p> Popular Courses : <br>
+	<% if @nonEmptyView.length >= 3 %>
+		<%=@nonEmptyView[0].faculty%> 
+		<%=@nonEmptyView[0].number %> with <%=@nonEmptyView[0].viewCount%> views <br>
+
+		<%=@nonEmptyView[1].faculty%> 
+		<%=@nonEmptyView[1].number %> with <%=@nonEmptyView[1].viewCount%> views <br>
+
+		<%=@nonEmptyView[2].faculty%> 
+		<%=@nonEmptyView[2].number %> with <%=@nonEmptyView[2].viewCount%> views <br>
+	<% else %>
+		Not enough information to show.
+	<% end %>
+	 </p>
+	
+	<p> Hottest Course (Most Added to Student's Profile) : <br>
+		<% if @nonEmptyCart.length >= 3 %>
+		<%=@nonEmptyCart[0].faculty%> 
+		<%=@nonEmptyCart[0].number %> with <%=@nonEmptyCart[0].cartCount%> additions <br>
+
+		<%=@nonEmptyCart[1].faculty%> 
+		<%=@nonEmptyCart[1].number %> with <%=@nonEmptyCart[1].cartCount%> additions <br>
+
+		<%=@nonEmptyCart[2].faculty%> 
+		<%=@nonEmptyCart[2].number %> with <%=@nonEmptyCart[2].cartCount%> additions <br>
+	<% else %>
+		Not enough information to show.
+	<% end %>
+	</p>
+
 </body>
 <% end %>
