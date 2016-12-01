@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 
+.welcome-wrapper {
+	min-width: 1200px;
+	text-align: center;
+}
+
+.course-search-form {
+	display: inline-block;	
+	margin-left: 50px;
+	margin-right: 50px;
+}
 
 .course-search {
 	background-color: #faf2f2;
@@ -9,6 +19,13 @@
 	font-size: 30px;
 	font-family: 'Indie Flower', cursive;
 	color: #931010;
+}
+
+.recommendations-wrapper {
+	display: inline-block;
+	border: 1px solid #000;
+	border-radius: 25px;
+	padding: 10px;
 }
 
 .title-comment{

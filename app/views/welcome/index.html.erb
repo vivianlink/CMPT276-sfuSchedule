@@ -1,141 +1,147 @@
 <body>
-	<h1> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">
-	COURSE SEARCH</h1>
-	<%= form_tag sort_path, :method => 'get' do %>
-	<table class="course-search" align="center">
 
-		<tr><td>Faculty:</td>
-		<td> <%= select_tag :faculty, options_for_select( Course.all.pluck(:faculty).uniq.insert(0, "") ), :style => "width:173px" %>
-		</td></tr>
+	<div class="welcome-wrapper">
+		<div class="recommendations-wrapper">
+			<p>
+			<div class= "recommendation-title"> Popular Courses </div>
+			<span class="title-comment">
+			(Most Viewed) <br></span>
 
-		<tr><td>Number:</td><td><%= text_field_tag :number, params[:number] %></td></tr>
+			<% if @nonEmptyView.length >= 3 %>
+				
+				<span class = "course-name"> 
+				<%=@nonEmptyView[0].faculty%> 
+				<%=@nonEmptyView[0].number %>
+				</span> with <%=@nonEmptyView[0].viewCount%> views <br>
 
-		<tr><td>Year:</td>
-		<td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:173px" %>
-		</td></tr>
+				<span class = "course-name"> 
+				<%=@nonEmptyView[1].faculty%> 
+				<%=@nonEmptyView[1].number %>
+				</span> with <%=@nonEmptyView[1].viewCount%> views <br>	
 
-		<tr><td>Semester:</td>
-		<td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:173px" %>
-		</td></tr>
+				<span class = "course-name"> 
+				<%=@nonEmptyView[2].faculty%> 
+				<%=@nonEmptyView[2].number %>
+				</span> with <%=@nonEmptyView[2].viewCount%> views <br>
 
-		<tr><td>Unit:</td><td><%= text_field_tag :unit, params[:unit] %></td></tr>
+			<% else %>
+				Not enough information to show. (Minimum 3 courses must be viewed)
+			<% end %>
+			</p>
 
-		<tr><td>Designation:</td>
-		<td> Writing<%= check_box_tag :W, "Writing" %>
-		Quantitative<%= check_box_tag :Q, "Quantitative" %>
-		<br>
-		Breath &nbsp<%= select_tag :B, options_for_select(["","Breadth", "Breadth-Science",
-					 "Breadth-Social", "Breadth-Humanities"]),
-			:style => "width:103px" %>
-		</td></tr>
 
-	</table>
-	<br>
-	<%= submit_tag "Search",  class:"button", :name => "commit" %>
-	<%= submit_tag "Search(in WQB order)", class:"button", :name => "commit" %>
+			<p>
+			<div class= "recommendation-title"> Hottest Courses </div>  <span class= "title-comment"> (Most Added to Student's Profile)  <br> </span>
+			
+				<% if @nonEmptyCart.length >= 3 %>
+				<span class = "course-name"> 
+				<%=@nonEmptyCart[0].faculty%> 
+				<%=@nonEmptyCart[0].number %>
+				</span>with <%=@nonEmptyCart[0].cartCount%> additions <br>
 
-	
-<!-- </p>
+				<span class = "course-name"> 
+				<%=@nonEmptyCart[1].faculty%> 
+				<%=@nonEmptyCart[1].number %>
+				</span> with <%=@nonEmptyCart[1].cartCount%> additions <br>
 
-	<p> most commented prof show here </p>
+				<span class = "course-name"> 
+				<%=@nonEmptyCart[2].faculty%> 
+				<%=@nonEmptyCart[2].number %>
+				</span> with <%=@nonEmptyCart[2].cartCount%> additions <br>
+			<% else %>
+				Not enough information to show.
+				(minimum 3 courses must have been added to course cart)
+			<% end %>
+			</p>
+		</div>
 
-	<p> highest rating prof show here </p> -->
+		<%= form_tag sort_path, :method => 'get', :class => 'course-search-form' do %>
+			
+			<h1> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">
+			COURSE SEARCH</h1>
+			<table class="course-search" align="center">
 
-	<p>
-	<div class= "recommendation-title"> Popular Courses </div>
-	<span class="title-comment">
-	(Most Viewed) <br></span>
+				<tr><td>Faculty:</td>
+				<td> <%= select_tag :faculty, options_for_select( Course.all.pluck(:faculty).uniq.insert(0, "") ), :style => "width:173px" %>
+				</td></tr>
 
-	<% if @nonEmptyView.length >= 3 %>
+				<tr><td>Number:</td><td><%= text_field_tag :number, params[:number] %></td></tr>
+
+				<tr><td>Year:</td>
+				<td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:173px" %>
+				</td></tr>
+
+				<tr><td>Semester:</td>
+				<td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:173px" %>
+				</td></tr>
+
+				<tr><td>Unit:</td><td><%= text_field_tag :unit, params[:unit] %></td></tr>
+
+				<tr><td>Designation:</td>
+				<td> Writing<%= check_box_tag :W, "Writing" %>
+				Quantitative<%= check_box_tag :Q, "Quantitative" %>
+				<br>
+				Breath &nbsp<%= select_tag :B, options_for_select(["","Breadth", "Breadth-Science",
+							 "Breadth-Social", "Breadth-Humanities"]),
+					:style => "width:103px" %>
+				</td></tr>
+
+			</table>
+			<br>
+			<%= submit_tag "Search",  class:"button", :name => "commit" %>
+			<%= submit_tag "Search(in WQB order)", class:"button", :name => "commit" %>
+		<% end %>
 		
-		<span class = "course-name"> 
-		<%=@nonEmptyView[0].faculty%> 
-		<%=@nonEmptyView[0].number %>
-		</span> with <%=@nonEmptyView[0].viewCount%> views <br>
+	<!-- </p>
 
-		<span class = "course-name"> 
-		<%=@nonEmptyView[1].faculty%> 
-		<%=@nonEmptyView[1].number %>
-		</span> with <%=@nonEmptyView[1].viewCount%> views <br>	
+		<p> most commented prof show here </p>
 
-		<span class = "course-name"> 
-		<%=@nonEmptyView[2].faculty%> 
-		<%=@nonEmptyView[2].number %>
-		</span> with <%=@nonEmptyView[2].viewCount%> views <br>
+		<p> highest rating prof show here </p> -->
 
-	<% else %>
-		Not enough information to show. (Minimum 3 courses must be viewed)
-	<% end %>
-	</p>
+		<div class="recommendations-wrapper">
+			<p>
+			<div class= "recommendation-title"> Best Instructors </div>  <span class= "title-comment">  (Highest Rating) <br> </span>
+			
+				<% if @profs_by_rating.length >= 3 %>
+				<span class = "course-name"> 
+				<%=@profs_by_rating[0].name%> 
+				</span>with <%=@profs_by_rating[0].rating%> <br>
 
+				<span class = "course-name"> 
+				<%=@profs_by_rating[1].name%> 
+				</span> with <%=@profs_by_rating[1].rating%> <br>
 
-	<p>
-	<div class= "recommendation-title"> Hottest Courses </div>  <span class= "title-comment"> (Most Added to Student's Profile)  <br> </span>
-	
-		<% if @nonEmptyCart.length >= 3 %>
-		<span class = "course-name"> 
-		<%=@nonEmptyCart[0].faculty%> 
-		<%=@nonEmptyCart[0].number %>
-		</span>with <%=@nonEmptyCart[0].cartCount%> additions <br>
-
-		<span class = "course-name"> 
-		<%=@nonEmptyCart[1].faculty%> 
-		<%=@nonEmptyCart[1].number %>
-		</span> with <%=@nonEmptyCart[1].cartCount%> additions <br>
-
-		<span class = "course-name"> 
-		<%=@nonEmptyCart[2].faculty%> 
-		<%=@nonEmptyCart[2].number %>
-		</span> with <%=@nonEmptyCart[2].cartCount%> additions <br>
-	<% else %>
-		Not enough information to show.
-		(minimum 3 courses must have been added to course cart)
-	<% end %>
-	</p>
+				<span class = "course-name"> 
+				<%=@profs_by_rating[2].name%> 
+				</span> with <%=@profs_by_rating[2].rating%> <br>
+			<% else %>
+				Not enough information to show.
+				(minimum 3 profs must be rated, only <%=@profs_by_rating.length%> do now)
+			<% end %>
+			</p>
 
 
-	<p>
-	<div class= "recommendation-title"> Best Instructors </div>  <span class= "title-comment">  (Highest Rating) <br> </span>
-	
-		<% if @profs_by_rating.length >= 3 %>
-		<span class = "course-name"> 
-		<%=@profs_by_rating[0].name%> 
-		</span>with <%=@profs_by_rating[0].rating%> <br>
+			<p>
+			<div class= "recommendation-title"> Popular Instructors </div>  <span class= "title-comment"> (Most Number of Comments)  <br> </span>
+			
+				<% if @profs_by_comments_count.length >= 3 %>
+				<span class = "course-name"> 
+				<%=@profs_by_comments_count[0].name%> 
+				</span>with <%=@profs_by_comments_count[0].commentsCount%> comments <br>
 
-		<span class = "course-name"> 
-		<%=@profs_by_rating[1].name%> 
-		</span> with <%=@profs_by_rating[1].rating%> <br>
+				<span class = "course-name"> 
+				<%=@profs_by_comments_count[1].name%> 
+				</span> with <%=@profs_by_comments_count[1].commentsCount%> comments <br>
 
-		<span class = "course-name"> 
-		<%=@profs_by_rating[2].name%> 
-		</span> with <%=@profs_by_rating[2].rating%> <br>
-	<% else %>
-		Not enough information to show.
-		(minimum 3 profs must be rated, only <%=@profs_by_rating.length%> do now)
-	<% end %>
-	</p>
-
-
-	<p>
-	<div class= "recommendation-title"> Popular Instructors </div>  <span class= "title-comment"> (Most Number of Comments)  <br> </span>
-	
-		<% if @profs_by_comments_count.length >= 3 %>
-		<span class = "course-name"> 
-		<%=@profs_by_comments_count[0].name%> 
-		</span>with <%=@profs_by_comments_count[0].commentsCount%> comments <br>
-
-		<span class = "course-name"> 
-		<%=@profs_by_comments_count[1].name%> 
-		</span> with <%=@profs_by_comments_count[1].commentsCount%> comments <br>
-
-		<span class = "course-name"> 
-		<%=@profs_by_comments_count[2].name%> 
-		</span> with <%=@profs_by_comments_count[2].commentsCount%> comments <br>
-	<% else %>
-		Not enough information to show.
-		(minimum 3 profs must have comments, only <%=@profs_by_comments_count.length%> do now)
-	<% end %>
-	</p>
-	
+				<span class = "course-name"> 
+				<%=@profs_by_comments_count[2].name%> 
+				</span> with <%=@profs_by_comments_count[2].commentsCount%> comments <br>
+			<% else %>
+				Not enough information to show.
+				(minimum 3 profs must have comments, only <%=@profs_by_comments_count.length%> do now)
+			<% end %>
+			</p>
+		</div>
+		
+	</div>
 </body>
-<% end %>
