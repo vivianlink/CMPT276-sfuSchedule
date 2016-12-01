@@ -7,7 +7,8 @@
     <p>Admin Password:</br> <%= password_field_tag :admin_password%></p> 
 
     <%= submit_tag("Authenticate") %>
-    <%= link_to 'Back', welcome_index_path%>
+    <br><br>
+    <span class= "back-button"><%= link_to 'Back', welcome_index_path%></span>
   <% end %>
 
   <p id="notice"><%= notice %></p>

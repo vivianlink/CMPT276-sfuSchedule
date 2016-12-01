@@ -26,7 +26,7 @@ class ProfController < ApplicationController
 	  	@profs = @profs.uniq.pluck(:instructor) 
 	  	
 	  	# sort
-	  	@profs = @profs.sort! 
+	  	@profs = @profs.sort!
 	end
 
 	def show
