@@ -1,5 +1,6 @@
 <body>
-	<h1> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">COURSE SEARCH</h1>
+	<h1> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">
+	COURSE SEARCH</h1>
 	<%= form_tag sort_path, :method => 'get' do %>
 	<table class="course-search" align="center">
 
@@ -34,41 +35,63 @@
 	<%= submit_tag "Search(in WQB order)", class:"button", :name => "commit" %>
 
 	
-<!-- 	<p> most viewed prof show here </p>
+<!-- </p>
 
 	<p> most commented prof show here </p>
 
 	<p> highest rating prof show here </p> -->
 
-	<p> Popular Courses : <br>
-	<% if @nonEmptyView.length >= 3 %>
-		<%=@nonEmptyView[0].faculty%> 
-		<%=@nonEmptyView[0].number %> with <%=@nonEmptyView[0].viewCount%> views <br>
-
-		<%=@nonEmptyView[1].faculty%> 
-		<%=@nonEmptyView[1].number %> with <%=@nonEmptyView[1].viewCount%> views <br>
-
-		<%=@nonEmptyView[2].faculty%> 
-		<%=@nonEmptyView[2].number %> with <%=@nonEmptyView[2].viewCount%> views <br>
-	<% else %>
-		Not enough information to show.
-	<% end %>
-	 </p>
+	<p>
+	<div class= "recommendation-title"> Popular Courses </div>
+	<span class="title-comment">
+	(Most Viewed) <br></span>
 	
-	<p> Hottest Course (Most Added to Student's Profile) : <br>
-		<% if @nonEmptyCart.length >= 3 %>
-		<%=@nonEmptyCart[0].faculty%> 
-		<%=@nonEmptyCart[0].number %> with <%=@nonEmptyCart[0].cartCount%> additions <br>
+	<% if @nonEmptyView.length >= 3 %>
+		
+		<span class = "course-name"> 
+		<%=@nonEmptyView[0].faculty%> 
+		<%=@nonEmptyView[0].number %>
+		</span> with <%=@nonEmptyView[0].viewCount%> views <br>
 
-		<%=@nonEmptyCart[1].faculty%> 
-		<%=@nonEmptyCart[1].number %> with <%=@nonEmptyCart[1].cartCount%> additions <br>
+		<span class = "course-name"> 
+		<%=@nonEmptyView[1].faculty%> 
+		<%=@nonEmptyView[1].number %>
+		</span> with <%=@nonEmptyView[1].cartCount%> views <br>	
 
-		<%=@nonEmptyCart[2].faculty%> 
-		<%=@nonEmptyCart[2].number %> with <%=@nonEmptyCart[2].cartCount%> additions <br>
+		<span class = "course-name"> 
+		<%=@nonEmptyView[2].faculty%> 
+		<%=@nonEmptyView[2].number %>
+		</span> with <%=@nonEmptyView[2].viewCount%> views <br>
+
 	<% else %>
-		Not enough information to show.
+		Not enough information to show. (Minimum 3 courses must be viewed)
 	<% end %>
 	</p>
 
+
+	<p>
+	<div class= "recommendation-title"> Hottest Courses </div>  <span class= "title-comment"> (Most Added to Student's Profile)  <br> </span>
+	
+		<% if @nonEmptyCart.length >= 3 %>
+		<span class = "course-name"> 
+		<%=@nonEmptyCart[0].faculty%> 
+		<%=@nonEmptyCart[0].number %>
+		</span>with <%=@nonEmptyCart[0].cartCount%> additions <br>
+
+		<span class = "course-name"> 
+		<%=@nonEmptyCart[1].faculty%> 
+		<%=@nonEmptyCart[1].number %>
+		</span> with <%=@nonEmptyCart[1].cartCount%> additions <br>
+
+		<span class = "course-name"> 
+		<%=@nonEmptyCart[2].faculty%> 
+		<%=@nonEmptyCart[2].number %>
+		</span> with <%=@nonEmptyCart[2].cartCount%> additions <br>
+	<% else %>
+		Not enough information to show.
+		(minimum 3 courses must have been added to course cart)
+	<% end %>
+	</p>
+	
 </body>
 <% end %>
