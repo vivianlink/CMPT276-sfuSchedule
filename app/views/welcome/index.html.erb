@@ -45,7 +45,7 @@
 	<div class= "recommendation-title"> Popular Courses </div>
 	<span class="title-comment">
 	(Most Viewed) <br></span>
-	
+
 	<% if @nonEmptyView.length >= 3 %>
 		
 		<span class = "course-name"> 
@@ -56,7 +56,7 @@
 		<span class = "course-name"> 
 		<%=@nonEmptyView[1].faculty%> 
 		<%=@nonEmptyView[1].number %>
-		</span> with <%=@nonEmptyView[1].cartCount%> views <br>	
+		</span> with <%=@nonEmptyView[1].viewCount%> views <br>	
 
 		<span class = "course-name"> 
 		<%=@nonEmptyView[2].faculty%> 
@@ -90,6 +90,50 @@
 	<% else %>
 		Not enough information to show.
 		(minimum 3 courses must have been added to course cart)
+	<% end %>
+	</p>
+
+
+	<p>
+	<div class= "recommendation-title"> Best Instructors </div>  <span class= "title-comment">  (Highest Rating) <br> </span>
+	
+		<% if @profs_by_rating.length >= 3 %>
+		<span class = "course-name"> 
+		<%=@profs_by_rating[0].name%> 
+		</span>with <%=@profs_by_rating[0].rating%> <br>
+
+		<span class = "course-name"> 
+		<%=@profs_by_rating[1].name%> 
+		</span> with <%=@profs_by_rating[1].rating%> <br>
+
+		<span class = "course-name"> 
+		<%=@profs_by_rating[2].name%> 
+		</span> with <%=@profs_by_rating[2].rating%> <br>
+	<% else %>
+		Not enough information to show.
+		(minimum 3 profs must be rated, only <%=@profs_by_rating.length%> do now)
+	<% end %>
+	</p>
+
+
+	<p>
+	<div class= "recommendation-title"> Popular Instructors </div>  <span class= "title-comment"> (Most Number of Comments)  <br> </span>
+	
+		<% if @profs_by_comments_count.length >= 3 %>
+		<span class = "course-name"> 
+		<%=@profs_by_comments_count[0].name%> 
+		</span>with <%=@profs_by_comments_count[0].commentsCount%> comments <br>
+
+		<span class = "course-name"> 
+		<%=@profs_by_comments_count[1].name%> 
+		</span> with <%=@profs_by_comments_count[1].commentsCount%> comments <br>
+
+		<span class = "course-name"> 
+		<%=@profs_by_comments_count[2].name%> 
+		</span> with <%=@profs_by_comments_count[2].commentsCount%> comments <br>
+	<% else %>
+		Not enough information to show.
+		(minimum 3 profs must have comments, only <%=@profs_by_comments_count.length%> do now)
 	<% end %>
 	</p>
 	
