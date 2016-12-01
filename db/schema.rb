@@ -96,11 +96,47 @@ ActiveRecord::Schema.define(version: 20161128230956) do
     t.datetime "updated_at"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "time"
+    t.string   "activity_type"
+    t.string   "location"
+    t.string   "group_owner"
+    t.string   "member1"
+    t.string   "member2"
+    t.string   "member3"
+    t.string   "member4"
+    t.string   "description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+    t.integer  "member1id"
+    t.integer  "member2id"
+    t.integer  "member3id"
+    t.integer  "member4id"
+  end
+
+  create_table "message_boards", force: :cascade do |t|
+    t.string   "sender"
+    t.string   "group_name"
+    t.string   "message"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.string   "comment"
     t.integer  "rating"
     t.string   "prof_name"
     t.string   "user_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trainers", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -3,11 +3,24 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  sized = Array.new(32, ['_'*12, false])
+  @@mon = sized.dup
+  @@tue = sized.dup
+  @@wed = sized.dup
+  @@thu = sized.dup
+  @@fri = sized.dup
+  @@sat = sized.dup
+  @@sun = sized.dup
+  @@dWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  @@warning = 'Successful Schedule Table building :D'
+
+
+
   	def authenticate_user
   	if session[:user_id]
 	     # set current user object to @current_user object variable
-	    @current_user = User.find session[:user_id] 
-	    return true	
+	    @current_user = User.find session[:user_id]
+	    return true
 	  else
 	    redirect_to(:controller => 'sessions', :action => 'login')
 	    return false
@@ -21,4 +34,81 @@ class ApplicationController < ActionController::Base
 	    return true
 	  end
 	end
+
+  def populateWeek(timeS, course, duration, days)
+    duration = duration*2 -1
+    timeS = ((timeToDecimal(timeS)-8)*2).round
+
+    if course !=''
+      name = (course.faculty).to_s.upcase + (course.number).to_s
+    else
+      name = 'Course'
+    end
+
+    if days.include? "Mo"
+      for i in 0..duration
+        if @@mon[timeS + i][1] == false
+          @@mon[timeS + i] = [name, true]
+        else
+          errorMessage(1)
+        end
+      end
+    end
+    if days.include? "Tu"
+      for i in 0..duration
+        if @@tue[timeS + i][1] == false
+          @@tue[timeS + i] = [name, true]
+        else
+          errorMessage(1)
+        end
+      end
+    end
+    if days.include? "We"
+      for i in 0..duration
+        if @@wed[timeS + i][1] == false
+          @@wed[timeS + i] = [name, true]
+        else
+          errorMessage(1)
+        end
+      end
+    end
+    if days.include? "Th"
+      for i in 0..duration
+        if @@thu[timeS + i][1] == false
+          @@thu[timeS + i] = [name, true]
+        else
+          errorMessage(1)
+        end
+      end
+    end
+    if days.include? "Fr"
+      for i in 0..duration
+        if @@fri[timeS + i][1] == false
+          @@fri[timeS + i] = [name, true]
+        else
+          errorMessage(1)
+        end
+      end
+    end
+    if days.include? "Sa"
+      for i in 0..duration
+        if @@sat[timeS + i][1] == false
+          @@sat[timeS + i] = [name, true]
+        else
+          errorMessage(1)
+        end
+      end
+    end
+    if days.include? "Su"
+      for i in 0..duration
+        if @@sun[timeS + i][1] == false
+          @@sun[timeS + i] = [name, true]
+        else
+          errorMessage(1)
+        end
+      end
+    end
+  end
+
+
 end

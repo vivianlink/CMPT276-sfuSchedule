@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'schedule/index'
+
+  get 'schedule/p1'
+
+  get 'schedule/p2'
+
   get "/courses/sort " => "courses#sort", :as => 'sort'
 
   get 'prof/index'

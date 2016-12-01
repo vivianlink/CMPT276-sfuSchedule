@@ -1,8 +1,8 @@
 # make gems
 
 # Define variables here.
-branch = database
-message = "going to sleep"
+branch = schedule
+message = "moved some code to ApplicationController"
 
 push_master:
 	git add .
