@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def clearingVariables
-    sized = Array.new(32, ['_'*11, false])
+    sized = Array.new(32, ['_'*9, false])
     @@mon = sized.dup
     @@tue = sized.dup
     @@wed = sized.dup
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     @@sun = sized.dup
     @@daysData = Array.new(7, Array.new(32, ['_'*11, false]))
     @@dWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    @@warning = 'Successful Schedule Table building :D'
+    @@warning = 'Successful Schedule Table building.'
     @@courseConflict = []
   end
 

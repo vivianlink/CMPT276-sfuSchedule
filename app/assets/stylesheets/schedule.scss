@@ -2,20 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-table, th, td {
-   border: 1px solid black;
-   text-align: center;
-   padding: 0px;
+
+table.schedule {
+  display: inline-block;
+  border: 1px solid black;
 }
 
-table {
-  display: inline;
-  border: 1px solid;
+th.header{
+  border: 1px solid black;
+  text-align: center;
+  line-height: 25px;
 }
 
 td.row {
-  height: 10px;
+  border: 1px solid black;
+  font-size: 80%
 }
+
 td.odd {
-  border: 0;
+  font-size: 80%
+}
+
+tr.oRow{
+  line-height: 2px;
 }

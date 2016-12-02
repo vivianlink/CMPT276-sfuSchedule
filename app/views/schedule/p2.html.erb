@@ -1,27 +1,23 @@
-<h1>Schedule#p2</h1>
-<p>Find me in app/views/schedule/p2.html.erb</p>
+<h1>Schedule Table of Courses in Portfolio</h1>
 <p> <%= @warning %>  </p>
-<p> <%= @viewing %>  </p>
-
-
-<table>
-  <tr>
-    <th>
+<table class = 'schedule'>
+  <tr class = 'oRow'>
+    <th class = 'header'>
       time
     </th>
     <% for i in 0..6 %>
-    <th>
+    <th class = 'header'>
       <%= @dWeekdays[i] %>
     </th>
     <% end %>
   </tr>
 
   <% for i in 0..31 %>
-  <tr>
-    <td class='row'>
-      <%= @timeSlot[i] %>
-    </td>
+  <tr class = 'oRow'>
     <% if i%2==1 %>
+      <td class='row'>
+        <%= @timeSlot[i] %>
+      </td>
       <td class='row'>
         <%= @mon[i][0] %>
       </td>
@@ -44,6 +40,9 @@
         <%= @sun[i][0] %>
       </td>
     <% else %>
+      <td class='odd'>
+        <%= @timeSlot[i] %>
+      </td>
       <td class='odd'>
         <%= @mon[i][0] %>
       </td>
