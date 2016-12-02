@@ -1,5 +1,13 @@
 
 <p>
+  <strong>View Count:</strong>
+  <%= @course.viewCount %>
+</p>
+<h1>
+  <strong>Title</strong>
+  <%= @course.title %>
+</h1>
+<p>
   <strong>Year:</strong>
   <%= @course.year %>
 </p>
@@ -25,11 +33,11 @@
 </p>
 <p>
   <strong>Schedule:</strong>
-  <%= @course.schedule %>
+  <%=raw @course.schedule %>
 </p>
 <p>
   <strong>Description:</strong>
-  <%= @course.description %>
+  <%=raw @course.description %>
 </p>
 <p>
   <strong>Designation:</strong>
@@ -47,6 +55,21 @@
   <strong>RoomNumber:</strong>
   <%= @course.RoomNumber %>
 </p>
+<p>
+  <strong>prereq:</strong>
+  <%= @course.prereq %>
+</p>
+<p>
+  <strong>coreq:</strong>
+  <%= @course.coreq %>
+</p>
+<p>
+  <%=raw @course.requiredtext %>
+</p>
+
+
+
+
 
 <% if @course.tutorial.any? %>
   <p>

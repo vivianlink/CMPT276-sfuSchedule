@@ -14,9 +14,10 @@
   *= require_tree .
   *= require_self
 */
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
-
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy');
 body {
  font-family: 'Titillium Web', sans-serif;
  text-align: center;
@@ -57,7 +58,17 @@ tr:not(:first-child) td {
 /*tr:nth-child(even) {background-color: #E5E1E1}*/
 
 
+.upper-button {
+  color: #cc0000;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 18;
+}
 
+.name-button {
+  color: grey;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 18px;
+}
 /*
   blue fansy button
 */
@@ -70,6 +81,7 @@ tr:not(:first-child) td {
  color: grey;
  background-color: white;
  border: 2px grey solid;
+
 }
 
 .button:hover {
@@ -77,7 +89,21 @@ tr:not(:first-child) td {
  color: #fff
 }
 
+.back-button{
+ cursor: pointer;
+ margin: 10px;
+ border-radius: 7px;
+ background-color: white;
+ border: 1px black solid;
+ padding: 5px;
+ font-family: 'Luckiest Guy', cursive;
+ color: red;
+}
 
+.back-button:hover {
+ background-color: black;
+ color: #fff
+}
 
 /*
   navigation bar

@@ -7,7 +7,6 @@ default: &default
 
 development:
   <<: *default
-
   database: cmpt276 #myproj_development
   username: cmpt276 #postgres
   password: thecmpt276Passw0rd #121

@@ -7,24 +7,24 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <ul>
-    <li><a href="/welcome">Search</a></li>
-    <li><a href="/users/show">Profile</a></li>
-    <li><a href="/courses">Schedule</a></li>
-    <li><a href="/prof">Rate a Professor</a></li>
+    <li><a class = "upper-button" href="/welcome">Search</a></li>
+    <li><a class = "upper-button" href="/users/show">Profile</a></li>
+    <li><a class = "upper-button" href="/courses">Schedule</a></li>
+    <li><a class = "upper-button" href="/prof">Rate a Professor</a></li>
     <%# this block is commented out %>
     <% if session[:user_name].present? %>
-  		<li style="float:right"><a href= "/sessions/logout">Logout</a></li>
-      <li style="float:right"><a><%=session[:user_name]%></a><li>
+  		<li style="float:right"><a class = "upper-button" href= "/sessions/logout">Logout</a></li>
+      <li style="float:right"><a class = "name-button" ><%=session[:user_name]%></a><li>
 
       <% if session[:is_admin] %>
-        <li style="float:right"><a href="/users"> SHOW USERS </a></li>
-        <li style="float:right"><a href="/urlConstruct"> urlConstruct </a></li>
+        <li style="float:right"><a class = "upper-button" href="/users"> Show User </a></li>
+        <li  style="float:right"><a class = "upper-button" href="/urlConstruct"> urlConstruct </a></li>
       <% else %>
-        <li style="float:right"><a href="/admin/new"> BECOME ADMIN </a></li>
+        <li style="float:right"><a class = "upper-button" href="/admin/new"> Become Admin</a></li>
       <% end %>
   	<% else %>
-  		<li style="float:right"><a href= "/users/new">Sign Up</a></li>
-  		<li style="float:right"><a href= "/sessions/login"> Login </a></li>
+  		<li style="float:right"><a class = "upper-button" href= "/users/new">Sign Up</a></li>
+  		<li style="float:right"><a class = "upper-button" href= "/sessions/login"> Login </a></li>
   	<% end %>
   </ul>
 </head>

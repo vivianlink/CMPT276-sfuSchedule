@@ -1,5 +1,11 @@
 class ProfController < ApplicationController
   	def index
+  		if params[:page]
+  			@current_page = params[:page].to_i
+  		else
+  			@current_page = 1
+  		end
+
 		prof_name = params[:prof_name]
 		if prof_name
 			prof_name.downcase!
@@ -12,6 +18,12 @@ class ProfController < ApplicationController
 	  	
 	  	# sort
 	  	@profs = @profs.sort! 
+
+	  	@pages_count = @profs.length / 10.0
+	  	@pages_count = @pages_count.ceil
+
+	  	@profs = @profs.drop((@current_page - 1) * 10)
+	  	@profs = @profs.take 10
 	end
 
 	def list
@@ -26,7 +38,7 @@ class ProfController < ApplicationController
 	  	@profs = @profs.uniq.pluck(:instructor) 
 	  	
 	  	# sort
-	  	@profs = @profs.sort! 
+	  	@profs = @profs.sort!
 	end
 
 	def show
