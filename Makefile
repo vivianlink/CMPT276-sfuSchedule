@@ -2,7 +2,7 @@
 
 # Define variables here.
 branch = schedule
-message = "moved some code to ApplicationController"
+message = "mostly ready"
 
 push_master:
 	git add .

@@ -1,15 +1,7 @@
 <h1>Schedule#p1</h1>
 <p>Find me in app/views/schedule/p1.html.erb</p>
 <p> <%= @display %>  </p>
-<p> <%= @display0 %>  </p>
-<p> <%= @display1 %>  </p>
-<p> <%= @display2 %>  </p>
-<p> <%= @display3 %>  </p>
-<p> <%= @display4 %>  </p>
-<p> <%= @display5 %>  </p>
-<p> <%= @display6 %>  </p>
-<p> <%= @display7 %>  </p>
-<p> <%= @timeSlot %>  </p>
+
 
 <!--
 
@@ -22,71 +14,3 @@
 <p> <%= @sun %>  </p>
 
 -->
-
-<table>
-  <tr>
-    <th>
-      time
-    </th>
-    <% for i in 0..6 %>
-    <th>
-      <%= @dWeekdays[i] %>
-    </th>
-    <% end %>
-  </tr>
-
-  <% for i in 0..31 %>
-  <tr>
-    <td class='row'>
-      <%= @timeSlot[i] %>
-    </td>
-    <% if i%2==1 %>
-      <td class='row'>
-        <%= @mon[i][0] %>
-      </td>
-      <td class='row'>
-        <%= @tue[i][0] %>
-      </td>
-      <td class='row'>
-        <%= @wed[i][0] %>
-      </td>
-      <td class='row'>
-        <%= @thu[i][0] %>
-      </td>
-      <td class='row'>
-        <%= @fri[i][0] %>
-      </td>
-      <td class='row'>
-        <%= @sat[i][0] %>
-      </td>
-      <td class='row'>
-        <%= @sun[i][0] %>
-      </td>
-    <% else %>
-      <td class='odd'>
-        <%= @mon[i][0] %>
-      </td>
-      <td class='odd'>
-        <%= @tue[i][0] %>
-      </td>
-      <td class='odd'>
-        <%= @wed[i][0] %>
-      </td>
-      <td class='odd'>
-        <%= @thu[i][0] %>
-      </td>
-      <td class='odd'>
-        <%= @fri[i][0] %>
-      </td>
-      <td class='odd'>
-        <%= @sat[i][0] %>
-      </td>
-      <td class='odd'>
-        <%= @sun[i][0] %>
-      </td>
-      <% end %>
-    <% end %>
-  </tr>
-
-
-</table>

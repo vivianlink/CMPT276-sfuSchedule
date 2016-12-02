@@ -3,16 +3,20 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  sized = Array.new(32, ['_'*12, false])
-  @@mon = sized.dup
-  @@tue = sized.dup
-  @@wed = sized.dup
-  @@thu = sized.dup
-  @@fri = sized.dup
-  @@sat = sized.dup
-  @@sun = sized.dup
-  @@dWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-  @@warning = 'Successful Schedule Table building :D'
+  def clearingVariables
+    sized = Array.new(32, ['_'*11, false])
+    @@mon = sized.dup
+    @@tue = sized.dup
+    @@wed = sized.dup
+    @@thu = sized.dup
+    @@fri = sized.dup
+    @@sat = sized.dup
+    @@sun = sized.dup
+    @@daysData = Array.new(7, Array.new(32, ['_'*11, false]))
+    @@dWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    @@warning = 'Successful Schedule Table building :D'
+    @@courseConflict = []
+  end
 
 
 
@@ -36,6 +40,7 @@ class ApplicationController < ActionController::Base
 	end
 
   def populateWeek(timeS, course, duration, days)
+
     duration = duration*2 -1
     timeS = ((timeToDecimal(timeS)-8)*2).round
 
@@ -50,7 +55,7 @@ class ApplicationController < ActionController::Base
         if @@mon[timeS + i][1] == false
           @@mon[timeS + i] = [name, true]
         else
-          errorMessage(1)
+          errorMessageSchedule(1)
         end
       end
     end
@@ -59,7 +64,7 @@ class ApplicationController < ActionController::Base
         if @@tue[timeS + i][1] == false
           @@tue[timeS + i] = [name, true]
         else
-          errorMessage(1)
+          errorMessageSchedule(1)
         end
       end
     end
@@ -68,7 +73,7 @@ class ApplicationController < ActionController::Base
         if @@wed[timeS + i][1] == false
           @@wed[timeS + i] = [name, true]
         else
-          errorMessage(1)
+          errorMessageSchedule(1)
         end
       end
     end
@@ -77,7 +82,7 @@ class ApplicationController < ActionController::Base
         if @@thu[timeS + i][1] == false
           @@thu[timeS + i] = [name, true]
         else
-          errorMessage(1)
+          errorMessageSchedule(1)
         end
       end
     end
@@ -86,7 +91,7 @@ class ApplicationController < ActionController::Base
         if @@fri[timeS + i][1] == false
           @@fri[timeS + i] = [name, true]
         else
-          errorMessage(1)
+          errorMessageSchedule(1)
         end
       end
     end
@@ -95,7 +100,7 @@ class ApplicationController < ActionController::Base
         if @@sat[timeS + i][1] == false
           @@sat[timeS + i] = [name, true]
         else
-          errorMessage(1)
+          errorMessageSchedule(1)
         end
       end
     end
@@ -104,9 +109,82 @@ class ApplicationController < ActionController::Base
         if @@sun[timeS + i][1] == false
           @@sun[timeS + i] = [name, true]
         else
-          errorMessage(1)
+          errorMessageSchedule(1)
         end
       end
+    end
+  end
+
+  def timeToDecimal(time)
+    timeI = 0
+    temp = time.split(':')
+    timeI = temp[0].to_f + temp[1].to_f/60
+    return timeI
+  end
+
+  def generateTable
+    user = User.find(session[:user_id])
+    @dWeekdays = @@dWeekdays
+
+    if user.course.any?
+      user.course.each do |course|
+        url = course.CourseUrl
+
+        flag = false
+        while flag == false
+          try = HTTParty.get(url)
+          if try.include? "errorMessage"
+            flag = false
+            sleep 1
+          else
+            flag = true
+          end
+        end
+
+        schedule = JSON.parse(try.body)
+        schedule = schedule['courseSchedule']
+
+        schedule.each do |schedule|
+          timeS, timeE, days = '','', ''
+          if (schedule.include?("startTime"))
+            timeS = schedule['startTime']
+            timeE = schedule['endTime']
+            days = (schedule['days'].tr(' ', '')).split(',')
+            duration =  (timeToDecimal(timeE) - timeToDecimal(timeS)).ceil
+            populateWeek(timeS, course, duration, days)
+          end
+        end
+      end
+    end
+
+    @mon = @@mon
+    @tue = @@tue
+    @wed = @@wed
+    @thu = @@thu
+    @fri = @@fri
+    @sat = @@sat
+    @sun = @@sun
+
+    h = 8
+    m = 0
+    @timeSlot = Array.new(32, '')
+    for i in 0..31
+      @timeSlot[i] = h.to_s + ':' + m.to_s + '0'
+      if m == 0
+        m += 3
+      elsif m == 3
+        m = 0
+        h += 1
+      end
+    end
+    @warning = @@warning
+  end
+
+
+
+  def errorMessageSchedule(i)
+    if i==1
+      @@warning = 'There were course conflicts. Please check your courses.'
     end
   end
 

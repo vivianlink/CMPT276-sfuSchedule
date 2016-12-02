@@ -25,18 +25,19 @@ def sort
 
       #for search
       @courses = Course.order("#{sort_column} #{sort_direction}")
-
   	end
 
 	def show
     @course = Course.find(params[:id])
+
     if @course.viewCount
       @course.viewCount = @course.viewCount + 1
     else
       @course.viewCount = 1
-    end 
+    end
 
     @course.save
+
   end
 
   def new
@@ -80,7 +81,7 @@ def sort
       @course.cartCount = @course.cartCount + 1
     else
       @course.cartCount = 1
-    end 
+    end
 
     @course.save
     redirect_to :back
