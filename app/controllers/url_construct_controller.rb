@@ -60,8 +60,15 @@ class UrlConstructController < ApplicationController
                                                      "CourseUrl" => instage_section_url,
                                                      "schedule" => detail.DSchedule,
                                                      "unit" => detail.dUnit,
-                                                     "RoomNumber" => detail.RoomNumber)
+                                                     "RoomNumber" => detail.RoomNumber,
+                                                     "title" => detail.title,
+                                                     "prereq" => detail.prereq,
+                                                     "coreq" => detail.coreq,
+                                                     "requiredtext" => detail.requiredtext,
+                                                     "description" => detail.coursedetails)
                     @creating_new_course.save
+
+               
 
                   else if (detail.sectioncode == "SEC" || detail.sectioncode == "STL" || detail.sectioncode == "LAB" || detail.sectioncode == "TUT")
                     creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + "-" + section.dSectionNumber,
@@ -73,11 +80,19 @@ class UrlConstructController < ApplicationController
                     creating_new_tutorial.save
                     puts instage_section_url
                     puts detail.DSchedule
+                    
                   end
-                end
-            end
 
+
+
+                  detail.delete
+
+                end
+                section.delete
+            end
+          course.delete
           end
+        falculty.delete
         end
 
       end
@@ -87,62 +102,7 @@ class UrlConstructController < ApplicationController
 
 
   def url2015SpringCourses
-    filler_array = []
-
-    urlYear = "2015"
-    urlSeason = "spring"
-    instage_season_url = @@base + urlYear + "/" + urlSeason
-
-    urlFalculty(instage_season_url)
-
-
-      @AllFalculty.each do |falculty|
-          instage_falculty_url = instage_season_url + "/" + falculty.dSubject
-          urlCourse(instage_falculty_url)
-
-
-          @AllCourse.each do |course|
-            instage_course_url = instage_falculty_url + "/" + course.dCourseNumber
-            urlSection(instage_course_url)
-
-
-            @AllSection.each do |section|
-              instage_section_url = instage_course_url + "/" + section.dSectionNumber
-              urlDetail(instage_section_url)
-
-
-
-
-                @AllDetail.each do |detail|
-                  if detail.sectioncode == "LEC"
-                    creating_new_course = Course.new("calender" => detail.calender,
-                                                     "designation" => detail.dDesignation,
-                                                     "instructor" => detail.dProfessor,
-                                                     "faculty" => falculty.dSubject,
-                                                     "number" => course.dCourseNumber,
-                                                     "year" => urlYear,
-                                                     "semester" => urlSeason,
-                                                     "section" => section.dSectionNumber,
-                                                     "CourseUrl" => instage_section_url,
-                                                     "schedule" => detail.DSchedule,
-                                                     "unit" => detail.dUnit,
-                                                     "RoomNumber" => detail.RoomNumber)
-                    creating_new_course.save
-                    puts instage_section_url
-                    puts creating_new_course.id
-                    puts creating_new_course.designation
-                    creating_new_course.save
-                    puts instage_section_url
-                    puts creating_new_course.id
-                    puts creating_new_course.designation
-                  end
-                end
-            end
-
-          end
-
-      end
-
+  
   end
 
 
@@ -226,15 +186,24 @@ class UrlConstructController < ApplicationController
 
     if (data == badJSON)
     else
+
+# Professor
       if (data.include?("instructor"))
+
 
         professor = data["instructor"]
         professor = professor.first
         professor = professor["name"]
-      else
-        professor = "none specified"
-      end
+        if (professor == "")
+          professor = "Falculty.m"
+        end
 
+      else
+        professor = "Falculty.m"
+      end
+###
+
+#Schedule
         overall_schedule = ""
         sectioncode = ""
         roomnumber = ""
@@ -248,9 +217,13 @@ class UrlConstructController < ApplicationController
               sectioncode = schedule["sectionCode"]
 
               if (schedule.include?("startTime"))
-                overall_schedule = overall_schedule + schedule["startTime"] + " to " + schedule["endTime"] + " on " + schedule["days"]
+                overall_schedule = overall_schedule + schedule["days"] + " " + schedule["startTime"] + " - " + \
+                                   schedule["endTime"] + "</br>" + schedule["buildingCode"] + " "+ schedule["roomNumber"] \
+                                   + ", " + schedule["campus"] + "</br> </br>"
+
+                
               else
-                overall_schedule = "none"
+                overall_schedule = "<p> none </p> "
               end
 
 
@@ -272,28 +245,64 @@ class UrlConstructController < ApplicationController
             end
 
         else
-          schedule = "no schedule in api"
+          schedule = "No specific schedule"
         end
+###
+
+#CourseTextbook
+        requiredtext = ""
+        counter = 0
+        if(data.include?("requiredText"))
+          textbook = data["requiredText"]
+          textbook.each do |textbook|
+            if counter == 0
+              requiredtext = requiredtext + textbook["details"]
+              counter = 1
+            else
+              requiredtext = requiredtext + ", " + textbook["details"]
+            end
+
+          end
+
+        end
+######
 
 
+
+
+
+
+#basic course information
         if(data.include?("info"))
           data = data["info"]
           unit = data["units"]
-
           designation = data["designation"]
+          title = data["title"]
+
+          # if(data.include?("prerequisites"))
+          prereq = data["prerequisites"]
+          coreq = data["corequisites"]
+          coursedetails = data["courseDetails"]
+
+
 
 
         end
+######
 
 
-
-        dValue = DDetail.new("calender" => calender,
+        dValue = DDetail.new("title" => title,
+                             "prereq" => prereq,
+                             "coreq" => coreq, 
+                             "requiredtext" => requiredtext,
+                             "calender" => calender,
                              "sectioncode" => sectioncode,
                              "dDesignation" => designation,
                              "dUnit" => unit,
                              "dProfessor" => professor,
                              "DSchedule" => overall_schedule,
-                             "RoomNumber" => roomnumber)
+                             "RoomNumber" => roomnumber,
+                             "coursedetails" => coursedetails)
         dValue.save
         filler_array.push(dValue)
 
