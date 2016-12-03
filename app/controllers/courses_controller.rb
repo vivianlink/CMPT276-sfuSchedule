@@ -13,14 +13,16 @@ def sort
     if params[:commit] == "Search(in WQB order)"
 
         @courses = Course.search(params[:faculty], params[:number],params[:year],
-                  params[:semester],  params[:unit],params[:W],params[:Q],params[:B],
-                  params[:Mon],params[:Tu],params[:Wed],params[:Th],params[:Fri]).order(year: :desc, designation: :desc,faculty: :asc,
+                  params[:semester],  params[:unit], params[:instructor], params[:W],
+                  params[:Q],params[:B], params[:Mon],params[:Tu],params[:Wed],params[:Th],
+                  params[:Fri]).order(year: :desc, designation: :desc,faculty: :asc,
                   number: :asc, unit: :asc)#.order("#{sort_column} #{sort_direction}")
 
     elsif params[:commit] == "Search"
         @courses = Course.search(params[:faculty], params[:number],params[:year],
-                  params[:semester],  params[:unit],params[:W],params[:Q],params[:B],
-                  params[:Mon],params[:Tu],params[:Wed],params[:Th],params[:Fri]).order(year: :desc,faculty: :asc, number: :asc, unit: :asc)
+                  params[:semester],  params[:unit], params[:instructor], params[:W],
+                  params[:Q],params[:B], params[:Mon],params[:Tu],params[:Wed],params[:Th],
+                  params[:Fri]).order(year: :desc,faculty: :asc, number: :asc, unit: :asc)
     end
 
     @pages_count = @courses.length / 40.0

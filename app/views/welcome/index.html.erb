@@ -79,6 +79,11 @@
 
         <tr><td>Unit:</td><td><%= select_tag :unit, options_for_select( Course.all.pluck(:unit).uniq.sort_by! { |u| u.to_i } ) ,:style => "width:163px" %></td></tr>
 
+        <tr><td>Professor:</td>
+        <td> <%= select_tag :instructor, options_for_select( Course.all.pluck(:instructor).uniq.insert(0, "") ), :style => "width:163px" %>
+        </td></tr>
+
+
         <tr><td>Designation:</td>
         <td> Writing<%= check_box_tag :W, "W" %>
         Quantitative<%= check_box_tag :Q, "Q" %>
