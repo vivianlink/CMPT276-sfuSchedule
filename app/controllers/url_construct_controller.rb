@@ -74,6 +74,7 @@ class UrlConstructController < ApplicationController
                     creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + " " + course.dCourseNumber + "-" + section.dSectionNumber,
                                                           "tutcalender" => detail.calender,
                                                           "TutUrl" => instage_section_url,
+                                                          "CourseUrl" => instage_section_url,
                                                           "tutschedule" => detail.DSchedule,
                                                           "tutlocation" => detail.RoomNumber)
 

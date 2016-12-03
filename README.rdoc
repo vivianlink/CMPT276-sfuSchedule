@@ -1,15 +1,7 @@
 to become admin enter password : cmpt276admin
 
-there may be odd things we need to do.
-
-http://www.sfu.ca/bin/wcm/course-outlines?2017/spring/engl/111w
-
-In this example JSON, there are 3 lectures, and each with their own set of tutorials. We can distinguish them by looking at "associatedClass"
-
-Do we need to worry about labs?
-
-
 Group git link: https://github.com/vivianlink/CMPT276-sfuSchedule
+
 PROJECT PROPOSAL: “SFU COURSE PLANNER”
 
 Abstract
@@ -55,7 +47,7 @@ than the UI from goSFU.
 Project Deliverables and Beneficiaries
 
 At the end of the project we hope to have a website with the features mentioned in the project
-scope. We will use agile methodologies for this project, possibly adding extra features as we go 
+scope. We will use agile methodologies for this project, possibly adding extra features as we go
 along. Access to the system is made public but students need to sign up to use certain feature
 such as making comments regarding the course and saving their portfolios.
 The application is designed especially for SFU students. SFU students will benefit from this

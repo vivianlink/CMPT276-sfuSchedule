@@ -2,8 +2,12 @@
 
 <% def populate(day, i) %>
   <% if day[i][2] != -111 %>
-    <% course = Course.find(day[i][2]) %>
-    <% link_to day[i][0], course_path(course) %>
+    <% if day[i][3] == 'course' %>
+      <% course = Course.find(day[i][2]) %>
+      <% link_to day[i][0], course_path(course) %>
+    <% elsif day[i][3] == 'tutorial' %>
+      <%  day[i][0] %>
+    <% end %>
   <% else %>
     <% day[i][0] %>
   <% end %>
