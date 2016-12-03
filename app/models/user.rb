@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_and_belongs_to_many :course
+  has_and_belongs_to_many :tutorial
   attr_accessor :password
 
   EMAIL_REGEX =  /\A[^@\s]+@([^@.\s]+\.)*[^@.\s]+\z/

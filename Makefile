@@ -2,7 +2,7 @@
 
 # Define variables here.
 branch = schedule
-message = "mostly ready"
+message = "merging"
 
 push_master:
 	git add .

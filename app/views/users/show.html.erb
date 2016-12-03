@@ -37,6 +37,23 @@
 	 					<% end %>
 					</div>
 	 		<% end %>
+			<% if @user.tutorial.any? %>
+				<div class = "table-wrapper">
+				<table class="center">
+					<tr>
+						<th><%= "Name" %></th>
+						<th><%= "Location" %></th>
+						<th><%= "Schedule" %></th>
+					</tr>
+					<% @user.tutorial.each do |tutorial| %>
+						<tr>
+							<td><%= tutorial.tutname %></td>
+							<td><%= tutorial.tutlocation %></td>
+							<td><%=raw tutorial.tutschedule %></td>
+							<td><%= link_to "Remove", {:action => "remove_tut", id: tutorial.id} %></td>
+						</tr>
+				<% end %>
+			<% end %>
   <%else %>
   		You are not logged in. No profile to show.
 

@@ -88,6 +88,13 @@ def sort
     @course.save
     redirect_to :back
   end
+  def add_tut
+    @currUser = User.find(session[:user_id])
+    @tut = Tutorial.find(params[:id])
+    @tut.user << @currUser
+    @tut.save
+    redirect_to :back
+  end
 
   def destroy
     #@faculty = Faculty.find(params[:faculty_id])
