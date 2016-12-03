@@ -34,7 +34,7 @@ def sort
       @course.viewCount = @course.viewCount + 1
     else
       @course.viewCount = 1
-    end 
+    end
 
     @course.save
   end
@@ -80,9 +80,16 @@ def sort
       @course.cartCount = @course.cartCount + 1
     else
       @course.cartCount = 1
-    end 
+    end
 
     @course.save
+    redirect_to :back
+  end
+  def add_tut
+    @currUser = User.find(session[:user_id])
+    @tut = Tutorial.find(params[:id])
+    @tut.user << @currUser
+    @tut.save
     redirect_to :back
   end
 

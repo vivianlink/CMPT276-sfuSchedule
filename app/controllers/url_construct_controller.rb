@@ -68,11 +68,12 @@ class UrlConstructController < ApplicationController
                                                      "description" => detail.coursedetails)
                     @creating_new_course.save
 
-               
+
 
                   else if (detail.sectioncode == "SEC" || detail.sectioncode == "STL" || detail.sectioncode == "LAB" || detail.sectioncode == "TUT")
-                    creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + "-" + section.dSectionNumber,
+                    creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + " " + course.dCourseNumber + "-" + section.dSectionNumber,
                                                           "tutcalender" => detail.calender,
+                                                          "TutUrl" => instage_section_url,
                                                           "tutschedule" => detail.DSchedule,
                                                           "tutlocation" => detail.RoomNumber)
 
@@ -80,7 +81,7 @@ class UrlConstructController < ApplicationController
                     creating_new_tutorial.save
                     puts instage_section_url
                     puts detail.DSchedule
-                    
+
                   end
 
 
@@ -102,7 +103,7 @@ class UrlConstructController < ApplicationController
 
 
   def url2015SpringCourses
-  
+
   end
 
 
@@ -211,7 +212,7 @@ class UrlConstructController < ApplicationController
 
         if(data.include?("courseSchedule"))
         schedule = data["courseSchedule"]
-        calender = schedule
+        calender = ""
 
             schedule.each do |schedule|
               sectioncode = schedule["sectionCode"]
@@ -221,7 +222,7 @@ class UrlConstructController < ApplicationController
                                    schedule["endTime"] + "</br>" + schedule["buildingCode"] + " "+ schedule["roomNumber"] \
                                    + ", " + schedule["campus"] + "</br> </br>"
 
-                
+                calender = calender + schedule["days"]
               else
                 overall_schedule = "<p> none </p> "
               end
@@ -293,7 +294,7 @@ class UrlConstructController < ApplicationController
 
         dValue = DDetail.new("title" => title,
                              "prereq" => prereq,
-                             "coreq" => coreq, 
+                             "coreq" => coreq,
                              "requiredtext" => requiredtext,
                              "calender" => calender,
                              "sectioncode" => sectioncode,

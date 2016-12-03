@@ -35,6 +35,13 @@ class UsersController < ApplicationController
     redirect_to :back
   end
 
+  def remove_tut
+    @currUser = User.find(session[:user_id])
+    @delTut = @currUser.tutorial.find(params[:id])
+    @currUser.tutorial.delete(@delTut)
+    redirect_to :back
+  end
+
   def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
