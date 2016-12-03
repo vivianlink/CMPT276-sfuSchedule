@@ -78,14 +78,13 @@
   <table class="center">
   <tr>
     <th><%= "Section" %></th>
-    <th><%= "Schdeule" %></th>
-    <th><%= "Location" %></th>
+    <th><%= "Detail" %></th>
+
   </tr>
   <%  @course.tutorial.each do |tutorial| %>
     <tr>
       <td><%= tutorial.tutname %></td>
-      <td><%= tutorial.tutschedule %></td>
-      <td><%= tutorial.tutlocation %></td>
+      <td><%=raw tutorial.tutschedule %></td>
       <% if session[:user_name].present? %>
         <% if !User.find(session[:user_id]).tutorial.exists?(tutorial.id) %>
           <td><%= link_to "Add", {:action => "add_tut", id: tutorial.id} %></td>

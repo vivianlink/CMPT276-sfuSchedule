@@ -62,21 +62,22 @@
       <table class="course-search" align="center">
 
 
+
         <tr><td>Year:</td>
-        <td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:179px" %>
+        <td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:163px" %>
         </td></tr>
 
         <tr><td>Semester:</td>
-        <td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:179px" %>
+        <td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:163px" %>
         </td></tr>
 
         <tr><td>Faculty:</td>
-        <td> <%= select_tag :faculty, options_for_select( Course.all.pluck(:faculty).uniq.insert(0, "") ), :style => "width:179px" %>
+        <td> <%= select_tag :faculty, options_for_select( Course.all.pluck(:faculty).uniq.insert(0, "") ), :style => "width:163px" %>
         </td></tr>
 
-        <tr><td>Number:</td><td><%= text_field_tag :number, params[:number] ,:style => "width:163px" %></td></tr>
+        <tr><td>Number:</td><td><%= text_field_tag :number, params[:number] ,:style => "width:153px" %></td></tr>
 
-        <tr><td>Unit:</td><td><%= text_field_tag :unit, params[:unit] ,:style => "width:163px" %></td></tr>
+        <tr><td>Unit:</td><td><%= select_tag :unit, options_for_select( Course.all.pluck(:unit).uniq.sort_by! { |u| u.to_i } ) ,:style => "width:163px" %></td></tr>
 
         <tr><td>Designation:</td>
         <td> Writing<%= check_box_tag :W, "W" %>

@@ -604,7 +604,13 @@ class UrlConstructController < ApplicationController
         if(data.include?("info"))
           data = data["info"]
           unit = data["units"]
-          designation = data["designation"]
+
+
+          if data["designation"] == "N/A"
+            designation = ""
+          else
+            designation = data["designation"]
+          end
           title = data["title"]
 
           # if(data.include?("prerequisites"))

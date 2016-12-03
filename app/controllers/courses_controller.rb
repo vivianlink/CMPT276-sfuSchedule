@@ -4,12 +4,17 @@ helper_method :sort_column, :sort_direction
 
 def sort
 
+    if params[:page]
+      @current_page = params[:page].to_i
+    else
+      @current_page = 1
+    end
 
     if params[:commit] == "Search(in WQB order)"
 
         @courses = Course.search(params[:faculty], params[:number],params[:year],
                   params[:semester],  params[:unit],params[:W],params[:Q],params[:B],
-                  params[:Mon],params[:Tu],params[:Wed],params[:Th],params[:Fri]).order(year: :desc,faculty: :asc, designation: :desc,
+                  params[:Mon],params[:Tu],params[:Wed],params[:Th],params[:Fri]).order(year: :desc, designation: :desc,faculty: :asc,
                   number: :asc, unit: :asc)#.order("#{sort_column} #{sort_direction}")
 
     elsif params[:commit] == "Search"
@@ -18,14 +23,37 @@ def sort
                   params[:Mon],params[:Tu],params[:Wed],params[:Th],params[:Fri]).order(year: :desc,faculty: :asc, number: :asc, unit: :asc)
     end
 
+    @pages_count = @courses.length / 40.0
+    @pages_count = @pages_count.ceil
+
+    @courses = @courses.drop((@current_page - 1) * 40)
+    @courses = @courses.take 40
+
   end 
 
 
 	def index
+    
+      if params[:page]
+        @current_page = params[:page].to_i
+      else
+        @current_page = 1
+      end
+
+      
       @courses = Course.all
 
       #for search
       @courses = Course.order("#{sort_column} #{sort_direction}")
+
+
+      @pages_count = @courses.length / 10.0
+      @pages_count = @pages_count.ceil
+
+      @courses = @courses.drop((@current_page - 1) * 10)
+      @courses = @courses.take 10
+
+
   	end
 
 	def show
