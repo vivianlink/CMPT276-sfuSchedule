@@ -59,34 +59,46 @@
 			
 			<h1> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">
 			COURSE SEARCH</h1>
-			<table class="course-search" align="center">
+      <table class="course-search" align="center">
 
-				<tr><td>Faculty:</td>
-				<td> <%= select_tag :faculty, options_for_select( Course.all.pluck(:faculty).uniq.insert(0, "") ), :style => "width:173px" %>
-				</td></tr>
 
-				<tr><td>Number:</td><td><%= text_field_tag :number, params[:number] %></td></tr>
+        <tr><td>Year:</td>
+        <td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:179px" %>
+        </td></tr>
 
-				<tr><td>Year:</td>
-				<td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:173px" %>
-				</td></tr>
+        <tr><td>Semester:</td>
+        <td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:179px" %>
+        </td></tr>
 
-				<tr><td>Semester:</td>
-				<td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:173px" %>
-				</td></tr>
+        <tr><td>Faculty:</td>
+        <td> <%= select_tag :faculty, options_for_select( Course.all.pluck(:faculty).uniq.insert(0, "") ), :style => "width:179px" %>
+        </td></tr>
 
-				<tr><td>Unit:</td><td><%= text_field_tag :unit, params[:unit] %></td></tr>
+        <tr><td>Number:</td><td><%= text_field_tag :number, params[:number] ,:style => "width:163px" %></td></tr>
 
-				<tr><td>Designation:</td>
-				<td> Writing<%= check_box_tag :W, "Writing" %>
-				Quantitative<%= check_box_tag :Q, "Quantitative" %>
-				<br>
-				Breath &nbsp<%= select_tag :B, options_for_select(["","Breadth", "Breadth-Science",
-							 "Breadth-Social", "Breadth-Humanities"]),
-					:style => "width:103px" %>
-				</td></tr>
+        <tr><td>Unit:</td><td><%= text_field_tag :unit, params[:unit] ,:style => "width:163px" %></td></tr>
 
-			</table>
+        <tr><td>Designation:</td>
+        <td> Writing<%= check_box_tag :W, "W" %>
+        Quantitative<%= check_box_tag :Q, "Q" %>
+        <br>
+        Breath &nbsp<%= select_tag :B, options_for_select(["","Breadth", "Breadth-Science",
+               "Breadth-Social", "Breadth-Humanities"]),
+          :style => "width:103px" %>
+        </td></tr>
+
+        <tr><td>Schedule Days:</td>
+        <td> 
+          Mon<%= check_box_tag :Mon, "Mo" %>
+          Tu<%= check_box_tag :Tu, "Tu" %>
+          Wed<%= check_box_tag :Wed, "We" %>
+          Th<%= check_box_tag :Th, "Th" %>
+          Fri<%= check_box_tag :Fri, "Fr" %>
+        <br>
+    
+        </td></tr>
+
+      </table>
 			<br>
 			<%= submit_tag "Search",  class:"button", :name => "commit" %>
 			<%= submit_tag "Search(in WQB order)", class:"button", :name => "commit" %>
