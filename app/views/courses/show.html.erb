@@ -70,7 +70,7 @@
 
 
 
-
+<div>
 <% if @course.tutorial.any? %>
   <p>
     Tutorial sections
@@ -93,4 +93,7 @@
       <% end %>
     </tr>
   <% end %>
+  <% else %>
+  <br>
 <% end %>
+</div>

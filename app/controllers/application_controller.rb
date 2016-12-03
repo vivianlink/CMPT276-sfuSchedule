@@ -225,7 +225,7 @@ class ApplicationController < ActionController::Base
         timeE = schedule['endTime']
         days = (schedule['days'].tr(' ', '')).split(',')
         duration =  (timeToDecimal(timeE) - timeToDecimal(timeS)).ceil
-        populateWeek(timeS, course, duration, days, id)
+        populateWeek(timeS, course, duration, days, id, 'course')
       end
     end
 
