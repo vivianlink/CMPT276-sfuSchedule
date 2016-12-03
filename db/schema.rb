@@ -135,6 +135,14 @@ ActiveRecord::Schema.define(version: 20161202082438) do
     t.integer  "member4id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.boolean  "islike"
+    t.integer  "publish_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.integer  "latitude"
@@ -154,6 +162,17 @@ ActiveRecord::Schema.define(version: 20161202082438) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "publishes", force: :cascade do |t|
+    t.string   "Rname"
+    t.integer  "user_id"
+    t.integer  "drink_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "image"
+    t.text     "ingredients"
+    t.text     "instructions"
   end
 
   create_table "ratings", force: :cascade do |t|

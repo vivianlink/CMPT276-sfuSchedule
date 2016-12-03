@@ -29,6 +29,8 @@ def sort
 
 	def show
     @course = Course.find(params[:id])
+    #clearingVariables
+    #generateTableShow(@course)
 
     if @course.viewCount
       @course.viewCount = @course.viewCount + 1

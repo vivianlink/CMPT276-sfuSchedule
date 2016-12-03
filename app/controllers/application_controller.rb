@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def clearingVariables
-    sized = Array.new(32, ['_'*9, false])
+    sized = Array.new(32, ['_'*9, false, -111])
     @@mon = sized.dup
     @@tue = sized.dup
     @@wed = sized.dup
@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
     @@fri = sized.dup
     @@sat = sized.dup
     @@sun = sized.dup
-    @@daysData = Array.new(7, Array.new(32, ['_'*11, false]))
     @@dWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     @@warning = 'Successful Schedule Table building.'
     @@courseConflict = []
@@ -39,7 +38,9 @@ class ApplicationController < ActionController::Base
 	  end
 	end
 
-  def populateWeek(timeS, course, duration, days)
+
+# Schedule table code here
+  def populateWeek(timeS, course, duration, days, id)
 
     duration = duration*2 -1
     timeS = ((timeToDecimal(timeS)-8)*2).round
@@ -53,7 +54,7 @@ class ApplicationController < ActionController::Base
     if days.include? "Mo"
       for i in 0..duration
         if @@mon[timeS + i][1] == false
-          @@mon[timeS + i] = [name, true]
+          @@mon[timeS + i] = [name, true, id]
         else
           errorMessageSchedule(1)
         end
@@ -62,7 +63,7 @@ class ApplicationController < ActionController::Base
     if days.include? "Tu"
       for i in 0..duration
         if @@tue[timeS + i][1] == false
-          @@tue[timeS + i] = [name, true]
+          @@tue[timeS + i] = [name, true, id]
         else
           errorMessageSchedule(1)
         end
@@ -71,7 +72,7 @@ class ApplicationController < ActionController::Base
     if days.include? "We"
       for i in 0..duration
         if @@wed[timeS + i][1] == false
-          @@wed[timeS + i] = [name, true]
+          @@wed[timeS + i] = [name, true, id]
         else
           errorMessageSchedule(1)
         end
@@ -80,7 +81,7 @@ class ApplicationController < ActionController::Base
     if days.include? "Th"
       for i in 0..duration
         if @@thu[timeS + i][1] == false
-          @@thu[timeS + i] = [name, true]
+          @@thu[timeS + i] = [name, true, id]
         else
           errorMessageSchedule(1)
         end
@@ -89,7 +90,7 @@ class ApplicationController < ActionController::Base
     if days.include? "Fr"
       for i in 0..duration
         if @@fri[timeS + i][1] == false
-          @@fri[timeS + i] = [name, true]
+          @@fri[timeS + i] = [name, true, id]
         else
           errorMessageSchedule(1)
         end
@@ -98,7 +99,7 @@ class ApplicationController < ActionController::Base
     if days.include? "Sa"
       for i in 0..duration
         if @@sat[timeS + i][1] == false
-          @@sat[timeS + i] = [name, true]
+          @@sat[timeS + i] = [name, true, id]
         else
           errorMessageSchedule(1)
         end
@@ -107,7 +108,7 @@ class ApplicationController < ActionController::Base
     if days.include? "Su"
       for i in 0..duration
         if @@sun[timeS + i][1] == false
-          @@sun[timeS + i] = [name, true]
+          @@sun[timeS + i] = [name, true, id]
         else
           errorMessageSchedule(1)
         end
@@ -129,15 +130,16 @@ class ApplicationController < ActionController::Base
     if user.course.any?
       user.course.each do |course|
         url = course.CourseUrl
+        id = course.id
 
         flag = false
         while flag == false
           try = HTTParty.get(url)
-          if try.include? "errorMessage"
+          if try.include? 'courseSchedule'
+            flag = true
+          else
             flag = false
             sleep 1
-          else
-            flag = true
           end
         end
 
@@ -151,9 +153,62 @@ class ApplicationController < ActionController::Base
             timeE = schedule['endTime']
             days = (schedule['days'].tr(' ', '')).split(',')
             duration =  (timeToDecimal(timeE) - timeToDecimal(timeS)).ceil
-            populateWeek(timeS, course, duration, days)
+            populateWeek(timeS, course, duration, days, id)
           end
         end
+      end
+    end
+
+    @mon = @@mon
+    @tue = @@tue
+    @wed = @@wed
+    @thu = @@thu
+    @fri = @@fri
+    @sat = @@sat
+    @sun = @@sun
+
+    h = 8
+    m = 0
+    @timeSlot = Array.new(32, '')
+    for i in 0..31
+      @timeSlot[i] = h.to_s + ':' + m.to_s + '0'
+      if m == 0
+        m += 3
+      elsif m == 3
+        m = 0
+        h += 1
+      end
+    end
+    @warning = @@warning
+  end
+
+  def generateTableShow(course)
+    @dWeekdays = @@dWeekdays
+
+    url = course.CourseUrl
+    id = course.id
+    flag = false
+    while flag == false
+      try = HTTParty.get(url)
+      if try.include? 'courseSchedule'
+        flag = true
+      else
+        flag = false
+        sleep 1
+      end
+    end
+
+    schedule = JSON.parse(try.body)
+    schedule = schedule['courseSchedule']
+
+    schedule.each do |schedule|
+      timeS, timeE, days = '','', ''
+      if (schedule.include?("startTime"))
+        timeS = schedule['startTime']
+        timeE = schedule['endTime']
+        days = (schedule['days'].tr(' ', '')).split(',')
+        duration =  (timeToDecimal(timeE) - timeToDecimal(timeS)).ceil
+        populateWeek(timeS, course, duration, days, id)
       end
     end
 

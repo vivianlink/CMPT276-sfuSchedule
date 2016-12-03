@@ -8,6 +8,8 @@ table.schedule {
   border: 1px solid black;
 }
 
+tr:nth-child(odd) {background-color: #f2f2f2}
+
 th.header{
   border: 1px solid black;
   text-align: center;

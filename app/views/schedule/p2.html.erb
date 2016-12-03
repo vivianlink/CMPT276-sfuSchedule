@@ -1,4 +1,15 @@
 <h1>Schedule Table of Courses in Portfolio</h1>
+
+<% def populate(day, i) %>
+  <% if day[i][2] != -111 %>
+    <% course = Course.find(day[i][2]) %>
+    <% link_to day[i][0], course_path(course) %>
+  <% else %>
+    <% day[i][0] %>
+  <% end %>
+<% end %>
+
+
 <p> <%= @warning %>  </p>
 <table class = 'schedule'>
   <tr class = 'oRow'>
@@ -19,50 +30,50 @@
         <%= @timeSlot[i] %>
       </td>
       <td class='row'>
-        <%= @mon[i][0] %>
+        <%= populate(@mon, i) %>
       </td>
       <td class='row'>
-        <%= @tue[i][0] %>
+        <%= populate(@tue, i) %>
       </td>
       <td class='row'>
-        <%= @wed[i][0] %>
+        <%= populate(@wed, i) %>
       </td>
       <td class='row'>
-        <%= @thu[i][0] %>
+        <%= populate(@thu, i) %>
       </td>
       <td class='row'>
-        <%= @fri[i][0] %>
+        <%= populate(@fri, i) %>
       </td>
       <td class='row'>
-        <%= @sat[i][0] %>
+        <%= populate(@sat, i) %>
       </td>
       <td class='row'>
-        <%= @sun[i][0] %>
+        <%= populate(@sun, i) %>
       </td>
     <% else %>
       <td class='odd'>
         <%= @timeSlot[i] %>
       </td>
       <td class='odd'>
-        <%= @mon[i][0] %>
+        <%= populate(@mon, i) %>
       </td>
       <td class='odd'>
-        <%= @tue[i][0] %>
+        <%= populate(@tue, i) %>
       </td>
       <td class='odd'>
-        <%= @wed[i][0] %>
+        <%= populate(@wed, i) %>
       </td>
       <td class='odd'>
-        <%= @thu[i][0] %>
+        <%= populate(@thu, i) %>
       </td>
       <td class='odd'>
-        <%= @fri[i][0] %>
+        <%= populate(@fri, i) %>
       </td>
       <td class='odd'>
-        <%= @sat[i][0] %>
+        <%= populate(@sat, i) %>
       </td>
       <td class='odd'>
-        <%= @sun[i][0] %>
+        <%= populate(@sun, i) %>
       </td>
       <% end %>
     <% end %>
