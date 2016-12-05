@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
     @@sat = sized.dup
     @@sun = sized.dup
     @@dWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    @@warning = 'Successful Schedule Table building.'
+    @@warning = 'No time conflicts found.'
+    @@warning2 = 'Successful schedule table built.'
     @@courseConflict = []
   end
 
@@ -62,7 +63,7 @@ class ApplicationController < ActionController::Base
         if @@mon[timeS + i][1] == false
           @@mon[timeS + i] = [name, true, id, type]
         else
-          errorMessageSchedule(1)
+          errorMessageSchedule(1, name, @@mon[timeS + i][0])
         end
       end
     end
@@ -71,7 +72,7 @@ class ApplicationController < ActionController::Base
         if @@tue[timeS + i][1] == false
           @@tue[timeS + i] = [name, true, id, type]
         else
-          errorMessageSchedule(1)
+          errorMessageSchedule(1, name, @@tue[timeS + i][0])
         end
       end
     end
@@ -80,7 +81,7 @@ class ApplicationController < ActionController::Base
         if @@wed[timeS + i][1] == false
           @@wed[timeS + i] = [name, true, id, type]
         else
-          errorMessageSchedule(1)
+          errorMessageSchedule(1, name, @@wed[timeS + i][0])
         end
       end
     end
@@ -89,7 +90,7 @@ class ApplicationController < ActionController::Base
         if @@thu[timeS + i][1] == false
           @@thu[timeS + i] = [name, true, id, type]
         else
-          errorMessageSchedule(1)
+          errorMessageSchedule(1, name, @@thu[timeS + i][0])
         end
       end
     end
@@ -98,7 +99,7 @@ class ApplicationController < ActionController::Base
         if @@fri[timeS + i][1] == false
           @@fri[timeS + i] = [name, true, id, type]
         else
-          errorMessageSchedule(1)
+          errorMessageSchedule(1, name, @@fri[timeS + i][0])
         end
       end
     end
@@ -107,7 +108,7 @@ class ApplicationController < ActionController::Base
         if @@sat[timeS + i][1] == false
           @@sat[timeS + i] = [name, true, id, type]
         else
-          errorMessageSchedule(1)
+          errorMessageSchedule(1, name, @@sat[timeS + i][0])
         end
       end
     end
@@ -116,7 +117,7 @@ class ApplicationController < ActionController::Base
         if @@sun[timeS + i][1] == false
           @@sun[timeS + i] = [name, true, id, type]
         else
-          errorMessageSchedule(1)
+          errorMessageSchedule(1, name, @@sun[timeS + i][0])
         end
       end
     end
@@ -165,35 +166,42 @@ class ApplicationController < ActionController::Base
       end
     end
     @warning = @@warning
+    @warning2 = @@warning2
   end
 
   def generateData(course, type)
-    url = course.CourseUrl
+    if type == 'course'
+      url = course.CourseUrl
+    elsif type == 'tutorial'
+      url = course.TutUrl
+    end
     id = course.id
 
-    flag = false
-    while flag == false
+    counter = 0
+    for counter in 0..30
       try = HTTParty.get(url)
       schedule = JSON.parse(try.body)
       if schedule.include? 'courseSchedule'
-        flag = true
+        counter = 50
       else
-        flag = false
         sleep 1
+      end
+      if counter == 25
+        errorMessageSchedule(2, '', '')
       end
     end
 
-    schedule = JSON.parse(try.body)
-    schedule = schedule['courseSchedule']
-
-    schedule.each do |schedule|
-      timeS, timeE, days = '','', ''
-      if (schedule.include?("startTime"))
-        timeS = schedule['startTime']
-        timeE = schedule['endTime']
-        days = (schedule['days'].tr(' ', '')).split(',')
-        duration =  (timeToDecimal(timeE) - timeToDecimal(timeS)).ceil
-        populateWeek(timeS, course, duration, days, id, type)
+    if counter !=25
+      schedule = schedule['courseSchedule']
+      schedule.each do |schedule|
+        timeS, timeE, days = '','', ''
+        if (schedule.include?("startTime"))
+          timeS = schedule['startTime']
+          timeE = schedule['endTime']
+          days = (schedule['days'].tr(' ', '')).split(',')
+          duration =  (timeToDecimal(timeE) - timeToDecimal(timeS)).ceil
+          populateWeek(timeS, course, duration, days, id, type)
+        end
       end
     end
   end
@@ -206,20 +214,23 @@ class ApplicationController < ActionController::Base
     url = course.CourseUrl
     id = course.id
     flag = false
-    while flag == false
+
+    counter = 0
+    for counter in 0..30
       try = HTTParty.get(url)
       schedule = JSON.parse(try.body)
       if schedule.include? 'courseSchedule'
-        flag = true
+        counter = 50
       else
-        flag = false
         sleep 1
+      end
+      if counter == 25
+        errorMessageSchedule(2, '', '')
       end
     end
 
-    schedule = JSON.parse(try.body)
-    schedule = schedule['courseSchedule']
 
+    schedule = schedule['courseSchedule']
     schedule.each do |schedule|
       timeS, timeE, days = '','', ''
       if (schedule.include?("startTime"))
@@ -252,13 +263,23 @@ class ApplicationController < ActionController::Base
       end
     end
     @warning = @@warning
+    @warning2 = @@warning2
   end
 
 
 
-  def errorMessageSchedule(i)
+  def errorMessageSchedule(i, name0, name1)
     if i==1
-      @@warning = 'There were course conflicts. Please check your courses.'
+      if !(@@courseConflict.include?(name0))
+        @@courseConflict.push(name0)
+      elsif !(@@courseConflict.include?(name1))
+        @@courseConflict.push(name1)
+      end
+      temp = @@courseConflict.join(", ")
+      @@warning = 'The following courses have time conflicts: ' + temp + '. Please make sure this is intended.'
+    end
+    if i==2
+      @@warning2 = "Server timeout issue. Please refresh page. If error persists, please rerun application at later time"
     end
   end
 
