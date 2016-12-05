@@ -66,6 +66,15 @@ class CoursesControllerTest < ActionController::TestCase
     assert_select "th", {count: 1, text: "Designation"}
     assert_select "th", {count: 1, text: "Year"}
     assert_select "th", {count: 1, text: "Semester"}
+
+    get :sort
+    assert_response :success
+    assert_select "th", {count: 1, text: "faculty"}
+    assert_select "th", {count: 1, text: "number"}
+    assert_select "th", {count: 1, text: "unit"}
+    assert_select "th", {count: 1, text: "designation"}
+    assert_select "th", {count: 1, text: "year"}
+    assert_select "th", {count: 1, text: "semester"}
   end
 
 end

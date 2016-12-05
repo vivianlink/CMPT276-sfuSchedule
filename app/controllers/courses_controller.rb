@@ -18,7 +18,7 @@ def sort
                   params[:Fri]).order(year: :desc, designation: :desc,faculty: :asc,
                   number: :asc, unit: :asc)#.order("#{sort_column} #{sort_direction}")
 
-    else #params[:commit] == "Search"
+    elsif params[:commit] == "Search"
         @courses = Course.search(params[:faculty], params[:number],params[:year],
                   params[:semester],  params[:unit], params[:instructor], params[:W],
                   params[:Q],params[:B], params[:Mon],params[:Tu],params[:Wed],params[:Th],
@@ -36,11 +36,11 @@ def sort
 
 	def index
 
-      #if params[:page]
-    #    @current_page = params[:page].to_i
-     # else
-    #    @current_page = 1
-     # end
+      if params[:page]
+        @current_page = params[:page].to_i
+      else
+        @current_page = 1
+      end
 
 
       @courses = Course.all
@@ -49,11 +49,11 @@ def sort
       @courses = Course.order("#{sort_column} #{sort_direction}")
 
 
-    #  @pages_count = @courses.length / 40.0
-    #  @pages_count = @pages_count.ceil
+      @pages_count = @courses.length / 40.0
+      @pages_count = @pages_count.ceil
 
-    #  @courses = @courses.drop((@current_page - 1) * 40)
-    #  @courses = @courses.take 40
+      @courses = @courses.drop((@current_page - 1) * 40)
+      @courses = @courses.take 40
 
 
   	end
