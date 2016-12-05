@@ -2,7 +2,7 @@
 
 # Define variables here.
 branch = schedule
-message = "works with tutorial model"
+message = "updating to master"
 
 push_master:
 	git add .

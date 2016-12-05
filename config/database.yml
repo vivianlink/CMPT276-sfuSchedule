@@ -7,22 +7,22 @@ default: &default
 
 development:
   <<: *default
-  
-  database: cmpt276 #myproj_development
-  username: cmpt276 #postgres
-  password: thecmpt276Passw0rd #121
+
+  database: myproj_development
+  username: postgres
+  password: cmpt276
   host: localhost
 
 
 test:
   <<: *default
-  database: cmpt276 #myproj_development
-  username: cmpt276 #postgres
-  password: thecmpt276Passw0rd #121
+  database: myproj_test
+  username: postgres
+  password: cmpt276
   host: localhost
 
 production:
   <<: *default
   database: sfuPlanner_production
   username: sfuPlanner
-password: <%= ENV['SFUPLANNER_DATABASE_PASSWORD'] %>
+  password: <%= ENV['SFUPLANNER_DATABASE_PASSWORD'] %>
