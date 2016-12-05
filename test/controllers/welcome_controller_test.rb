@@ -14,7 +14,7 @@ class WelcomeControllerTest < ActionController::TestCase
 	assert_select "a", {count: 1, text: "Sign Up"}
 	assert_select "a", {count: 1, text: "Login"}
 	assert_select "a", {count: 0, text: "Logout"}
-	assert_select "a", {count: 0, text: "BECOME ADMIN"}
+	assert_select "a", {count: 0, text: "Become Admin"}
 
 	# test logged in
 	session[:user_name] = "tester"
@@ -24,7 +24,7 @@ class WelcomeControllerTest < ActionController::TestCase
 	assert_select "a", {count: 0, text: "Sign Up"}
 	assert_select "a", {count: 0, text: "Login"}
 	assert_select "a", {count: 1, text: "Logout"}
-	assert_select "a", {count: 1, text: "BECOME ADMIN"}
+	assert_select "a", {count: 1, text: "Become Admin"}
 	assert_select "a", {count: 1, text: session[:user_name]}
   end
 end
