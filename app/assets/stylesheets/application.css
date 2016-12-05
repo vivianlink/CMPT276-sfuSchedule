@@ -153,9 +153,6 @@ li a:hover:not(.active) {
 }
 
 
-p,body,button {
-    background-color: #fff;
-}
 
 button {
 	text: #a6192e;

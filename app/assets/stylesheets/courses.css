@@ -6,7 +6,7 @@
 }
 
 .course-outline{
-	background-color: #fff;
+
 	color:black;
 	text-align: left;
 
@@ -19,17 +19,15 @@ h1{
 	color: #333; 
 	margin-top: -30px;
 	margin-bottom:-28px;
-	background-color: #111;
 }
 
 h2{
 	color: #555;
 	padding-bottom: 5px;
-	border-bottom: 10px #ddd solid;
+	border-bottom: 10px #777 solid;
 	text-align: left;
 }
 .course-details{
-	background-color: #fff;
     color:black;
     text-align: left;
 }
