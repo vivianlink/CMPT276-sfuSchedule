@@ -64,11 +64,11 @@
 
 
         <tr><td>Year:</td>
-        <td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq.insert(0, "") ), :style => "width:163px" %>
+        <td><%= select_tag :year, options_for_select( Course.all.pluck(:year).uniq ), :style => "width:163px" %>
         </td></tr>
 
         <tr><td>Semester:</td>
-        <td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq.insert(0, "") ), :style => "width:163px" %>
+        <td><%= select_tag :semester, options_for_select( Course.all.pluck(:semester).uniq ), :style => "width:163px" %>
         </td></tr>
 
         <tr><td>Faculty:</td>
