@@ -1,9 +1,9 @@
 
-<h1><img class="sfu-logo2" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo"> <span class= "prof-name"><%= params[:prof_name] %> </span></h1>
+<h1 class="need-background"><img class="sfu-logo2" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo"> <span class= "prof-name"><%= params[:prof_name] %> </span></h1>
 <% if @ratings_count > 0 %>
 	<p class= "average-rating">Rating is <b><%= @rating_average %></b> according to <b> <%= @ratings_count %></b> people</p>
 <% else %>
-	<p>No one gave rating to this professor. Be the first to rate!</p>
+	<span>No one gave rating to this professor. Be the first to rate!</span>
 <% end %>
  
 <% if session[:user_name].present? %>

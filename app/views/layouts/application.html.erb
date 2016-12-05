@@ -6,13 +6,14 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <div class="toolbar">
   <ul>
     <li><a class = "upper-button" href="/welcome">Search</a></li>
     <li><a class = "upper-button" href="/users/show">Profile</a></li>
     <li><a class = "upper-button" href="/schedule">Schedule</a></li>
      <li><a class = "upper-button" href="/courses">Course List</a></li>
     <li><a class = "upper-button" href="/prof">Rate a Professor</a></li>
-    <%# this block is commented out %>
+
     <% if session[:user_name].present? %>
   		<li style="float:right"><a class = "upper-button" href= "/sessions/logout">Logout</a></li>
       <li style="float:right"><a class = "name-button" ><%=session[:user_name]%></a><li>
@@ -28,6 +29,7 @@
   		<li style="float:right"><a class = "upper-button" href= "/sessions/login"> Login </a></li>
   	<% end %>
   </ul>
+  </div>
 </head>
 <body>
 

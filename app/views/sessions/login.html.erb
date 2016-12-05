@@ -1,10 +1,12 @@
 <% @page_title = "UserAuth | Login" -%>
 <div class= "Sign_Form">
-  <h1><img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">LOG IN</h1>
+  <h1 class="need-background"><img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">LOG IN</h1>
   <%= form_tag(:action => 'login_attempt') do %>
+  	<div class="white-background">
     <p>Username or Email:</br> <%= text_field_tag(:username_or_email) %></p> 
     <p>Password:</br> <%= password_field_tag :login_password %></p> 
     <%= submit_tag("Log In") %>
+    </div>
   <% end %>
 
   <p id="notice"><%= notice %></p>

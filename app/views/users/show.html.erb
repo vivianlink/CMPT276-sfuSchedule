@@ -1,6 +1,8 @@
 <div class="user-show">
 
 	<% if session[:user_id].present? %>
+		<br>
+		<div class="white-background">
 		<p>
 		Hello <%=@user.username %>, this is your profile: </p>
 		<p>
@@ -12,6 +14,9 @@
     	 <strong>Email:</strong>
     	 <%= @user.email %>
   		 </p>
+  		 </div><br>
+  		 <br>
+  		 	<span class="course-cart"> Your course cart: </span>
 			 <% if @user.course.any? %>
 	 			<div class = "table-wrapper">
 	 			<table class="center">
@@ -53,6 +58,7 @@
 				<% end %>
 			<% end %>
   <%else %>
+  		<br>
   		You are not logged in. No profile to show.
 
   <% end %>

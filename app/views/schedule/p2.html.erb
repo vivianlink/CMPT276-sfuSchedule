@@ -1,4 +1,4 @@
-<h1>Schedule Table of Courses in Portfolio</h1>
+<h1 class="need-background">Schedule Table of Courses in Portfolio</h1>
 
 <% def populate(day, i) %>
   <% if day[i][2] != -111 %>
@@ -14,8 +14,10 @@
 <% end %>
 
 
-<p> <%= @warning %>  </p>
+<span> <%= @warning %>   </span>
+<br>
 <p> <%= @warning2 %>  </p>
+
 <table class = 'schedule'>
   <tr class = 'oRow'>
     <th class = 'header'>

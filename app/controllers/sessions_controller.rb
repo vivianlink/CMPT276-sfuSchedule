@@ -6,13 +6,13 @@ class SessionsController < ApplicationController
   def login_attempt
     authorized_user = User.authenticate(params[:username_or_email],params[:login_password])
     if authorized_user
-      flash[:notice] = "Welcome again, you logged in as #{authorized_user.username}"
+      #flash[:notice] = "Welcome again, you logged in as #{authorized_user.username}"
       session[:user_name] = authorized_user.username
       session[:user_id] = authorized_user.id
 
       if authorized_user.is_admin
         session[:is_admin] = true
-        flash[:notice] = flash[:notice] + ", and you are an admin"
+       # flash[:notice] = flash[:notice] + ", and you are an admin"
       else
         session[:is_admin] = false
       end

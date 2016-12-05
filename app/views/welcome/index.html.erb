@@ -51,12 +51,12 @@
 				Not enough information to show.
 				(minimum 3 courses must have been added to course cart)
 			<% end %>
-			</p> <br><br><br><br>
+			</p> <br><br><br>
 		</div>
 
 		<%= form_tag sort_path, :method => 'get', :class => 'course-search-form' do %>
 			
-			<h1> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">
+			<h1 class= "need-background"> <img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">
 			COURSE SEARCH</h1>
       <table class="course-search" align="center">
 
@@ -105,7 +105,7 @@
 
       </table>
 			<br>
-			<p><%= submit_tag "Search",  class:"button", :name => "commit" %></p>
+			<%= submit_tag "Search",  class:"button", :name => "commit" %>
 			<%= submit_tag "Search(in WQB order)", class:"button", :name => "commit" %>
 		<% end %>
 		
@@ -154,7 +154,7 @@
 				(minimum 3 profs must have comments, only <%=@profs_by_comments_count.length%> do now)
 			<% end %>
 			</p>
-			<br><br><br><br>
+			<br><br><br>
 		</div>
 		
 	</div>

@@ -1,13 +1,15 @@
 <% @page_title = "UserAuth | Signup" %>
 
 <div class="Sign_Form">
-  <h1><img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">SIGN UP</h1>
+  <h1 class= "need-background"><img class="sfu-logo" src="http://www.sfu.ca/~hongweil/images/sfu.png" alt="sfu-logo">SIGN UP</h1>
   <%= form_for(:user, :url => {:controller => 'users/create'}) do |f| %>
+    <div class= white-background>
     <p> Username:</br> <%= f.text_field :username%> </p>
     <p> Email:</br> <%= f.text_field :email%> </p>
     <p> Password:</br> <%= f.password_field :password%></p>
     <p> Password Confirmation:</br> <%= f.password_field :password_confirmation%> </p>
     <%= f.submit :Signup %>
+    </div>
   <% end %>
   <% if @user.errors.any? %>
     <ul class="Signup_Errors">
