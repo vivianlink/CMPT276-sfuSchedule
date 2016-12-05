@@ -101,11 +101,338 @@ class UrlConstructController < ApplicationController
 
   end
 
+  def url2017SpringCourses
+    filler_array = []
+
+    urlYear = "2017"
+    urlSeason = "spring"
+    instage_season_url = @@base + urlYear + "/" + urlSeason
+
+    urlFalculty(instage_season_url)
 
 
-  def url2015SpringCourses
+      @AllFalculty.each do |falculty|
+          instage_falculty_url = instage_season_url + "/" + falculty.dSubject
+          urlCourse(instage_falculty_url)
+
+
+          @AllCourse.each do |course|
+            instage_course_url = instage_falculty_url + "/" + course.dCourseNumber
+            urlSection(instage_course_url)
+
+
+            @AllSection.each do |section|
+              instage_section_url = instage_course_url + "/" + section.dSectionNumber
+              urlDetail(instage_section_url)
+
+
+
+
+                @AllDetail.each do |detail|
+
+
+
+                  if (detail.sectioncode == "LEC" || detail.sectioncode == "SEM" || detail.sectioncode == "PRA" || detail.sectioncode == "STD" || detail.sectioncode == "WKS")
+                    @creating_new_course = Course.new("calender" => detail.calender,
+                                                     "designation" => detail.dDesignation,
+                                                     "instructor" => detail.dProfessor,
+                                                     "faculty" => falculty.dSubject,
+                                                     "number" => course.dCourseNumber,
+                                                     "year" => urlYear,
+                                                     "semester" => urlSeason,
+                                                     "section" => section.dSectionNumber,
+                                                     "CourseUrl" => instage_section_url,
+                                                     "schedule" => detail.DSchedule,
+                                                     "unit" => detail.dUnit,
+                                                     "RoomNumber" => detail.RoomNumber,
+                                                     "title" => detail.title,
+                                                     "prereq" => detail.prereq,
+                                                     "coreq" => detail.coreq,
+                                                     "requiredtext" => detail.requiredtext,
+                                                     "description" => detail.coursedetails)
+                    @creating_new_course.save
+
+
+
+                  else if (detail.sectioncode == "SEC" || detail.sectioncode == "STL" || detail.sectioncode == "LAB" || detail.sectioncode == "TUT")
+                    creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + " " + course.dCourseNumber + "-" + section.dSectionNumber,
+                                                          "tutcalender" => detail.calender,
+                                                          "TutUrl" => instage_section_url,
+                                                          "tutschedule" => detail.DSchedule,
+                                                          "tutlocation" => detail.RoomNumber)
+
+                    @creating_new_course.tutorial << creating_new_tutorial
+                    creating_new_tutorial.save
+                    puts instage_section_url
+                    puts detail.DSchedule
+
+                  end
+
+
+
+                  detail.delete
+
+                end
+                section.delete
+            end
+          course.delete
+          end
+        falculty.delete
+        end
+
+      end
 
   end
+
+  def url2017SummerCourses
+    filler_array = []
+
+    urlYear = "2017"
+    urlSeason = "summer"
+    instage_season_url = @@base + urlYear + "/" + urlSeason
+
+    urlFalculty(instage_season_url)
+
+
+      @AllFalculty.each do |falculty|
+          instage_falculty_url = instage_season_url + "/" + falculty.dSubject
+          urlCourse(instage_falculty_url)
+
+
+          @AllCourse.each do |course|
+            instage_course_url = instage_falculty_url + "/" + course.dCourseNumber
+            urlSection(instage_course_url)
+
+
+            @AllSection.each do |section|
+              instage_section_url = instage_course_url + "/" + section.dSectionNumber
+              urlDetail(instage_section_url)
+
+
+
+
+                @AllDetail.each do |detail|
+
+
+
+                  if (detail.sectioncode == "LEC" || detail.sectioncode == "SEM" || detail.sectioncode == "PRA" || detail.sectioncode == "STD" || detail.sectioncode == "WKS")
+                    @creating_new_course = Course.new("calender" => detail.calender,
+                                                     "designation" => detail.dDesignation,
+                                                     "instructor" => detail.dProfessor,
+                                                     "faculty" => falculty.dSubject,
+                                                     "number" => course.dCourseNumber,
+                                                     "year" => urlYear,
+                                                     "semester" => urlSeason,
+                                                     "section" => section.dSectionNumber,
+                                                     "CourseUrl" => instage_section_url,
+                                                     "schedule" => detail.DSchedule,
+                                                     "unit" => detail.dUnit,
+                                                     "RoomNumber" => detail.RoomNumber,
+                                                     "title" => detail.title,
+                                                     "prereq" => detail.prereq,
+                                                     "coreq" => detail.coreq,
+                                                     "requiredtext" => detail.requiredtext,
+                                                     "description" => detail.coursedetails)
+                    @creating_new_course.save
+
+
+
+                  else if (detail.sectioncode == "SEC" || detail.sectioncode == "STL" || detail.sectioncode == "LAB" || detail.sectioncode == "TUT")
+                    creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + " " + course.dCourseNumber + "-" + section.dSectionNumber,
+                                                          "tutcalender" => detail.calender,
+                                                          "TutUrl" => instage_section_url,
+                                                          "tutschedule" => detail.DSchedule,
+                                                          "tutlocation" => detail.RoomNumber)
+
+                    @creating_new_course.tutorial << creating_new_tutorial
+                    creating_new_tutorial.save
+                    puts instage_section_url
+                    puts detail.DSchedule
+
+                  end
+
+
+
+                  detail.delete
+
+                end
+                section.delete
+            end
+          course.delete
+          end
+        falculty.delete
+        end
+
+      end
+
+  end
+
+  def url2016SummerCourses
+    filler_array = []
+
+    urlYear = "2016"
+    urlSeason = "summer"
+    instage_season_url = @@base + urlYear + "/" + urlSeason
+
+    urlFalculty(instage_season_url)
+
+
+      @AllFalculty.each do |falculty|
+          instage_falculty_url = instage_season_url + "/" + falculty.dSubject
+          urlCourse(instage_falculty_url)
+
+
+          @AllCourse.each do |course|
+            instage_course_url = instage_falculty_url + "/" + course.dCourseNumber
+            urlSection(instage_course_url)
+
+
+            @AllSection.each do |section|
+              instage_section_url = instage_course_url + "/" + section.dSectionNumber
+              urlDetail(instage_section_url)
+
+
+
+
+                @AllDetail.each do |detail|
+
+
+
+                  if (detail.sectioncode == "LEC" || detail.sectioncode == "SEM" || detail.sectioncode == "PRA" || detail.sectioncode == "STD" || detail.sectioncode == "WKS")
+                    @creating_new_course = Course.new("calender" => detail.calender,
+                                                     "designation" => detail.dDesignation,
+                                                     "instructor" => detail.dProfessor,
+                                                     "faculty" => falculty.dSubject,
+                                                     "number" => course.dCourseNumber,
+                                                     "year" => urlYear,
+                                                     "semester" => urlSeason,
+                                                     "section" => section.dSectionNumber,
+                                                     "CourseUrl" => instage_section_url,
+                                                     "schedule" => detail.DSchedule,
+                                                     "unit" => detail.dUnit,
+                                                     "RoomNumber" => detail.RoomNumber,
+                                                     "title" => detail.title,
+                                                     "prereq" => detail.prereq,
+                                                     "coreq" => detail.coreq,
+                                                     "requiredtext" => detail.requiredtext,
+                                                     "description" => detail.coursedetails)
+                    @creating_new_course.save
+
+
+
+                  else if (detail.sectioncode == "SEC" || detail.sectioncode == "STL" || detail.sectioncode == "LAB" || detail.sectioncode == "TUT")
+                    creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + " " + course.dCourseNumber + "-" + section.dSectionNumber,
+                                                          "tutcalender" => detail.calender,
+                                                          "TutUrl" => instage_section_url,
+                                                          "tutschedule" => detail.DSchedule,
+                                                          "tutlocation" => detail.RoomNumber)
+
+                    @creating_new_course.tutorial << creating_new_tutorial
+                    creating_new_tutorial.save
+                    puts instage_section_url
+                    puts detail.DSchedule
+
+                  end
+
+
+
+                  detail.delete
+
+                end
+                section.delete
+            end
+          course.delete
+          end
+        falculty.delete
+        end
+
+      end
+
+  end
+
+  def url2016SpringCourses
+    filler_array = []
+
+    urlYear = "2016"
+    urlSeason = "spring"
+    instage_season_url = @@base + urlYear + "/" + urlSeason
+
+    urlFalculty(instage_season_url)
+
+
+      @AllFalculty.each do |falculty|
+          instage_falculty_url = instage_season_url + "/" + falculty.dSubject
+          urlCourse(instage_falculty_url)
+
+
+          @AllCourse.each do |course|
+            instage_course_url = instage_falculty_url + "/" + course.dCourseNumber
+            urlSection(instage_course_url)
+
+
+            @AllSection.each do |section|
+              instage_section_url = instage_course_url + "/" + section.dSectionNumber
+              urlDetail(instage_section_url)
+
+
+
+
+                @AllDetail.each do |detail|
+
+
+
+                  if (detail.sectioncode == "LEC" || detail.sectioncode == "SEM" || detail.sectioncode == "PRA" || detail.sectioncode == "STD" || detail.sectioncode == "WKS")
+                    @creating_new_course = Course.new("calender" => detail.calender,
+                                                     "designation" => detail.dDesignation,
+                                                     "instructor" => detail.dProfessor,
+                                                     "faculty" => falculty.dSubject,
+                                                     "number" => course.dCourseNumber,
+                                                     "year" => urlYear,
+                                                     "semester" => urlSeason,
+                                                     "section" => section.dSectionNumber,
+                                                     "CourseUrl" => instage_section_url,
+                                                     "schedule" => detail.DSchedule,
+                                                     "unit" => detail.dUnit,
+                                                     "RoomNumber" => detail.RoomNumber,
+                                                     "title" => detail.title,
+                                                     "prereq" => detail.prereq,
+                                                     "coreq" => detail.coreq,
+                                                     "requiredtext" => detail.requiredtext,
+                                                     "description" => detail.coursedetails)
+                    @creating_new_course.save
+
+
+
+                  else if (detail.sectioncode == "SEC" || detail.sectioncode == "STL" || detail.sectioncode == "LAB" || detail.sectioncode == "TUT")
+                    creating_new_tutorial = Tutorial.new("tutname" => falculty.dSubject + " " + course.dCourseNumber + "-" + section.dSectionNumber,
+                                                          "tutcalender" => detail.calender,
+                                                          "TutUrl" => instage_section_url,
+                                                          "tutschedule" => detail.DSchedule,
+                                                          "tutlocation" => detail.RoomNumber)
+
+                    @creating_new_course.tutorial << creating_new_tutorial
+                    creating_new_tutorial.save
+                    puts instage_section_url
+                    puts detail.DSchedule
+
+                  end
+
+
+
+                  detail.delete
+
+                end
+                section.delete
+            end
+          course.delete
+          end
+        falculty.delete
+        end
+
+      end
+
+  end
+
 
 
 
@@ -278,7 +605,13 @@ class UrlConstructController < ApplicationController
         if(data.include?("info"))
           data = data["info"]
           unit = data["units"]
-          designation = data["designation"]
+
+
+          if data["designation"] == "N/A"
+            designation = ""
+          else
+            designation = data["designation"]
+          end
           title = data["title"]
 
           # if(data.include?("prerequisites"))

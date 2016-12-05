@@ -29,14 +29,6 @@ ActiveRecord::Schema.define(version: 20161203032244) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "authorizations", force: :cascade do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "courses", force: :cascade do |t|
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -115,99 +107,11 @@ ActiveRecord::Schema.define(version: 20161203032244) do
     t.datetime "updated_at"
   end
 
-  create_table "groups", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "time"
-    t.string   "activity_type"
-    t.string   "location"
-    t.string   "group_owner"
-    t.string   "member1"
-    t.string   "member2"
-    t.string   "member3"
-    t.string   "member4"
-    t.string   "description"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "user_id"
-    t.integer  "member1id"
-    t.integer  "member2id"
-    t.integer  "member3id"
-    t.integer  "member4id"
-  end
-
-  create_table "likes", force: :cascade do |t|
-    t.boolean  "islike"
-    t.integer  "publish_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "locations", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "latitude"
-    t.integer  "longitude"
-    t.string   "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.string   "imgurl"
-    t.string   "imgplaceholder"
-    t.datetime "timestamp"
-  end
-
-  create_table "message_boards", force: :cascade do |t|
-    t.string   "sender"
-    t.string   "group_name"
-    t.string   "message"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "publishes", force: :cascade do |t|
-    t.string   "Rname"
-    t.integer  "user_id"
-    t.integer  "drink_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "image"
-    t.text     "ingredients"
-    t.text     "instructions"
-  end
-
   create_table "ratings", force: :cascade do |t|
     t.string   "comment"
     t.integer  "rating"
     t.string   "prof_name"
     t.string   "user_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "relationships", force: :cascade do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
-  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
-  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
-
-  create_table "reviews", force: :cascade do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "reviews", ["user_id", "created_at"], name: "index_reviews_on_user_id_and_created_at", using: :btree
-  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
-
-  create_table "trainers", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

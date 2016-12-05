@@ -2,7 +2,8 @@
 
 <%= form_tag prof_index_path, :method => 'get' do %>
 	<table class= "prof-search" align="center">
-		<tr><td>Professor name:</td><td><%= text_field_tag :prof_name, params[:prof_name] %>	<%= submit_tag "Search", class:"button", :name => nil %></td></tr>
+		<tr><td>Professor name:</td><td><%= text_field_tag :prof_name, params[:prof_name] %>	
+		<%= submit_tag "Search", class:"button", :name => nil %></td></tr>
 	</table>
 	<br>
 	
