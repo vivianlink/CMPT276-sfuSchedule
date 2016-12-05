@@ -35,9 +35,8 @@ body {
 }
 
 .need-background{
-  background:url(
-      http://www.easyfreepatterns.com/patterns/145/light-blue-background-pattern-this-is--145463.jpg
-  )repeat;
+  background: transparent;
+  )
  }
 
  .white-background{
