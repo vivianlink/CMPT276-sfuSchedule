@@ -544,7 +544,7 @@ class UrlConstructController < ApplicationController
             schedule.each do |schedule|
               sectioncode = schedule["sectionCode"]
 
-              if (schedule.include?("startTime"))
+              if (schedule.include?("startTime") && schedule.include?("days") && schedule.include?("buildingCode"))
                 overall_schedule = overall_schedule + schedule["days"] + " " + schedule["startTime"] + " - " + \
                                    schedule["endTime"] + "</br>" + schedule["buildingCode"] + " "+ schedule["roomNumber"] \
                                    + ", " + schedule["campus"] + "</br> </br>"
