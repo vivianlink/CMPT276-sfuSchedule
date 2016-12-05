@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20161205024639) do
     t.datetime "updated_at",  null: false
     t.integer  "course_id"
     t.string   "TutUrl"
+    t.string   "CourseUrl"
   end
 
   create_table "tutorials_users", force: :cascade do |t|

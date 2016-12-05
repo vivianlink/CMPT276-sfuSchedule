@@ -11,9 +11,9 @@ class ScheduleControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get p2" do
-    get :p2
-    assert_response :success
-  end
+  # test "should get p2" do
+  #   get :p2
+  #   assert_response :success
+  # end
 
 end

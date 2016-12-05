@@ -20,12 +20,23 @@ class WelcomeControllerTest < ActionController::TestCase
 	session[:user_name] = "tester"
 	session[:user_id] = 1
 	get :index
-
+ 
 	assert_select "a", {count: 0, text: "Sign Up"}
 	assert_select "a", {count: 0, text: "Login"}
 	assert_select "a", {count: 1, text: "Logout"}
 	assert_select "a", {count: 1, text: "Become Admin"}
 	assert_select "a", {count: 1, text: session[:user_name]}
+  
+  assert_select "div", {count: 1, text: "Best Instructors"}
+  assert_select "div", {count: 1, text: "Popular Instructors"}
+  assert_select "div", {count: 1, text: "Popular Courses"}
+  assert_select "div", {count: 1, text: "Hottest Courses"}
+
+  assert_select "span", {count: 1, text: "(Most Viewed)"}
+  assert_select "span", {count: 1, text: "(Most Added to Student's Profile)"}
+  assert_select "span", {count: 1, text: "(Highest Rating)"}
+  assert_select "span", {count: 1, text: "(Most Number of Comments)"}
+
   end
 
 

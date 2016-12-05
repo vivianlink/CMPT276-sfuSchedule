@@ -4,9 +4,8 @@
 		<div class="recommendations-wrapper">
 			<p>
 			<div class= "recommendation-title"> Popular Courses </div>
-			<span class="title-comment">
-			(Most Viewed) <br></span>
-
+			<span class="title-comment">(Most Viewed)</span>
+			<br>
 			<% if @nonEmptyView.length >= 3 %>
 				
 				<span class = "course-name"> 
@@ -31,8 +30,8 @@
 
 <br>
 			<p>
-			<div class= "recommendation-title"> Hottest Courses </div>  <span class= "title-comment"> (Most Added to Student's Profile)  <br> </span>
-			
+			<div class= "recommendation-title"> Hottest Courses </div>  <span class= "title-comment">(Most Added to Student's Profile)</span>
+			<br>
 				<% if @nonEmptyCart.length >= 3 %>
 				<span class = "course-name"> 
 				<%=@nonEmptyCart[0].faculty%> 
@@ -52,7 +51,7 @@
 				Not enough information to show.
 				(minimum 3 courses must have been added to course cart)
 			<% end %>
-			</p>
+			</p> <br><br>
 		</div>
 
 		<%= form_tag sort_path, :method => 'get', :class => 'course-search-form' do %>
@@ -114,8 +113,8 @@
 
 		<div class="recommendations-wrapper">
 			<p>
-			<div class= "recommendation-title"> Best Instructors </div>  <span class= "title-comment">  (Highest Rating) <br> </span>
-			
+			<div class= "recommendation-title"> Best Instructors </div>  <span class= "title-comment">(Highest Rating)</span>
+			<br>
 				<% if @profs_by_rating.length >= 3 %>
 				<span class = "course-name"> 
 				<%=@profs_by_rating[0].name%> 
@@ -136,8 +135,8 @@
 
 <br>
 			<p>
-			<div class= "recommendation-title"> Popular Instructors </div>  <span class= "title-comment"> (Most Number of Comments)  <br> </span>
-			
+			<div class= "recommendation-title"> Popular Instructors </div>  <span class= "title-comment">(Most Number of Comments)</span>
+			<br>
 				<% if @profs_by_comments_count.length >= 3 %>
 				<span class = "course-name"> 
 				<%=@profs_by_comments_count[0].name%> 
@@ -155,6 +154,7 @@
 				(minimum 3 profs must have comments, only <%=@profs_by_comments_count.length%> do now)
 			<% end %>
 			</p>
+			<br><br>
 		</div>
 		
 	</div>
