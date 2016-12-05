@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203032244) do
+ActiveRecord::Schema.define(version: 20161205024639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "courses", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "year"
     t.string   "semester"
     t.string   "faculty"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20161203032244) do
     t.string   "prereq"
     t.string   "coreq"
     t.string   "title"
+    t.string   "additionDetails"
+    t.string   "deliveryMethod"
   end
 
   create_table "courses_users", force: :cascade do |t|
@@ -51,8 +53,8 @@ ActiveRecord::Schema.define(version: 20161203032244) do
 
   create_table "d_details", force: :cascade do |t|
     t.string   "dProfessor"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "DSchedule"
     t.string   "dUnit"
     t.string   "dDesignation"
@@ -62,6 +64,8 @@ ActiveRecord::Schema.define(version: 20161203032244) do
     t.string   "coreq"
     t.string   "title"
     t.string   "coursedetails"
+    t.string   "additionDetails"
+    t.string   "deliveryMethod"
   end
 
   create_table "d_faculties", force: :cascade do |t|
