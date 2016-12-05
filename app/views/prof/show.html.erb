@@ -5,7 +5,7 @@
 <% else %>
 	<p>No one gave rating to this professor. Be the first to rate!</p>
 <% end %>
-
+ 
 <% if session[:user_name].present? %>
 	<div class="comment-form">
 	  <%= form_tag prof_new_path, :method => 'get' do %>

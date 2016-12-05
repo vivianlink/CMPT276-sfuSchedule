@@ -18,7 +18,7 @@ test:
   <<: *default
   database: myproj_test
   username: postgres
-  password: cmpt276 
+  password: cmpt276
   host: localhost
 
 production:

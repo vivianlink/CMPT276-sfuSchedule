@@ -1,7 +1,10 @@
 <h1>Schedule Table</h1>
 <p>Click on button to see the schedule of each course in your Portfolio</p>
 
-
-<form action="schedule/p2">
-    <input type="submit" value="Portfolio Schedule" />
-</form>
+<% if session[:user_name].present? %>
+	<form action="schedule/p2">
+ 	   <input type="submit" value="Portfolio Schedule" />
+	</form>
+<% else %>
+	<div class="login-notice">You need to be logged in to see the weekly schedule </div>
+<% end %>
