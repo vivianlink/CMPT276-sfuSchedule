@@ -36,12 +36,14 @@ p.upper-case{
 	text-transform: uppercase;
 	color: grey;
 	font-size: 23px;
+	margin-bottom: -20px;
 }
 p.under-case{
 	text-transform: capitalize;
 	color: grey;
 	font-size: 18px;
 	font-style: italic;
+	margin-top: -20px;
 }
 p.schedule{
 	border-bottom: 2px #999 solid;
@@ -50,4 +52,5 @@ p.subtitle{
 	text-transform: uppercase;
 	color: grey;
 	font-size: 18px;
+	margin-bottom: -10px;
 }
