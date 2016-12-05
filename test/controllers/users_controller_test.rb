@@ -6,7 +6,52 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should show message if not logged in" do
+  test "should show message if not admin" do
+    get :index
+    assert_response :success
+    assert_select "p", {count: 1, text: "You shouldn't be here!"}
+    assert_select "th", {count: 0, text: "Username"}
+    assert_select "th", {count: 0, text: "Email Address"}
+    assert_select "th", {count: 0, text: "isAdmin?"}
+    users.each do |u|
+      assert_select "td", {count: 0, text: users(u).username}
+      assert_select "td", {count: 0, text: users(u).email}
+    end
+  end
+
+  test "should show message if not admin 2" do
+    session[:user_name] = users(:one).username
+    session[:user_id] = users(:one).id
+    get :index
+    assert_response :success
+    assert_select "p", {count: 1, text: "You shouldn't be here!"}
+    assert_select "th", {count: 0, text: "Username"}
+    assert_select "th", {count: 0, text: "Email Address"}
+    assert_select "th", {count: 0, text: "isAdmin?"}
+    users.each do |u|
+      assert_select "td", {count: 0, text: users(u).username}
+      assert_select "td", {count: 0, text: users(u).email}
+    end
+  end
+
+  test "should show all users if logged in as admin" do
+    session[:user_name] = users(:one).username
+    session[:user_id] = users(:one).id
+    session[:is_admin] = true
+    get :index
+    assert_response :success
+    assert_select "h1", {count: 1, text: "LIST OF USERS"}
+    assert_select "th", {count: 1, text: "Username"}
+    assert_select "th", {count: 1, text: "Email Address"}
+    assert_select "th", {count: 1, text: "isAdmin?"}
+    users.each  do |u|
+      assert_select "td", {count: 1, text: users(u).username}
+      assert_select "td", {count: 1, text: users(u).email}
+      assert_select "td", {count: 1, text: "Delete User"}
+    end
+  end
+
+  test "should show message on profile page if not logged in" do
     get :show
     assert_response :success
     assert_select "p", {count: 1, text: "You are not logged in. No profile to show."}
