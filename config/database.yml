@@ -10,7 +10,7 @@ development:
 
   database: myproj_development
   username: postgres
-  password: Facai123
+  password: cmpt276
   host: localhost
 
 
@@ -18,7 +18,7 @@ test:
   <<: *default
   database: myproj_test
   username: postgres
-  password: Facai123
+  password: cmpt276
   host: localhost
 
 production:
