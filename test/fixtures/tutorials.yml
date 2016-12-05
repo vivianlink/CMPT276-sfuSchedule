@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  tutname: MyString
-  tutcalender: MyString
-  tutlocation: MyString
-  tutschedule: MyString
+  tutname: nameTest1
+  tutcalender: calTest1
+  tutlocation: locTest1
+  tutschedule: schedTest1
 
 two:
-  tutname: MyString
-  tutcalender: MyString
-  tutlocation: MyString
-  tutschedule: MyString
+  tutname: nameTest2
+  tutcalender: calTest2
+  tutlocation: locTest2
+  tutschedule: schedTest2

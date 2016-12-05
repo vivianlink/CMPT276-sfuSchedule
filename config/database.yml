@@ -7,18 +7,23 @@ default: &default
 
 development:
   <<: *default
-
-  database: myproj_development
-  username: postgres
-  password: cmpt276
+  database: Cmpt276ProjDev #myproj_development
+  username: sfuplannerdev #postgres
+  password: sfuplanner #121
+  #database: myproj_development
+  #username: postgres
+  #password: cmpt276
   host: localhost
 
 
 test:
   <<: *default
-  database: myproj_test
-  username: postgres
-  password: cmpt276
+  database: Cmpt276ProjTest #myproj_development
+  username: sfuplannertest #postgres
+  password: sfuplanner #121
+  #database: myproj_test
+  #username: postgres
+  #password: cmpt276
   host: localhost
 
 production:

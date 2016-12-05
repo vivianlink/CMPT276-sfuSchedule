@@ -1,7 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  faculty: MyString
+  faculty: facTest1
+  number: numbTest1
+  unit: unitTest1
+  designation: desTest1
+  year: yearTest1
+  semester: semTest1
 
 two:
-  faculty: MyString
+  faculty: facTest2
+  number: numbTest2
+  unit: unitTest2
+  designation: desTest2
+  year: yearTest2
+  semester: semTest2
