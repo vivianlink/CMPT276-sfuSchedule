@@ -8,7 +8,7 @@
 
   <%= @course.semester %>
   <%= @course.year %>
-   - 
+   -
   <%= @course.faculty %>
   <%= @course.number %>
   <%= @course.section %>
@@ -22,13 +22,113 @@
 
 <p class = "under-case">
   Delivery Method: <%= @course.deliveryMethod %>
-</p> 
+</p>
 
 
 <h2> Outline </h2>
 <p class = "subtitle">
   Course times + location: </p>
   <p class = "schedule"> <%=raw @course.schedule %> </p>
+
+
+  <style type="text/css">
+  .spoilerbutton {display:block;margin:5px 0;}
+  .spoiler {overflow:hidden;background: #f5f5f5;}
+  .spoiler > div {-webkit-transition: all 0.2s ease;-moz-transition: margin 0.2s ease;-o-transition: all 0.2s ease;transition: margin 0.2s ease;}
+  .spoilerbutton[value="Schedule Table"] + .spoiler > div {margin-top:-100%;}
+  .spoilerbutton[value="Hide"] + .spoiler {padding:5px;}
+  </style>
+
+  <input class="spoilerbutton" type="button" value="Schedule Table" onclick="this.value=this.value=='Schedule Table'?'Hide':'Schedule Table';">
+  <div class="spoiler"><div>
+
+    <% def populate(day, i) %>
+      <% if day[i][2] != -111 %>
+        <% if day[i][3] == 'course' %>
+          <% course = Course.find(day[i][2]) %>
+          <% link_to day[i][0], course_path(course) %>
+        <% elsif day[i][3] == 'tutorial' %>
+          <%  day[i][0] %>
+        <% end %>
+      <% else %>
+        <% day[i][0] %>
+      <% end %>
+    <% end %>
+
+    <table class = 'schedule'>
+      <tr class = 'oRow'>
+        <th class = 'header'>
+          time
+        </th>
+        <% for i in 0..6 %>
+        <th class = 'header'>
+          <%= @dWeekdays[i] %>
+        </th>
+        <% end %>
+      </tr>
+
+      <% for i in 0..31 %>
+      <tr class = 'oRow'>
+        <% if i%2==1 %>
+          <td class='row'>
+            <%= @timeSlot[i] %>
+          </td>
+          <td class='row'>
+            <%= populate(@mon, i) %>
+          </td>
+          <td class='row'>
+            <%= populate(@tue, i) %>
+          </td>
+          <td class='row'>
+            <%= populate(@wed, i) %>
+          </td>
+          <td class='row'>
+            <%= populate(@thu, i) %>
+          </td>
+          <td class='row'>
+            <%= populate(@fri, i) %>
+          </td>
+          <td class='row'>
+            <%= populate(@sat, i) %>
+          </td>
+          <td class='row'>
+            <%= populate(@sun, i) %>
+          </td>
+        <% else %>
+          <td class='odd'>
+            <%= @timeSlot[i] %>
+          </td>
+          <td class='odd'>
+            <%= populate(@mon, i) %>
+          </td>
+          <td class='odd'>
+            <%= populate(@tue, i) %>
+          </td>
+          <td class='odd'>
+            <%= populate(@wed, i) %>
+          </td>
+          <td class='odd'>
+            <%= populate(@thu, i) %>
+          </td>
+          <td class='odd'>
+            <%= populate(@fri, i) %>
+          </td>
+          <td class='odd'>
+            <%= populate(@sat, i) %>
+          </td>
+          <td class='odd'>
+            <%= populate(@sun, i) %>
+          </td>
+          <% end %>
+        <% end %>
+      </tr>
+    </table>
+
+  </div></div>
+
+
+
+
 <p>
 
 
@@ -76,4 +176,3 @@
   <br>
 <% end %>
 </div>
-

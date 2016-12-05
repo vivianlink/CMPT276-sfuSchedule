@@ -174,7 +174,8 @@ class ApplicationController < ActionController::Base
     flag = false
     while flag == false
       try = HTTParty.get(url)
-      if try.include? 'courseSchedule'
+      schedule = JSON.parse(try.body)
+      if schedule.include? 'courseSchedule'
         flag = true
       else
         flag = false
@@ -207,7 +208,8 @@ class ApplicationController < ActionController::Base
     flag = false
     while flag == false
       try = HTTParty.get(url)
-      if try.include? 'courseSchedule'
+      schedule = JSON.parse(try.body)
+      if schedule.include? 'courseSchedule'
         flag = true
       else
         flag = false

@@ -2,7 +2,7 @@
 
 # Define variables here.
 branch = schedule
-message = "updating to master"
+message = "schedule table in course pages is in spoilers"
 
 push_master:
 	git add .

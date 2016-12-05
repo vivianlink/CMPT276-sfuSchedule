@@ -31,18 +31,18 @@ def sort
     @courses = @courses.drop((@current_page - 1) * 40)
     @courses = @courses.take 40
 
-  end 
+  end
 
 
 	def index
-    
+
       #if params[:page]
     #    @current_page = params[:page].to_i
      # else
     #    @current_page = 1
      # end
 
-      
+
       @courses = Course.all
 
       #for search
@@ -60,8 +60,8 @@ def sort
 
 	def show
     @course = Course.find(params[:id])
-    #clearingVariables
-    #generateTableShow(@course)
+    clearingVariables
+    generateTableShow(@course)
 
     if @course.viewCount
       @course.viewCount = @course.viewCount + 1
