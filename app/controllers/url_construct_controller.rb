@@ -11,9 +11,23 @@ class UrlConstructController < ApplicationController
 
   def index
 
+  end
 
-    @forView = [1,2,3]
-
+  def DeleteAllCourse
+    @course = Course.all
+    @course.each do |course|
+      course.delete
+    end
+    @tutorial = Tutorial.all
+    @tutorial.each do |tutorial|
+      tutorial.delete
+    end
+  end
+  def DeleteAllUser
+    @user = User.all
+    @user.each do |user|
+      user.delete
+    end
   end
 
 
