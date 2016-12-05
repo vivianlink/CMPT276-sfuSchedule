@@ -1,6 +1,54 @@
 
+.course-overview{
 
-p,body,button {
-    background-color: #fff;
-    color:blue;
+	margin-left:30px;
+	margin-right:30px;
+}
+
+.course-outline{
+	background-color: #fff;
+	color:black;
+	text-align: left;
+
+}
+
+
+
+
+h1{
+	color: #333; 
+	margin-top: -30px;
+	margin-bottom:-28px;
+}
+
+h2{
+	color: #555;
+	padding-bottom: 5px;
+	border-bottom: 10px #ddd solid;
+	text-align: left;
+}
+.course-details{
+	background-color: #fff;
+    color:black;
+    text-align: left;
+}
+
+p.upper-case{
+	text-transform: uppercase;
+	color: grey;
+	font-size: 23px;
+}
+p.under-case{
+	text-transform: capitalize;
+	color: grey;
+	font-size: 18px;
+	font-style: italic;
+}
+p.schedule{
+	border-bottom: 2px #999 solid;
+}
+p.subtitle{
+	text-transform: uppercase;
+	color: grey;
+	font-size: 18px;
 }

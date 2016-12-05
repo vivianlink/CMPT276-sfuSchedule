@@ -65,7 +65,9 @@ class UrlConstructController < ApplicationController
                                                      "prereq" => detail.prereq,
                                                      "coreq" => detail.coreq,
                                                      "requiredtext" => detail.requiredtext,
-                                                     "description" => detail.coursedetails)
+                                                     "description" => detail.coursedetails,
+                                                     "additionDetails" => detail.additionDetails,
+                                                     "deliveryMethod" => detail.deliveryMethod)
                     @creating_new_course.save
 
 
@@ -148,7 +150,9 @@ class UrlConstructController < ApplicationController
                                                      "prereq" => detail.prereq,
                                                      "coreq" => detail.coreq,
                                                      "requiredtext" => detail.requiredtext,
-                                                     "description" => detail.coursedetails)
+                                                     "description" => detail.coursedetails,
+                                                     "additionDetails" => detail.additionDetails,
+                                                     "deliveryMethod" => detail.deliveryMethod)
                     @creating_new_course.save
 
 
@@ -231,7 +235,9 @@ class UrlConstructController < ApplicationController
                                                      "prereq" => detail.prereq,
                                                      "coreq" => detail.coreq,
                                                      "requiredtext" => detail.requiredtext,
-                                                     "description" => detail.coursedetails)
+                                                     "description" => detail.coursedetails,
+                                                     "additionDetails" => detail.additionDetails,
+                                                     "deliveryMethod" => detail.deliveryMethod)
                     @creating_new_course.save
 
 
@@ -314,7 +320,9 @@ class UrlConstructController < ApplicationController
                                                      "prereq" => detail.prereq,
                                                      "coreq" => detail.coreq,
                                                      "requiredtext" => detail.requiredtext,
-                                                     "description" => detail.coursedetails)
+                                                     "description" => detail.coursedetails,
+                                                     "additionDetails" => detail.additionDetails,
+                                                     "deliveryMethod" => detail.deliveryMethod)
                     @creating_new_course.save
 
 
@@ -397,7 +405,9 @@ class UrlConstructController < ApplicationController
                                                      "prereq" => detail.prereq,
                                                      "coreq" => detail.coreq,
                                                      "requiredtext" => detail.requiredtext,
-                                                     "description" => detail.coursedetails)
+                                                     "description" => detail.coursedetails,
+                                                     "additionDetails" => detail.additionDetails,
+                                                     "deliveryMethod" => detail.deliveryMethod)
                     @creating_new_course.save
 
 
@@ -617,7 +627,8 @@ class UrlConstructController < ApplicationController
           prereq = data["prerequisites"]
           coreq = data["corequisites"]
           coursedetails = data["courseDetails"]
-
+          additionDetails = data["description"]
+          deliveryMethod = data["deliveryMethod"]
 
 
 
@@ -636,7 +647,9 @@ class UrlConstructController < ApplicationController
                              "dProfessor" => professor,
                              "DSchedule" => overall_schedule,
                              "RoomNumber" => roomnumber,
-                             "coursedetails" => coursedetails)
+                             "coursedetails" => coursedetails,
+                             "additionDetails" => additionDetails,
+                             "deliveryMethod" => deliveryMethod)
         dValue.save
         filler_array.push(dValue)
 

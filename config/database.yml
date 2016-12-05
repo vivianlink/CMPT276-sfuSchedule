@@ -15,7 +15,7 @@ development:
 
 test:
   <<: *default
-  database: cmpt276 #myproj_development
+  database: cmpt276_test #myproj_development
   username: cmpt276 #postgres
   password: thecmpt276Passw0rd #121
   host: localhost

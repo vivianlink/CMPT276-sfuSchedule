@@ -1,71 +1,50 @@
+<div class = "course-overview">
 
-<p>
-  <strong>View Count:</strong>
-  <%= @course.viewCount %>
-</p>
-<h1>
-  <strong>Title</strong>
-  <%= @course.title %>
-</h1>
-<p>
-  <strong>Year:</strong>
-  <%= @course.year %>
-</p>
-<p>
-  <strong>Semester:</strong>
+
+<div class = "course-outline">
+
+
+<p class = "upper-case">
+
   <%= @course.semester %>
-</p>
-<p>
-  <strong>Faculty:</strong>
+  <%= @course.year %>
+   - 
   <%= @course.faculty %>
-</p>
-<p>
-  <strong>Number:</strong>
   <%= @course.number %>
-</p>
-<p>
-  <strong>Section:</strong>
   <%= @course.section %>
+
 </p>
+
+<h1>
+  <%= @course.title %>   (<%= @course.unit%>)
+</h1>
+
+
+<p class = "under-case">
+  Delivery Method: <%= @course.deliveryMethod %>
+</p> 
+
+
+<h2> Outline </h2>
+<p class = "subtitle">
+  Course times + location: </p>
+  <p class = "schedule"> <%=raw @course.schedule %> </p>
 <p>
-  <strong>Instructor:</strong>
-  <%= @course.instructor %>
+
+
+
+  <p class = "subtitle"> Instructor:</p>
+  <p><%= @course.instructor %>
 </p>
-<p>
-  <strong>Schedule:</strong>
-  <%=raw @course.schedule %>
-</p>
-<p>
-  <strong>Description:</strong>
+
+</div>
+</br>
+
+<h2> Description </h2>
+
+<div class = "course-details">
   <%=raw @course.description %>
-</p>
-<p>
-  <strong>Designation:</strong>
-  <%= @course.designation %>
-</p>
-<p>
-  <strong>Unit:</strong>
-  <%= @course.unit %>
-</p>
-<p>
-  <strong>CourseUrl:</strong>
-  <%= @course.CourseUrl %>
-</p>
-<p>
-  <strong>RoomNumber:</strong>
-  <%= @course.RoomNumber %>
-</p>
-<p>
-  <strong>prereq:</strong>
-  <%= @course.prereq %>
-</p>
-<p>
-  <strong>coreq:</strong>
-  <%= @course.coreq %>
-</p>
-<p>
-  <%=raw @course.requiredtext %>
-</p>
+</div>
 
 
 
@@ -78,7 +57,7 @@
   <table class="center">
   <tr>
     <th><%= "Section" %></th>
-    <th><%= "Detail" %></th>
+    <th><%= "Schedule" %></th>
 
   </tr>
   <%  @course.tutorial.each do |tutorial| %>
@@ -93,3 +72,5 @@
     </tr>
   <% end %>
 <% end %>
+
+</div>
