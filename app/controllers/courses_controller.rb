@@ -4,11 +4,7 @@ helper_method :sort_column, :sort_direction
 
 def sort
 
-    if params[:page]
-      @current_page = params[:page].to_i
-    else
-      @current_page = 1
-    end
+
 
     if params[:commit] == "Search(in WQB order)"
 
@@ -25,11 +21,6 @@ def sort
                   params[:Fri]).order(year: :desc,faculty: :asc, number: :asc, unit: :asc)
     end
 
-    @pages_count = @courses.length / 40.0
-    @pages_count = @pages_count.ceil
-
-    @courses = @courses.drop((@current_page - 1) * 40)
-    @courses = @courses.take 40
 
   end
 
