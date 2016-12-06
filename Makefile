@@ -1,8 +1,8 @@
 # make gems
 
 # Define variables here.
-branch = schedule
-message = "Cleaned things up."
+branch = bugfixing
+message = "new branch"
 
 push_master:
 	git add .
