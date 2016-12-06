@@ -178,20 +178,9 @@ class ApplicationController < ActionController::Base
     id = course.id
 
     counter = 0
-    for counter in 0..30
-      try = HTTParty.get(url)
-      schedule = JSON.parse(try.body)
-      if schedule.include? 'courseSchedule'
-        counter = 50
-      else
-        sleep 1
-      end
-      if counter == 25
-        errorMessageSchedule(2, '', '')
-      end
-    end
-
-    if counter !=25
+    try = HTTParty.get(url)
+    schedule = JSON.parse(try.body)
+    if schedule.include? 'courseSchedule'
       schedule = schedule['courseSchedule']
       schedule.each do |schedule|
         timeS, timeE, days = '','', ''
@@ -203,6 +192,8 @@ class ApplicationController < ActionController::Base
           populateWeek(timeS, course, duration, days, id, type)
         end
       end
+    else
+      errorMessageSchedule(2, '', '')
     end
   end
 
@@ -215,31 +206,22 @@ class ApplicationController < ActionController::Base
     id = course.id
     flag = false
 
-    counter = 0
-    for counter in 0..30
-      try = HTTParty.get(url)
-      schedule = JSON.parse(try.body)
-      if schedule.include? 'courseSchedule'
-        counter = 50
-      else
-        sleep 1
+    try = HTTParty.get(url)
+    schedule = JSON.parse(try.body)
+    if schedule.include? 'courseSchedule'
+      schedule = schedule['courseSchedule']
+      schedule.each do |schedule|
+        timeS, timeE, days = '','', ''
+        if (schedule.include?("startTime"))
+          timeS = schedule['startTime']
+          timeE = schedule['endTime']
+          days = (schedule['days'].tr(' ', '')).split(',')
+          duration =  (timeToDecimal(timeE) - timeToDecimal(timeS)).ceil
+          populateWeek(timeS, course, duration, days, id, 'course')
+        end
       end
-      if counter == 25
-        errorMessageSchedule(2, '', '')
-      end
-    end
-
-
-    schedule = schedule['courseSchedule']
-    schedule.each do |schedule|
-      timeS, timeE, days = '','', ''
-      if (schedule.include?("startTime"))
-        timeS = schedule['startTime']
-        timeE = schedule['endTime']
-        days = (schedule['days'].tr(' ', '')).split(',')
-        duration =  (timeToDecimal(timeE) - timeToDecimal(timeS)).ceil
-        populateWeek(timeS, course, duration, days, id, 'course')
-      end
+    else
+      errorMessageSchedule(2, '', '')
     end
 
     @mon = @@mon
@@ -279,7 +261,7 @@ class ApplicationController < ActionController::Base
       @@warning = 'The following courses have time conflicts: ' + temp + '. Please make sure this is intended.'
     end
     if i==2
-      @@warning2 = "Server timeout issue. Please refresh page. If error persists, please rerun application at later time"
+      @@warning2 = "SFU api server timeout issue. Please refresh page. If error persists, please rerun application at later time"
     end
   end
 

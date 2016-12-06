@@ -1,15 +1,15 @@
 # make gems
 
 # Define variables here.
-branch = schedule
-message = "Cleaned things up."
+branch = bugfixing
+message = "better error message colours"
 
-push_master:
+master:
 	git add .
 	git commit -m $(message)
 	git push origin
 
-push_branch:
+branch:
 	git add .
 	git commit -m $(message)
 	git push origin	$(branch)
