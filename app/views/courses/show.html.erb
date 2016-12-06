@@ -135,18 +135,17 @@
 
 
 <p>
-  <p class = "subtitle"> Instructor: <p><%= @course.instructor %>
-</p></p> 
+  <p class = "subtitle"> Instructor:<%= @course.instructor %>
+</p>
 
 <p>
-  <p class = "subtitle"> Co-Requisit:</p> <p><%= @course.coreq %>
+  <p class = "subtitle"> Co-Requisit:<%= @course.coreq %>
 </p>
 <p>
-  <p class = "subtitle"> Pre-Requisit:</p> <p><%= @course.prereq%>
+  <p class = "subtitle"> Pre-Requisit:<%= @course.prereq%>
 </p>
 <p>
-  <p class = "subtitle"> Required Textbooks:</p>
-  <p><%= @course.requiredtext %>
+  <p class = "subtitle"> Required Textbooks:  <%=raw @course.requiredtext %>
 </p>
 
 
