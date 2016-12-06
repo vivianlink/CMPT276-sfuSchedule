@@ -2,7 +2,7 @@
 
 # Define variables here.
 branch = bugfixing
-message = "new branch"
+message = "faster schedule table building (up to user to get full table)"
 
 push_master:
 	git add .
