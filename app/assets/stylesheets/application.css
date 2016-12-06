@@ -41,9 +41,9 @@ body {
 
  .white-background{
   display: inline-block;
-  background-color: ivory;
+  background-color: rgb(255, 242, 242);;
   padding : 7px;
-  border-color: ivory;
+  border-color: rgb(255, 242, 242);;
   border-radius: 10px;
   width: 300px;
  }
