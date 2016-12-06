@@ -6,14 +6,12 @@ class ScheduleControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get p1" do
-    get :p1
+  test "should do nothing, but should not give an error" do
+    session[:user_name] = users(:one).username
+    session[:user_id] = users(:one).id
+    get :p2
     assert_response :success
   end
 
-  # test "should get p2" do
-  #   get :p2
-  #   assert_response :success
-  # end
 
 end
