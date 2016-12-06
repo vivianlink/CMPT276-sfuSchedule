@@ -1,8 +1,8 @@
 # make gems
 
 # Define variables here.
-branch = bugfixing
-message = "better error message colours"
+branch = tests
+message = "writing tests..."
 
 master:
 	git add .
