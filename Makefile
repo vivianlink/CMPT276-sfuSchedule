@@ -2,14 +2,14 @@
 
 # Define variables here.
 branch = bugfixing
-message = "faster schedule table building (up to user to get full table)"
+message = "better error message colours"
 
-push_master:
+master:
 	git add .
 	git commit -m $(message)
 	git push origin
 
-push_branch:
+branch:
 	git add .
 	git commit -m $(message)
 	git push origin	$(branch)

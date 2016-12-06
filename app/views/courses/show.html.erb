@@ -28,8 +28,8 @@
 <h2> Outline </h2>
 <p class = "subtitle">
   Course times + location: </p>
-  <p class = "schedule"> <%=raw @course.schedule %> 
-</p> 
+  <p class = "schedule"> <%=raw @course.schedule %>
+</p>
 
 
 
@@ -57,7 +57,11 @@
       <% end %>
     <% end %>
 
-    <p> <%= @warning2 %>  </p>
+    <% if @warning2 == "SFU api server timeout issue. Please refresh page. If error persists, please rerun application at later time" %>
+      <p style="color:red;"> <%= @warning2 %>  </p>
+    <% else %>
+      <p> <%= @warning2 %>  </p>
+    <% end %>
     <table class = 'schedule'>
       <tr class = 'oRow'>
         <th class = 'header'>
