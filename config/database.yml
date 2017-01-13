@@ -11,7 +11,7 @@ development:
   #username: sfuplannerdev
   #assword: sfuplanner
   database: myproj_development
-  username: postgres
+  username: cmpt276
   password: cmpt276
   host: localhost
 
@@ -22,7 +22,7 @@ test:
   #username: sfuplannertest
   #password: sfuplanner
   database: myproj_test
-  username: postgres
+  username: cmpt276
   password: cmpt276
   host: localhost
 
