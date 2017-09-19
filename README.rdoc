@@ -1,6 +1,6 @@
 to become admin enter password : cmpt276admin
 
-Group git link: https://github.com/vivianlink/CMPT276-sfuSchedule
+Project Link: http://cmpt-276-courseproject.herokuapp.com/
 
 PROJECT PROPOSAL: “SFU COURSE PLANNER”
 
